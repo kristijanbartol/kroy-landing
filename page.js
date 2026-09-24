@@ -159,6 +159,26 @@ function fabricStrip(data) {
   return strip;
 }
 
+/* -- where you are ----------------------------------------------------- */
+/* A long single page loses the reader's place, and the fix is not to cut it
+ * into separate pages: the argument is cumulative, so a visitor who lands on
+ * page three of five has been handed the middle of a case nobody made to them.
+ * The fix is to say where they are. The nav link for the section under the
+ * reader lights up, which is the cheapest orientation cue there is, and it
+ * doubles as a map of what is further down. */
+function navHighlight() {
+  const links = [...$$('.nav nav a[href^="#"]')].filter((a) => !a.classList.contains('btn'));
+  const ids = links.map((a) => a.getAttribute('href').slice(1));
+  const seen = new Set();
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => (e.isIntersecting ? seen.add(e.target.id) : seen.delete(e.target.id)));
+    // The topmost section in the band, so two never light at once.
+    const at = ids.find((id) => seen.has(id));
+    links.forEach((a) => a.classList.toggle('active', a.getAttribute('href').slice(1) === at));
+  }, { rootMargin: '-70px 0px -55% 0px' });
+  ids.forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+}
+
 /* -- scroll reveal ---------------------------------------------------- */
 function reveal() {
   const io = new IntersectionObserver((es) => {
@@ -187,6 +207,7 @@ fetch('demo/data.json')
     if (data.strips.seated) seatedStrip(data);
     else $('#strip-seated').classList.add('no-figure');
     reveal();
+    navHighlight();
     const c = data.strips.cohort;
     $('#provenance').textContent =
       `${c.n_bodies} bodies, ${c.design}, ease ${c.ease.replace('uniform-', '')}, `
