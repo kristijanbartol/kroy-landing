@@ -1,0 +1,252 @@
+/* KROY. The palette, the type and the paper are the demo's, on purpose: the
+ * figures are rendered onto #FCFCFB and the page is that colour, so a picture
+ * sits in the page instead of on it.
+ *
+ * Light only, and that is a decision rather than an omission. Every figure is
+ * rendered onto a fixed paper by the engine; a dark theme would need a second
+ * render of all 225 positions, not a second stylesheet. */
+
+:root {
+  --paper: #FCFCFB;
+  --ink: #0B0B0B;
+  --ink2: #52514E;
+  --muted: #8A8985;
+  --line: #E6E5E1;
+  --rail: #EEEDE9;
+  --red: #C43B3A;
+  --red-soft: #F3E2E1;
+  --cloth: #B5BFCC;
+  --page: 1180px;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum' 0;
+}
+
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.022em; line-height: 1.08; }
+h1 { font-size: clamp(2.05rem, 4.1vw, 3.2rem); }
+h2 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); }
+h3 { font-size: 1.06rem; letter-spacing: -0.01em; }
+p { margin: 0 0 1em; }
+a { color: inherit; }
+
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 28px; }
+.eyebrow {
+  font-size: 0.74rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--muted); font-weight: 500; margin: 0 0 18px;
+}
+.lede { font-size: clamp(1.02rem, 1.5vw, 1.18rem); color: var(--ink2); max-width: 46ch; }
+.small { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.num { font-variant-numeric: tabular-nums; }
+.red { color: var(--red); }
+
+/* ---- nav ---------------------------------------------------------- */
+header.nav {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.nav img { height: 26px; width: auto; mix-blend-mode: multiply; display: block; }
+.nav nav { display: flex; align-items: center; gap: 26px; font-size: 0.9rem; }
+.nav nav a { color: var(--ink2); text-decoration: none; }
+.nav nav a:hover { color: var(--ink); }
+@media (max-width: 720px) { .nav nav a.hide-sm { display: none; } }
+
+.btn {
+  display: inline-block; background: var(--ink); color: var(--paper);
+  text-decoration: none; font-weight: 500; font-size: 0.92rem;
+  padding: 11px 18px; border-radius: 3px; letter-spacing: -0.005em;
+  transition: background .15s ease;
+}
+.btn:hover { background: #332F2B; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.ghost:hover { background: #F2F1EC; }
+
+/* ---- sections ----------------------------------------------------- */
+section { padding: clamp(64px, 9vw, 116px) 0; border-top: 1px solid var(--line); }
+section:first-of-type { border-top: 0; }
+.hed { max-width: 62ch; }
+.hed h2 { margin-bottom: 18px; }
+@media (min-width: 900px) {
+  .hed { max-width: none; display: grid; grid-template-columns: 1.05fr 1fr; gap: 20px 60px; align-items: start; }
+  .hed .eyebrow { grid-column: 1 / -1; margin-bottom: 4px; }
+  .hed h2 { margin-bottom: 0; }
+  .hed .lede { margin: 6px 0 0; }
+}
+
+/* A bar chart or a five-row table does not want the whole of a 1440 page:
+ * past about this width the eye stops connecting a row's label to its number. */
+.measure { max-width: 880px; }
+
+/* ---- the strip ---------------------------------------------------- */
+.strip { display: grid; gap: 34px; align-items: end; }
+@media (min-width: 900px) {
+  .strip { grid-template-columns: minmax(0, 1fr) minmax(260px, 360px); gap: 64px; align-items: center; }
+  .strip.left { grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); }
+  .strip.left .strip-figure { order: -1; }
+}
+#cohort { padding-top: clamp(40px, 5vw, 64px); }
+
+/* The hero is three parts, and on a phone their ORDER is the whole point: the
+ * headline, then the picture it is about, then the readout OF that picture. A
+ * live readout stacked above the figure it reads is three numbers about
+ * nothing. Named areas, so the two layouts cannot drift apart. */
+#strip-cohort { grid-template-areas: 'text' 'fig' 'read'; }
+#strip-cohort .strip-text { grid-area: text; }
+#strip-cohort .strip-figure { grid-area: fig; }
+#strip-cohort .strip-readout { grid-area: read; margin-top: 6px; }
+@media (min-width: 900px) {
+  #strip-cohort {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+    grid-template-areas: 'text fig' 'read fig';
+    align-items: start;
+  }
+  #strip-cohort .strip-readout { margin-top: 30px; }
+}
+#cohort .strip-stage { height: clamp(380px, 72vh, 760px); }
+/* Only the hero needs a figure that size. Below it the picture is
+ * evidence for a claim made in type, not the claim itself. */
+#fabric .strip-stage, #seated .strip-stage { height: clamp(320px, 46vh, 500px); }
+
+.strip-figure { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.strip-stage {
+  width: 100%;
+  height: clamp(340px, 56vh, 620px);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.strip-canvas {
+  display: block; touch-action: none; cursor: grab;
+  opacity: 0; transition: opacity .35s ease;
+}
+.strip.ready .strip-canvas { opacity: 1; }
+.strip.dragging .strip-canvas { cursor: grabbing; }
+.strip-stage::after {
+  content: 'loading'; position: absolute; font-size: 0.8rem; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.strip.ready .strip-stage::after, .strip.failed .strip-stage::after { content: none; }
+.strip.failed .strip-stage::after { content: 'the figures could not be loaded'; }
+
+/* The rail is the argument as well as the control: one tick per body, red
+ * where a body cannot wear the garment, so the failures visibly gather at the
+ * thick-thigh end before anyone drags anything. */
+.strip-rail {
+  position: relative; width: 100%; max-width: 360px;
+  height: 40px; padding: 13px 0; touch-action: none; cursor: ew-resize;
+  --at: 0;
+}
+.strip-rail:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+.ticks { display: flex; gap: 1px; height: 14px; align-items: stretch; }
+.ticks i { flex: 1 1 0; background: var(--rail); border-radius: 0.5px; }
+.ticks i.bad { background: var(--red); opacity: .82; }
+.strip-rail .handle {
+  position: absolute; top: 5px; bottom: 5px;
+  left: calc(var(--at) * 100%);
+  width: 3px; margin-left: -1.5px; background: var(--ink);
+  border-radius: 2px; pointer-events: none;
+}
+.strip-rail .handle::after {
+  content: ''; position: absolute; left: 50%; top: -6px;
+  width: 11px; height: 11px; margin-left: -5.5px;
+  background: var(--ink); border-radius: 50%;
+}
+.rail-ends { display: flex; justify-content: space-between; width: 100%; max-width: 360px; font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+.drag-hint { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+/* the live readout beside a strip */
+.readout { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 18px; }
+.readout.bare { border-top: 0; margin-top: 0; padding-top: 0; }
+.readout dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px; margin: 0; }
+@media (min-width: 560px) { .readout dl { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.readout dt { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.readout dd { margin: 0; font-size: clamp(1.25rem, 3.4vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.readout dd.verdict[data-fails='1'] { color: var(--red); }
+.tally { margin-top: 16px; font-size: 0.92rem; color: var(--ink2); }
+.tally b { font-weight: 600; color: var(--ink); }
+
+/* ---- the pair table ------------------------------------------------ */
+.pair { width: 100%; max-width: 880px; border-collapse: collapse; margin-top: 26px; font-variant-numeric: tabular-nums; }
+.pair th, .pair td { text-align: right; padding: 11px 10px; border-bottom: 1px solid var(--line); }
+.pair th:first-child, .pair td:first-child { text-align: left; }
+.pair thead th { font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.pair tbody tr.key td { font-weight: 600; }
+.pair tbody tr.key { background: var(--red-soft); }
+.pair tbody tr.key td:last-child { color: var(--red); }
+.pair td:last-child { font-weight: 600; }
+.pair .states { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+
+/* ---- the ranked bars ----------------------------------------------- */
+.bars { margin-top: 34px; max-width: 880px; display: grid; gap: 2px; }
+.bar { display: grid; grid-template-columns: 150px 1fr 74px; align-items: center; gap: 14px; padding: 7px 0; }
+@media (max-width: 620px) { .bar { grid-template-columns: 110px 1fr 62px; gap: 9px; } }
+.bar .who { font-size: 0.95rem; }
+.bar .who span { display: block; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.bar .track { height: 17px; background: transparent; position: relative; }
+.bar .track i {
+  position: absolute; top: 0; bottom: 0; left: 0; display: block;
+  width: 0; background: var(--rail); transition: width .85s cubic-bezier(.65,0,.35,1);
+}
+.bar.free .track i { background: var(--red); }
+.bar .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.98rem; }
+.bar.free .val { color: var(--red); }
+.bar.pinned .who, .bar.pinned .val { color: var(--ink2); }
+@media (prefers-reduced-motion: reduce) { .bar .track i { transition: none; } }
+.barkey { display: flex; gap: 22px; margin-top: 18px; font-size: 0.8rem; color: var(--muted); }
+.barkey b { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: baseline; }
+
+/* ---- fabric stops -------------------------------------------------- */
+.stops { display: flex; justify-content: space-between; width: 100%; max-width: 360px; margin-top: 4px; font-size: 0.74rem; color: var(--muted); }
+.stops button {
+  background: none; border: 0; padding: 4px 0; font: inherit; color: var(--muted);
+  cursor: pointer; letter-spacing: -0.01em;
+}
+.stops button:hover, .stops button[aria-current='true'] { color: var(--ink); }
+
+/* ---- plain grids --------------------------------------------------- */
+.cols { display: grid; gap: 34px; margin-top: 40px; }
+@media (min-width: 760px) { .cols.three { grid-template-columns: repeat(3, 1fr); } .cols.two { grid-template-columns: 1fr 1fr; } }
+.cols h3 { margin-bottom: 8px; }
+.cols p { color: var(--ink2); font-size: 0.96rem; margin: 0; }
+.rule { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+
+.stat { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 26px 34px; margin-top: 4px; }
+.stat b { display: block; font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.88rem; color: var(--ink2); }
+
+/* ---- team, contact, footer ---------------------------------------- */
+.people { display: grid; gap: 30px; margin-top: 40px; }
+@media (min-width: 700px) { .people { grid-template-columns: 1fr 1fr; gap: 44px; } }
+.person { display: flex; gap: 18px; align-items: flex-start; }
+.person img { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+.person p { font-size: 0.93rem; color: var(--ink2); margin: 4px 0 0; }
+.person .role { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+.cta { text-align: center; }
+.cta p { margin-left: auto; margin-right: auto; }
+.cta .btn { margin-top: 12px; }
+
+footer { border-top: 1px solid var(--line); padding: 34px 0; }
+footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 0.84rem; color: var(--muted); }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+/* A strip whose frames were not built: the numbers stand on their own. */
+.strip.no-figure { display: block; }
+.strip.no-figure .strip-figure { display: none; }
