@@ -77,6 +77,12 @@ function seatedStrip(data) {
   return new Strip(root, cfg, {
     start: 0,
     defer: true,
+    // NO BLENDING HERE, and it is the opposite call from the cohort strip. On
+    // that one the neighbours are two women of nearly the same height and a
+    // blend registers almost exactly, so it reads as motion blur. Here the
+    // neighbours are one woman five degrees apart, so a blend puts her knee in
+    // two places at once, which reads as a soft render rather than as movement.
+    blend: false,
     onIndex: (i, p) => {
       hip.textContent = p.hip_deg.toFixed(0) + '\u00b0';
       over.textContent = p.over_capacity < 0.05 ? 'none'

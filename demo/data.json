@@ -1,5 +1,5 @@
 {
- "built": "2026-09-24 20:34:23",
+ "built": "2026-09-24 20:56:25",
  "what": "The landing page's numbers, re-derived from the engine. Never typed on the page.",
  "rules": [
   "the numbers here are re-derived at build time, never typed",
@@ -48,7 +48,7 @@
    "id": "cohort",
    "size": [
     480,
-    1535
+    1493
    ],
    "n": 144,
    "fabric": 0.02,
@@ -74,12 +74,12 @@
     ],
     "cell": [
      132,
-     422
+     411
     ],
     "cols": 12,
-    "per_sheet": 96,
-    "bytes": 403502,
-    "resident_mb": 32.1
+    "per_sheet": 108,
+    "bytes": 405708,
+    "resident_mb": 31.2
    },
    "frame": "cohort/f%04d.webp",
    "positions": [
@@ -1097,7 +1097,7 @@
    "id": "fabric",
    "size": [
     480,
-    1535
+    1493
    ],
    "n": 81,
    "body": 32,
@@ -1120,12 +1120,12 @@
     ],
     "cell": [
      132,
-     422
+     411
     ],
     "cols": 12,
-    "per_sheet": 96,
-    "bytes": 228402,
-    "resident_mb": 18.0
+    "per_sheet": 108,
+    "bytes": 224844,
+    "resident_mb": 17.6
    },
    "frame": "fabric/f%04d.webp",
    "positions": [
@@ -1644,7 +1644,7 @@
     ],
     "cols": 12,
     "per_sheet": 204,
-    "bytes": 28476,
+    "bytes": 30450,
     "resident_mb": 2.1
    },
    "frame": "seated/f%04d.webp",
