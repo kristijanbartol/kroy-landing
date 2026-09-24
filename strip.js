@@ -45,6 +45,11 @@ export class Strip {
     this.onIndex = opts.onIndex || (() => {});
     this.n = cfg.n;
     this.i = Math.min(this.n - 1, Math.max(0, opts.start ?? 0));
+    // `i` is a position, `f` is where the hand is between two of them. The
+    // readout and the full-res frame always use `i`, because every position is
+    // a real body and a number under a blend of two would belong to neither.
+    this.f = this.i;
+    this.blend = opts.blend !== false;
     this.canvas = root.querySelector('.strip-canvas');
     this.ctx = this.canvas.getContext('2d', { alpha: false });
     this.rail = root.querySelector('.strip-rail');
@@ -123,17 +128,44 @@ export class Strip {
       Math.floor(k / cols) * cell[1], cell[0], cell[1]];
   }
 
+  blit(i) {
+    const [sheet, sx, sy, sw, sh] = this.cell(i);
+    this.ctx.drawImage(sheet, sx, sy, sw, sh, 0, 0, this.cw, this.ch);
+  }
+
+  /* WHY THIS CROSS-FADES. 144 positions across a 360 px rail is 2.5 px of hand
+   * travel per body, and neighbouring bodies are not neighbouring PICTURES:
+   * measured over the cohort, consecutive frames differ by about 9 grey levels
+   * whatever order they are in, because the bodies genuinely differ. Snapping
+   * from one to the next puts all of that into one step, which no amount of
+   * moving your hand slowly can soften, and the eye reads it as a fault rather
+   * than as a difference between two women.
+   *
+   * So the hand's position is continuous and the picture follows it: floor and
+   * ceiling drawn with the fraction as alpha. While it moves this reads as
+   * motion blur. It resolves the moment the hand stops, because `set` snaps
+   * `f` to `i` on settle and the full-res frame lands there, so nobody is ever
+   * left looking at a blend of two bodies with one body's numbers beside it. */
   draw() {
     if (!this.sheets) return;
     const g = this.ctx;
     g.imageSmoothingQuality = 'high';
     const hi = this.full.get(this.i);
-    if (hi) {
+    if (hi && Math.abs(this.f - this.i) < 0.001) {
       g.drawImage(hi, 0, 0, this.cw, this.ch);
-    } else {
-      const [sheet, sx, sy, sw, sh] = this.cell(this.i);
-      g.drawImage(sheet, sx, sy, sw, sh, 0, 0, this.cw, this.ch);
+      return;
     }
+    const lo = Math.floor(this.f);
+    const t = this.f - lo;
+    if (!this.blend || t < 0.004 || lo + 1 >= this.n) {
+      this.blit(Math.min(this.n - 1, Math.round(this.f)));
+      return;
+    }
+    g.globalAlpha = 1;
+    this.blit(lo);
+    g.globalAlpha = t;
+    this.blit(lo + 1);
+    g.globalAlpha = 1;
   }
 
   /* Fetch the full-res position and swap it in if the hand is still there. */
@@ -156,19 +188,28 @@ export class Strip {
   }
 
   /* -- position ------------------------------------------------------- */
-  set(i, fromUser) {
-    i = Math.min(this.n - 1, Math.max(0, Math.round(i)));
+  set(f, fromUser) {
+    f = Math.min(this.n - 1, Math.max(0, f));
     if (fromUser) this.stopAuto();
-    const moved = i !== this.i;
+    const i = Math.round(f);
+    const moved = f !== this.f;
+    this.f = f;
+    const changed = i !== this.i;
     this.i = i;
     if (moved || !this.drawnOnce) { this.draw(); this.drawnOnce = true; }
-    this.onIndex(i, this.cfg.positions[i]);
+    if (changed || !this.toldOnce) { this.onIndex(i, this.cfg.positions[i]); this.toldOnce = true; }
     if (this.rail) {
-      this.rail.style.setProperty('--at', (this.n < 2 ? 0 : i / (this.n - 1)));
+      this.rail.style.setProperty('--at', (this.n < 2 ? 0 : f / (this.n - 1)));
       this.rail.setAttribute('aria-valuenow', i);
     }
     clearTimeout(this.settle);
-    this.settle = setTimeout(() => this.want(i), SETTLE_MS);
+    this.settle = setTimeout(() => {
+      // Land on the body, not between two of them.
+      this.f = this.i;
+      if (this.rail) this.rail.style.setProperty('--at', (this.n < 2 ? 0 : this.f / (this.n - 1)));
+      this.draw();
+      this.want(this.i);
+    }, SETTLE_MS);
   }
 
   fromClientX(x) {
@@ -209,7 +250,7 @@ export class Strip {
       this.dragging = true;
       this.canvas.setPointerCapture?.(e.pointerId);
       this.root.classList.add('dragging');
-      this.dragFrom = [e.clientX, this.i];
+      this.dragFrom = [e.clientX, this.f];
       e.preventDefault();
     });
     this.canvas.addEventListener('pointermove', (e) => {
@@ -227,7 +268,7 @@ export class Strip {
       const k = { ArrowLeft: -step, ArrowRight: step, ArrowDown: -step,
         ArrowUp: step, Home: -this.n, End: this.n }[e.key];
       if (k === undefined) return;
-      this.set(this.i + k, true);
+      this.set(Math.round(this.f) + k, true);
       e.preventDefault();
     });
   }
@@ -255,7 +296,7 @@ export class Strip {
   playAuto() {
     const rest = this.cfg.rest ?? this.n - 1;
     const t0 = performance.now();
-    const ms = 4200;
+    const ms = 5600;
     const tick = (t) => {
       const u = Math.min(1, (t - t0) / ms);
       // Ease out, so it arrives at the argument rather than stopping dead on it.

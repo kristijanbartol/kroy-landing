@@ -1,5 +1,5 @@
 {
- "built": "2026-09-24 18:51:24",
+ "built": "2026-09-24 20:34:23",
  "what": "The landing page's numbers, re-derived from the engine. Never typed on the page.",
  "rules": [
   "the numbers here are re-derived at build time, never typed",
@@ -57,7 +57,7 @@
    "cohort": "designed-Mr-144",
    "view": "front@25",
    "elevation": 14.0,
-   "order": "thigh, smallest first",
+   "order": "thigh, smallest first, within 0.4 cm; nearest height inside each bucket",
    "cannot_wear_rule": "more than 5% of the garment over capacity",
    "n_fail": 19,
    "n_bodies": 144,
@@ -78,7 +78,7 @@
     ],
     "cols": 12,
     "per_sheet": 96,
-    "bytes": 404252,
+    "bytes": 403502,
     "resident_mb": 32.1
    },
    "frame": "cohort/f%04d.webp",
@@ -98,16 +98,16 @@
      "cumulative_fails": 0
     },
     {
-     "body": 80,
-     "thigh_cm": 44.3,
-     "over_capacity": 0.11,
+     "body": 15,
+     "thigh_cm": 44.5,
+     "over_capacity": 0.9,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 1,
+     "body": 80,
      "thigh_cm": 44.3,
-     "over_capacity": 0.22,
+     "over_capacity": 0.11,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -119,9 +119,9 @@
      "cumulative_fails": 0
     },
     {
-     "body": 15,
-     "thigh_cm": 44.5,
-     "over_capacity": 0.9,
+     "body": 1,
+     "thigh_cm": 44.3,
+     "over_capacity": 0.22,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -140,8 +140,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 118,
-     "thigh_cm": 44.8,
+     "body": 115,
+     "thigh_cm": 44.9,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -154,8 +154,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 115,
-     "thigh_cm": 44.9,
+     "body": 118,
+     "thigh_cm": 44.8,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -182,6 +182,27 @@
      "cumulative_fails": 0
     },
     {
+     "body": 7,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 136,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 44,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
      "body": 22,
      "thigh_cm": 45.1,
      "over_capacity": 0.0,
@@ -196,9 +217,9 @@
      "cumulative_fails": 0
     },
     {
-     "body": 136,
-     "thigh_cm": 45.3,
-     "over_capacity": 0.0,
+     "body": 90,
+     "thigh_cm": 45.4,
+     "over_capacity": 0.23,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -210,23 +231,9 @@
      "cumulative_fails": 0
     },
     {
-     "body": 7,
-     "thigh_cm": 45.3,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 44,
-     "thigh_cm": 45.3,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 90,
-     "thigh_cm": 45.4,
-     "over_capacity": 0.23,
+     "body": 14,
+     "thigh_cm": 45.8,
+     "over_capacity": 0.12,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -238,8 +245,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 116,
-     "thigh_cm": 45.6,
+     "body": 137,
+     "thigh_cm": 45.9,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -259,13 +266,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 14,
-     "thigh_cm": 45.8,
-     "over_capacity": 0.12,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 65,
      "thigh_cm": 45.9,
      "over_capacity": 0.0,
@@ -273,22 +273,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 137,
-     "thigh_cm": 45.9,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 82,
-     "thigh_cm": 46.0,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 35,
-     "thigh_cm": 46.1,
+     "body": 116,
+     "thigh_cm": 45.6,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -301,8 +287,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 31,
-     "thigh_cm": 46.2,
+     "body": 82,
+     "thigh_cm": 46.0,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -315,6 +301,13 @@
      "cumulative_fails": 0
     },
     {
+     "body": 31,
+     "thigh_cm": 46.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
      "body": 41,
      "thigh_cm": 46.3,
      "over_capacity": 0.0,
@@ -322,8 +315,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 54,
-     "thigh_cm": 46.3,
+     "body": 35,
+     "thigh_cm": 46.1,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -331,27 +324,6 @@
     {
      "body": 68,
      "thigh_cm": 46.3,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 48,
-     "thigh_cm": 46.4,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 29,
-     "thigh_cm": 46.5,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 109,
-     "thigh_cm": 46.5,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -371,22 +343,36 @@
      "cumulative_fails": 0
     },
     {
-     "body": 141,
-     "thigh_cm": 46.7,
+     "body": 29,
+     "thigh_cm": 46.5,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 125,
-     "thigh_cm": 46.8,
-     "over_capacity": 0.11,
+     "body": 48,
+     "thigh_cm": 46.4,
+     "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 75,
-     "thigh_cm": 47.0,
+     "body": 109,
+     "thigh_cm": 46.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 54,
+     "thigh_cm": 46.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 141,
+     "thigh_cm": 46.7,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -406,23 +392,23 @@
      "cumulative_fails": 0
     },
     {
-     "body": 18,
-     "thigh_cm": 47.2,
-     "over_capacity": 1.22,
+     "body": 125,
+     "thigh_cm": 46.8,
+     "over_capacity": 0.11,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 98,
-     "thigh_cm": 47.2,
+     "body": 75,
+     "thigh_cm": 47.0,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 132,
-     "thigh_cm": 47.3,
-     "over_capacity": 0.0,
+     "body": 2,
+     "thigh_cm": 47.5,
+     "over_capacity": 0.03,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -434,7 +420,7 @@
      "cumulative_fails": 0
     },
     {
-     "body": 95,
+     "body": 132,
      "thigh_cm": 47.3,
      "over_capacity": 0.0,
      "fails": false,
@@ -448,16 +434,16 @@
      "cumulative_fails": 0
     },
     {
-     "body": 2,
+     "body": 138,
      "thigh_cm": 47.5,
-     "over_capacity": 0.03,
+     "over_capacity": 0.11,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 138,
-     "thigh_cm": 47.5,
-     "over_capacity": 0.11,
+     "body": 95,
+     "thigh_cm": 47.3,
+     "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -469,15 +455,22 @@
      "cumulative_fails": 0
     },
     {
-     "body": 19,
-     "thigh_cm": 47.5,
+     "body": 98,
+     "thigh_cm": 47.2,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 34,
-     "thigh_cm": 47.6,
+     "body": 18,
+     "thigh_cm": 47.2,
+     "over_capacity": 1.22,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 60,
+     "thigh_cm": 47.8,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -490,34 +483,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 63,
-     "thigh_cm": 47.6,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 140,
-     "thigh_cm": 47.7,
-     "over_capacity": 0.24,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 94,
-     "thigh_cm": 47.7,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 47,
-     "thigh_cm": 47.7,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 39,
      "thigh_cm": 47.7,
      "over_capacity": 0.0,
@@ -525,15 +490,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 60,
-     "thigh_cm": 47.8,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 133,
-     "thigh_cm": 47.8,
+     "body": 94,
+     "thigh_cm": 47.7,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -546,8 +504,78 @@
      "cumulative_fails": 0
     },
     {
+     "body": 63,
+     "thigh_cm": 47.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 19,
+     "thigh_cm": 47.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 47,
+     "thigh_cm": 47.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 34,
+     "thigh_cm": 47.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 133,
+     "thigh_cm": 47.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 140,
+     "thigh_cm": 47.7,
+     "over_capacity": 0.24,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 81,
+     "thigh_cm": 48.0,
+     "over_capacity": 0.26,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 30,
+     "thigh_cm": 48.3,
+     "over_capacity": 0.25,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 120,
+     "thigh_cm": 48.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
      "body": 61,
      "thigh_cm": 47.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 100,
+     "thigh_cm": 48.1,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -567,22 +595,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 81,
-     "thigh_cm": 48.0,
-     "over_capacity": 0.26,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 100,
-     "thigh_cm": 48.1,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 120,
-     "thigh_cm": 48.1,
+     "body": 16,
+     "thigh_cm": 48.2,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -602,27 +616,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 16,
-     "thigh_cm": 48.2,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 30,
-     "thigh_cm": 48.3,
-     "over_capacity": 0.25,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 114,
-     "thigh_cm": 48.4,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 103,
      "thigh_cm": 48.4,
      "over_capacity": 0.0,
@@ -632,6 +625,27 @@
     {
      "body": 112,
      "thigh_cm": 48.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 27,
+     "thigh_cm": 48.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 131,
+     "thigh_cm": 48.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 114,
+     "thigh_cm": 48.4,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -651,13 +665,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 27,
-     "thigh_cm": 48.6,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 85,
      "thigh_cm": 48.7,
      "over_capacity": 0.0,
@@ -665,7 +672,14 @@
      "cumulative_fails": 0
     },
     {
-     "body": 131,
+     "body": 76,
+     "thigh_cm": 48.8,
+     "over_capacity": 0.67,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 88,
      "thigh_cm": 48.7,
      "over_capacity": 0.0,
      "fails": false,
@@ -679,29 +693,8 @@
      "cumulative_fails": 0
     },
     {
-     "body": 88,
-     "thigh_cm": 48.7,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 121,
-     "thigh_cm": 48.8,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 76,
-     "thigh_cm": 48.8,
-     "over_capacity": 0.67,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 36,
-     "thigh_cm": 48.9,
+     "body": 24,
+     "thigh_cm": 49.0,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -714,13 +707,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 24,
-     "thigh_cm": 49.0,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 3,
      "thigh_cm": 49.0,
      "over_capacity": 0.0,
@@ -728,15 +714,22 @@
      "cumulative_fails": 0
     },
     {
-     "body": 142,
-     "thigh_cm": 49.1,
-     "over_capacity": 0.05,
+     "body": 36,
+     "thigh_cm": 48.9,
+     "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 69,
-     "thigh_cm": 49.1,
+     "body": 121,
+     "thigh_cm": 48.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 106,
+     "thigh_cm": 49.4,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -749,15 +742,15 @@
      "cumulative_fails": 0
     },
     {
-     "body": 38,
-     "thigh_cm": 49.2,
+     "body": 66,
+     "thigh_cm": 49.4,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 57,
-     "thigh_cm": 49.3,
+     "body": 69,
+     "thigh_cm": 49.1,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -777,23 +770,23 @@
      "cumulative_fails": 0
     },
     {
-     "body": 101,
-     "thigh_cm": 49.4,
-     "over_capacity": 3.83,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 66,
-     "thigh_cm": 49.4,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 17,
      "thigh_cm": 49.4,
      "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 38,
+     "thigh_cm": 49.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 142,
+     "thigh_cm": 49.1,
+     "over_capacity": 0.05,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -805,22 +798,15 @@
      "cumulative_fails": 0
     },
     {
-     "body": 106,
+     "body": 101,
      "thigh_cm": 49.4,
-     "over_capacity": 0.0,
+     "over_capacity": 3.83,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 50,
-     "thigh_cm": 49.5,
-     "over_capacity": 0.0,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
-     "body": 93,
-     "thigh_cm": 49.5,
+     "body": 57,
+     "thigh_cm": 49.3,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -828,6 +814,13 @@
     {
      "body": 74,
      "thigh_cm": 49.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 117,
+     "thigh_cm": 49.9,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -847,9 +840,23 @@
      "cumulative_fails": 0
     },
     {
-     "body": 117,
-     "thigh_cm": 49.9,
+     "body": 93,
+     "thigh_cm": 49.5,
      "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 50,
+     "thigh_cm": 49.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 52,
+     "thigh_cm": 50.1,
+     "over_capacity": 0.11,
      "fails": false,
      "cumulative_fails": 0
     },
@@ -875,13 +882,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 52,
-     "thigh_cm": 50.1,
-     "over_capacity": 0.11,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 77,
      "thigh_cm": 50.2,
      "over_capacity": 4.18,
@@ -896,8 +896,15 @@
      "cumulative_fails": 0
     },
     {
-     "body": 126,
-     "thigh_cm": 50.3,
+     "body": 46,
+     "thigh_cm": 50.4,
+     "over_capacity": 0.02,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 20,
+     "thigh_cm": 50.5,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
@@ -910,13 +917,6 @@
      "cumulative_fails": 0
     },
     {
-     "body": 46,
-     "thigh_cm": 50.4,
-     "over_capacity": 0.02,
-     "fails": false,
-     "cumulative_fails": 0
-    },
-    {
      "body": 56,
      "thigh_cm": 50.4,
      "over_capacity": 0.9,
@@ -924,30 +924,30 @@
      "cumulative_fails": 0
     },
     {
-     "body": 20,
-     "thigh_cm": 50.5,
+     "body": 126,
+     "thigh_cm": 50.3,
      "over_capacity": 0.0,
      "fails": false,
      "cumulative_fails": 0
     },
     {
-     "body": 86,
-     "thigh_cm": 50.8,
-     "over_capacity": 6.36,
+     "body": 9,
+     "thigh_cm": 51.0,
+     "over_capacity": 9.48,
      "fails": true,
-     "cumulative_fails": 1
-    },
-    {
-     "body": 45,
-     "thigh_cm": 50.8,
-     "over_capacity": 4.91,
-     "fails": false,
      "cumulative_fails": 1
     },
     {
      "body": 91,
      "thigh_cm": 50.8,
      "over_capacity": 1.78,
+     "fails": false,
+     "cumulative_fails": 1
+    },
+    {
+     "body": 21,
+     "thigh_cm": 50.8,
+     "over_capacity": 3.72,
      "fails": false,
      "cumulative_fails": 1
     },
@@ -959,9 +959,9 @@
      "cumulative_fails": 2
     },
     {
-     "body": 21,
+     "body": 45,
      "thigh_cm": 50.8,
-     "over_capacity": 3.72,
+     "over_capacity": 4.91,
      "fails": false,
      "cumulative_fails": 2
     },
@@ -973,30 +973,23 @@
      "cumulative_fails": 3
     },
     {
-     "body": 9,
-     "thigh_cm": 51.0,
-     "over_capacity": 9.48,
+     "body": 86,
+     "thigh_cm": 50.8,
+     "over_capacity": 6.36,
      "fails": true,
      "cumulative_fails": 4
-    },
-    {
-     "body": 78,
-     "thigh_cm": 51.1,
-     "over_capacity": 4.85,
-     "fails": false,
-     "cumulative_fails": 4
-    },
-    {
-     "body": 83,
-     "thigh_cm": 51.3,
-     "over_capacity": 13.22,
-     "fails": true,
-     "cumulative_fails": 5
     },
     {
      "body": 102,
      "thigh_cm": 51.3,
      "over_capacity": 5.02,
+     "fails": true,
+     "cumulative_fails": 5
+    },
+    {
+     "body": 128,
+     "thigh_cm": 51.4,
+     "over_capacity": 7.01,
      "fails": true,
      "cumulative_fails": 6
     },
@@ -1008,37 +1001,44 @@
      "cumulative_fails": 7
     },
     {
-     "body": 143,
-     "thigh_cm": 51.4,
-     "over_capacity": 11.43,
+     "body": 83,
+     "thigh_cm": 51.3,
+     "over_capacity": 13.22,
      "fails": true,
      "cumulative_fails": 8
     },
     {
-     "body": 128,
-     "thigh_cm": 51.4,
-     "over_capacity": 7.01,
-     "fails": true,
-     "cumulative_fails": 9
+     "body": 78,
+     "thigh_cm": 51.1,
+     "over_capacity": 4.85,
+     "fails": false,
+     "cumulative_fails": 8
     },
     {
-     "body": 32,
-     "thigh_cm": 51.6,
-     "over_capacity": 6.85,
+     "body": 143,
+     "thigh_cm": 51.4,
+     "over_capacity": 11.43,
      "fails": true,
-     "cumulative_fails": 10
+     "cumulative_fails": 9
     },
     {
      "body": 10,
      "thigh_cm": 51.6,
      "over_capacity": 10.77,
      "fails": true,
-     "cumulative_fails": 11
+     "cumulative_fails": 10
     },
     {
      "body": 37,
      "thigh_cm": 51.8,
      "over_capacity": 15.63,
+     "fails": true,
+     "cumulative_fails": 11
+    },
+    {
+     "body": 32,
+     "thigh_cm": 51.6,
+     "over_capacity": 6.85,
      "fails": true,
      "cumulative_fails": 12
     },
