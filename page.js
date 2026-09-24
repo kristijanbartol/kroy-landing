@@ -57,7 +57,7 @@ function seatedStats(data) {
   const c = data.poses['seated-90']['10'];
   $('#seated-stats').innerHTML = `
     <div><b>${a.n_fail} of ${n}</b><span>cannot wear these standing, in a light stretch</span></div>
-    <div><b style="color:var(--red)">${b.n_fail} of ${n}</b><span>cannot sit down in them. Same cloth, same bodies</span></div>
+    <div><b style="color:var(--red)">${b.n_fail} of ${n}</b><span>cannot sit down in them. Same material, same bodies</span></div>
     <div><b>${c.n_fail} of ${n}</b><span>seated, in 10 percent elastane</span></div>`;
 }
 
@@ -122,8 +122,12 @@ function cohortStrip(data) {
 }
 
 function fabricStrip(data) {
+  // The strip is `fabric` to the engine and `material` on the page. The engine
+  // name is the parameter it actually sweeps, how far a yarn may stretch; the
+  // page name is the word a brand uses for the thing they buy. Renaming the
+  // engine's would mean re-rendering 81 frames to change a word.
   const cfg = data.strips.fabric;
-  const root = $('#strip-fabric');
+  const root = $('#strip-material');
   // A tick per position, red while any body still cannot wear the garment, so
   // the rail shows where the problem ends before anybody drags it.
   ticks($('.ticks', root), cfg.n, (i) => cfg.positions[i].n_fail > 0);
@@ -147,14 +151,14 @@ function fabricStrip(data) {
       nfail.style.color = p.n_fail ? 'var(--red)' : 'var(--ink)';
       hero.textContent = p.hero_over_capacity < 0.05 ? 'fits'
         : p.hero_over_capacity.toFixed(1) + '% over';
-      $$('#fabric-stops button').forEach((b) =>
+      $$('#material-stops button').forEach((b) =>
         b.setAttribute('aria-current', at(+b.dataset.s) === i ? 'true' : 'false'));
     },
   });
 
-  $('#fabric-stops').innerHTML = Object.entries(cfg.named)
+  $('#material-stops').innerHTML = Object.entries(cfg.named)
     .map(([s, label]) => `<button type="button" data-s="${s}">${label}</button>`).join('');
-  $$('#fabric-stops button').forEach((b) =>
+  $$('#material-stops button').forEach((b) =>
     b.addEventListener('click', () => strip.set(at(+b.dataset.s), true)));
   return strip;
 }
