@@ -240,6 +240,7 @@ section:first-of-type { border-top: 0; }
 .cta p { margin-left: auto; margin-right: auto; }
 .cta .btn { margin-top: 12px; }
 .cta .lede { margin-top: 20px; }
+.cta .small { max-width: 60ch; margin-top: 14px; }
 .btn.big { padding: 15px 26px; font-size: 1rem; }
 .cta .small a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
 
@@ -252,6 +253,9 @@ section:first-of-type { border-top: 0; }
 .gets > div { border-top: 1px solid var(--line); padding-top: 16px; }
 .gets p { color: var(--ink2); font-size: 0.95rem; margin: 0; }
 .gets .rule { color: var(--muted); margin-bottom: 8px; }
+/* The second paragraph of 'you send' is the ladder above the minimum.
+ * Quieter than the ask itself, because the ask has to stay small. */
+.gets .more { margin-top: 12px; color: var(--muted); }
 
 footer { border-top: 1px solid var(--line); padding: 34px 0; }
 footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 0.84rem; color: var(--muted); }
