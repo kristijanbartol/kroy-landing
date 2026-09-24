@@ -78,5 +78,7 @@ small: a few megabytes of WebP rather than a video.
       which reads as weak for B2B.
 - [ ] Absolute `og:image` / `twitter:image` URLs once the domain exists; some
       scrapers ignore relative paths.
-- [ ] A social preview image made from the demo's own figures. `assets/og-image.png`
-      is the old one and shows none of this.
+- [x] A social preview made from the demo's own figures. `build_page.py` draws
+      `demo/og-image.png`: eight figures across the cohort in thigh order, with
+      the real tally under them. `assets/og-image.png` is the old one and is now
+      unused.
