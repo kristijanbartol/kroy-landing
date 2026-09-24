@@ -239,6 +239,19 @@ section:first-of-type { border-top: 0; }
 .cta { text-align: center; }
 .cta p { margin-left: auto; margin-right: auto; }
 .cta .btn { margin-top: 12px; }
+.cta .lede { margin-top: 20px; }
+.btn.big { padding: 15px 26px; font-size: 1rem; }
+.cta .small a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+
+/* What the reader actually gets, in three steps. The page spends five sections
+ * showing what the tool DOES and never says what arrives in the inbox; a page
+ * with no narrator has to close that itself. Left-aligned inside a centred
+ * block, because centred body copy in three columns is unreadable. */
+.gets { display: grid; gap: 26px; margin: 46px auto 42px; max-width: 980px; text-align: left; }
+@media (min-width: 760px) { .gets { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+.gets > div { border-top: 1px solid var(--line); padding-top: 16px; }
+.gets p { color: var(--ink2); font-size: 0.95rem; margin: 0; }
+.gets .rule { color: var(--muted); margin-bottom: 8px; }
 
 footer { border-top: 1px solid var(--line); padding: 34px 0; }
 footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 0.84rem; color: var(--muted); }
