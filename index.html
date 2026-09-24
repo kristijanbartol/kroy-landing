@@ -3,373 +3,401 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KROY — Fit-aware product data for brands and fashion retail</title>
-  <meta name="description" content="KROY turns incomplete product data into fit your customers can trust, across your whole catalog, even without a photo of the garment. Fewer returns, more confident shoppers." />
+  <title>KROY — fit assessment across the shapes one size chart permits</title>
+  <meta name="description" content="One trouser, one manufactured size, and every body shape a single size chart permits. We show which of them can actually wear it, where the fabric runs out, and by how much." />
 
-  <!-- Favicon / icons -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-  <!-- Open Graph / social preview (link previews in email, Slack, LinkedIn) -->
-  <meta property="og:title" content="KROY — Fit-aware product data for brands and fashion retail" />
-  <meta property="og:description" content="Every garment, sized consistently. Turn incomplete product data into fit your customers can trust." />
+  <meta property="og:title" content="KROY — fit assessment across the shapes one size chart permits" />
+  <meta property="og:description" content="Bodies that all satisfy the same size chart. Drag through them and see which of them can wear the garment." />
   <meta property="og:type" content="website" />
-  <!-- TODO: once you have a domain, make these ABSOLUTE URLs (e.g. https://kroy.xx/og-image.png) — some scrapers ignore relative paths -->
-  <meta property="og:image" content="assets/og-image.png" />
+  <!-- The card is BUILT, from the cohort itself: scripts/build_page.py draws
+       eight figures across the thigh order with the real tally under them, so the
+       preview cannot go stale while the page changes.
+       TODO: absolute URLs once a domain is live; some scrapers ignore relative paths. -->
+  <meta property="og:image" content="demo/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KROY — Fit-aware product data for brands and fashion retail" />
-  <meta name="twitter:description" content="Every garment, sized consistently. Turn incomplete product data into fit your customers can trust." />
-  <meta name="twitter:image" content="assets/og-image.png" />
+  <meta name="twitter:title" content="KROY — fit assessment across the shapes one size chart permits" />
+  <meta name="twitter:description" content="Bodies that all satisfy the same size chart. Drag through them and see which of them can wear the garment." />
+  <meta name="twitter:image" content="demo/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bone:   '#F6F3EE',
-            paper:  '#FBFAF7',
-            ink:    '#171511',
-            muted:  '#6B6358',
-            line:   '#E4DED4',
-            clay:   '#B4531F',   /* single warm accent */
-            claylt: '#E9D9CC',
-          },
-          fontFamily: {
-            display: ['Fraunces', 'Georgia', 'serif'],
-            sans:    ['Inter', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { -webkit-font-smoothing: antialiased; }
-    .grain { background-image: radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px); background-size: 4px 4px; }
-    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-    .fade-up.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .fade-up { opacity: 1; transform: none; transition: none; }
-      html { scroll-behavior: auto; }
-    }
-    /* demo marker transition */
-    .marker { transition: left .8s cubic-bezier(.65,0,.35,1), background-color .4s ease; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="page.css" />
 </head>
 
-<body class="bg-bone text-ink font-sans antialiased">
+<body>
 
-  <!-- ============ NAV ============ -->
-  <header class="sticky top-0 z-40 bg-bone/85 backdrop-blur border-b border-line">
-    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#top" class="flex items-center gap-2">
-        <img src="assets/kroy-logo.png" alt="KROY" class="h-7 md:h-8 w-auto mix-blend-multiply" />
-      </a>
-      <div class="flex items-center gap-6 text-sm">
-        <a href="#how" class="hidden sm:inline text-muted hover:text-ink transition">How it works</a>
-        <a href="#team" class="hidden sm:inline text-muted hover:text-ink transition">Team</a>
-        <a href="#contact" class="inline-flex items-center rounded-full bg-ink text-paper px-4 py-2 font-medium hover:bg-clay transition">Book a call</a>
-      </div>
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" aria-label="KROY"><img src="assets/kroy-logo.png" alt="KROY" /></a>
+    <nav>
+      <a class="hide-sm" href="#blind">What the chart misses</a>
+      <a class="hide-sm" href="#fabric">Fabric</a>
+      <a class="hide-sm" href="#method">Method</a>
+      <a class="btn" href="#contact">Send us your size chart</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="top">
+<main id="top">
 
-    <!-- ============ HERO ============ -->
-    <section class="relative grain">
-      <div class="max-w-6xl mx-auto px-6 pt-20 pb-16 md:pt-28 md:pb-24">
-        <p class="fade-up text-xs sm:text-sm uppercase tracking-[0.2em] text-clay font-medium mb-6">Fit-aware product data for brands and fashion retail</p>
-        <h1 class="fade-up font-display font-medium leading-[1.05] tracking-tight text-5xl md:text-7xl max-w-4xl">
-          Fewer returns.<br />Every garment,<br />sized consistently.
-        </h1>
-        <p class="fade-up mt-8 text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
-          KROY turns incomplete product data into fit your customers can trust,
-          across your whole catalog, even without a photo of the garment.
-        </p>
-        <div class="fade-up mt-10 flex flex-wrap items-center gap-4">
-          <a href="#contact" class="inline-flex items-center rounded-full bg-ink text-paper px-7 py-3.5 text-base font-medium hover:bg-clay transition">Book a call</a>
-          <a href="#demo" class="inline-flex items-center gap-2 text-base font-medium text-ink hover:text-clay transition">
-            See how it works
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
+  <!-- ============ HERO: the cohort strip ============ -->
+  <section id="cohort">
+    <div class="wrap">
+      <div class="strip" id="strip-cohort">
 
-    <!-- ============ PROBLEM ============ -->
-    <section id="problem" class="border-y border-line bg-paper">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-start">
-        <div class="md:col-span-5">
-          <h2 class="fade-up font-display text-3xl md:text-4xl font-medium leading-tight tracking-tight">
-            A “Medium” isn’t a&nbsp;Medium.
-          </h2>
-        </div>
-        <div class="md:col-span-7 space-y-5 text-lg text-muted leading-relaxed">
-          <p class="fade-up">
-            The same label means different things across brands, materials and cuts.
-            Customers can’t tell, so they guess, and a large share of fashion orders
-            come back, almost always over size and fit.
+        <div class="strip-text">
+          <p class="eyebrow">Fit assessment for apparel brands</p>
+          <h1>Your size chart says these <span data-n="numbers.n_bodies">144</span> women are the same size.</h1>
+          <p class="lede" style="margin-top:22px">
+            They are. Every one of them sits inside every interval it states, at
+            the waist, the hip, the height and the inside leg. This is one
+            trouser, cut once, in one manufactured size.
+            <b><span data-n="strips.cohort.n_fail">19</span> of them cannot wear it.</b>
           </p>
-          <p class="fade-up">
-            The fix isn’t another size chart. It’s one <span class="text-ink font-medium">consistent,
-            comparable measure of fit</span> that works for every product you sell,
-            including the ones with thin or messy data.
-          </p>
+          <p class="lede">Drag through the cohort and stop anywhere you like.</p>
         </div>
-      </div>
-    </section>
 
-    <!-- ============ SIGNATURE DEMO ============ -->
-    <section id="demo" class="bg-bone">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl mb-12">
-          <p class="fade-up text-xs uppercase tracking-[0.2em] text-clay font-medium mb-4">The idea, in one move</p>
-          <h2 class="fade-up font-display text-3xl md:text-4xl font-medium leading-tight tracking-tight">
-            Four brands. The same “M”. <span class="italic">Four different fits.</span>
-          </h2>
-          <p class="fade-up mt-4 text-lg text-muted leading-relaxed">
-            Online, four pairs of jeans all just say “Size&nbsp;M”, so they look interchangeable.
-            KROY reads the brand, size and material - no photo needed - and places each one on a
-            single real waist scale, revealing how it actually fits.
+        <div class="readout strip-readout">
+            <dl>
+              <div>
+                <dt>Thigh</dt>
+                <dd class="num" data-live="thigh">&mdash;</dd>
+              </div>
+              <div>
+                <dt>Over capacity</dt>
+                <dd class="num" data-live="over">&mdash;</dd>
+              </div>
+              <div>
+                <dt>Verdict</dt>
+                <dd class="verdict" data-live="verdict">&mdash;</dd>
+              </div>
+            </dl>
+            <p class="tally">
+              <b><span data-n="strips.cohort.n_fail">19</span> of
+              <span data-n="strips.cohort.n_bodies">144</span></b>
+              cannot wear these, where a body counts as unable when more than 5
+              percent of the garment is asked to stretch further than the fabric
+            gives. The fabric here is a stable woven, which gives 2 percent.
           </p>
         </div>
 
-        <!-- interactive panel -->
-        <div class="fade-up rounded-2xl border border-line bg-paper p-6 md:p-10 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
-          <!-- input chips -->
-          <div class="flex flex-wrap items-center gap-2 mb-10 text-sm">
-            <span class="text-muted mr-1">Known product data:</span>
-            <span class="rounded-full border border-line bg-bone px-3 py-1">Garment: <b class="font-medium">Jeans</b></span>
-            <span class="rounded-full border border-line bg-bone px-3 py-1">Label: <b class="font-medium">Size M</b></span>
-            <span class="rounded-full border border-line bg-bone px-3 py-1">Material: <b class="font-medium">98% cotton, 2% elastane</b></span>
+        <div class="strip-figure">
+          <div class="strip-stage"><canvas class="strip-canvas"></canvas></div>
+          <div class="strip-rail" tabindex="0" role="slider"
+               aria-label="the cohort, in thigh order"
+               aria-valuemin="0" aria-valuemax="143" aria-valuenow="0">
+            <div class="ticks" aria-hidden="true"></div>
+            <div class="handle" aria-hidden="true"></div>
           </div>
-
-          <!-- the axis -->
-          <div class="relative">
-            <!-- state label above the axis -->
-            <div class="text-center mb-2">
-              <span id="stateLabel" class="text-xs uppercase tracking-[0.18em] text-muted font-medium">What the shopper sees today</span>
-            </div>
-            <!-- track -->
-            <div class="relative h-px bg-line my-16">
-              <!-- cluster label (default view only): explains what the four stacked dots are -->
-              <div id="clusterLabel" class="absolute top-6 left-1/2 -translate-x-1/2 text-center transition-opacity duration-500">
-                <span class="text-xs font-medium whitespace-nowrap">Brand 1–4 · all labelled “M”</span>
-                <span class="block text-[11px] text-muted mt-0.5">Same label, no real fit shown</span>
-              </div>
-              <!-- markers -->
-              <!-- data-today = clustered (all just labelled "M"); data-real = true fit on the KROY scale -->
-              <div class="marker absolute -top-3 -translate-x-1/2 flex flex-col items-center" data-today="48%" data-real="12%" style="left:48%;">
-                <span class="dot w-3 h-3 rounded-full bg-ink ring-4 ring-paper"></span>
-                <span class="lbl mt-3 text-xs font-medium whitespace-nowrap opacity-0 transition-opacity duration-500">Brand 1 · M</span>
-                <span class="tf mt-1 text-[11px] text-clay font-semibold whitespace-nowrap opacity-0 transition-opacity duration-500">fits like XS</span>
-              </div>
-              <div class="marker absolute -top-3 -translate-x-1/2 flex flex-col items-center" data-today="49.5%" data-real="38%" style="left:49.5%;">
-                <span class="dot w-3 h-3 rounded-full bg-ink ring-4 ring-paper"></span>
-                <span class="lbl mt-3 text-xs font-medium whitespace-nowrap opacity-0 transition-opacity duration-500">Brand 2 · M</span>
-                <span class="tf mt-1 text-[11px] text-clay font-semibold whitespace-nowrap opacity-0 transition-opacity duration-500">fits like S</span>
-              </div>
-              <div class="marker absolute -top-3 -translate-x-1/2 flex flex-col items-center" data-today="50.5%" data-real="63%" style="left:50.5%;">
-                <span class="dot w-3 h-3 rounded-full bg-ink ring-4 ring-paper"></span>
-                <span class="lbl mt-3 text-xs font-medium whitespace-nowrap opacity-0 transition-opacity duration-500">Brand 3 · M</span>
-                <span class="tf mt-1 text-[11px] text-clay font-semibold whitespace-nowrap opacity-0 transition-opacity duration-500">fits like L</span>
-              </div>
-              <div class="marker absolute -top-3 -translate-x-1/2 flex flex-col items-center" data-today="52%" data-real="88%" style="left:52%;">
-                <span class="dot w-3 h-3 rounded-full bg-ink ring-4 ring-paper"></span>
-                <span class="lbl mt-3 text-xs font-medium whitespace-nowrap opacity-0 transition-opacity duration-500">Brand 4 · M</span>
-                <span class="tf mt-1 text-[11px] text-clay font-semibold whitespace-nowrap opacity-0 transition-opacity duration-500">fits like XL</span>
-              </div>
-            </div>
-
-            <!-- axis labels (only meaningful once revealed) -->
-            <div id="axisLabels" class="flex justify-between text-xs text-muted mt-4 opacity-0 transition-opacity duration-500">
-              <span>Smaller fit · 64 cm waist</span>
-              <span>Larger fit · 84 cm waist</span>
-            </div>
-          </div>
-
-          <!-- toggle + caption -->
-          <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
-            <p id="demoCaption" class="text-sm text-muted max-w-md">
-              Online, all four just say “M”. They look identical: a shopper has no way to tell them apart.
-            </p>
-            <button id="demoToggle" class="self-start inline-flex items-center gap-2 rounded-full bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-clay transition">
-              Reveal the real fit →
-            </button>
+          <div class="rail-ends">
+            <span>smallest thigh</span>
+            <span class="drag-hint">drag</span>
+            <span>largest</span>
           </div>
         </div>
 
-        <p class="fade-up mt-6 text-xs text-muted max-w-2xl">Illustrative example; values shown for demonstration.</p>
       </div>
-    </section>
-
-    <!-- ============ HOW IT WORKS ============ -->
-    <section id="how" class="border-y border-line bg-paper">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-        <h2 class="fade-up font-display text-3xl md:text-4xl font-medium tracking-tight mb-14 max-w-2xl">
-          Fit you can publish, from the data you already&nbsp;have.
-        </h2>
-        <div class="grid md:grid-cols-3 gap-px bg-line rounded-2xl overflow-hidden border border-line">
-          <div class="fade-up bg-paper p-8 md:p-10">
-            <div class="font-display text-clay text-2xl mb-5">01</div>
-            <h3 class="font-display text-xl font-medium mb-3">Works with thin data</h3>
-            <p class="text-muted leading-relaxed">
-              Brand, size, material and garment type are enough to estimate fit.
-              We use images only to improve the result when available.
-            </p>
-          </div>
-          <div class="fade-up bg-paper p-8 md:p-10">
-            <div class="font-display text-clay text-2xl mb-5">02</div>
-            <h3 class="font-display text-xl font-medium mb-3">Consistent across the catalog</h3>
-            <p class="text-muted leading-relaxed">
-              Every product lands on one comparable scale, so a size finally means the same
-              thing across brands, collections and seasons; at the scale of millions of SKUs.
-            </p>
-          </div>
-          <div class="fade-up bg-paper p-8 md:p-10">
-            <div class="font-display text-clay text-2xl mb-5">03</div>
-            <h3 class="font-display text-xl font-medium mb-3">Fit shoppers can act on</h3>
-            <p class="text-muted leading-relaxed">
-              Clear, comparable guidance on the product page means the right size the first
-              time. Fewer returns, fewer support tickets, more confident buyers.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ OUTCOMES ============ -->
-    <section class="bg-ink text-paper">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-24 grid md:grid-cols-3 gap-12 md:gap-8">
-        <div class="fade-up">
-          <div class="font-display text-5xl md:text-6xl font-medium tracking-tight">Returns ↓</div>
-          <p class="mt-4 text-bone/70 leading-relaxed">Size and fit drive the majority of fashion returns. Get the size right up front and the costliest returns simply don’t happen.</p>
-        </div>
-        <div class="fade-up">
-          <div class="font-display text-5xl md:text-6xl font-medium tracking-tight">Conversion ↑</div>
-          <p class="mt-4 text-bone/70 leading-relaxed">Shoppers who trust the fit add to cart. Honest, comparable sizing removes the biggest reason people hesitate online.</p>
-        </div>
-        <div class="fade-up">
-          <div class="font-display text-5xl md:text-6xl font-medium tracking-tight">Trust ↑</div>
-          <p class="mt-4 text-bone/70 leading-relaxed">Consistent fit across every brand you carry turns your storefront into one shoppers can rely on, and come back to.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ TEAM / CREDIBILITY ============ -->
-    <section id="team" class="bg-bone grain">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl mb-14">
-          <p class="fade-up text-xs uppercase tracking-[0.2em] text-clay font-medium mb-4">Team</p>
-          <h2 class="fade-up font-display text-3xl md:text-4xl font-medium tracking-tight leading-tight">
-            The people behind KROY.
-          </h2>
-          <p class="fade-up mt-5 text-lg text-muted leading-relaxed">
-            KROY is built by two researchers in anthropometry and garment modeling: the science of
-            how bodies and garments relate. It’s why we can assess fit in ways the industry can’t today.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <!-- FOUNDER 1 — TODO: name + photo at assets/founder-1.jpg -->
-          <article class="fade-up rounded-2xl border border-line bg-paper p-7 md:p-8 flex gap-5">
-            <div class="shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full bg-bone border border-line overflow-hidden">
-              <img src="assets/kristijan-slika.jpeg" alt="Kristijan Bartol" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h3 class="font-display text-xl font-medium">Kristijan Bartol, Ph.D.</h3>
-              <p class="text-clay text-sm font-medium mb-3">Executive</p>
-              <p class="text-muted leading-relaxed text-[15px]">
-                Garment modeling infrastructure. Fit analytics platform for any garment and and body shape.
-                <!-- TODO: tailor this bio -->
-              </p>
-            </div>
-          </article>
-
-          <!-- FOUNDER 2 -->
-          <article class="fade-up rounded-2xl border border-line bg-paper p-7 md:p-8 flex gap-5">
-            <div class="shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full bg-bone border border-line overflow-hidden">
-              <img src="assets/davidboja.jpeg" alt="David Bojanić" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h3 class="font-display text-xl font-medium">David Bojanić, Ph.D.</h3>
-              <p class="text-clay text-sm font-medium mb-3">Product</p>
-              <p class="text-muted leading-relaxed text-[15px]">
-                Body modeling and measurement. Focus on sustainability and reducing returns with better fit.
-                <!-- TODO: tailor this bio -->
-              </p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT / CTA ============ -->
-    <section id="contact" class="bg-paper border-t border-line">
-      <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 text-center">
-        <h2 class="fade-up font-display text-4xl md:text-6xl font-medium tracking-tight leading-[1.05] max-w-3xl mx-auto">
-          Show your customers the right fit.
-        </h2>
-        <p class="fade-up mt-6 text-lg text-muted max-w-xl mx-auto leading-relaxed">
-          We’re working with a small number of retailers, brands and marketplaces.
-          Tell us about your catalog and we’ll show you what fit-aware data looks like for it.
-        </p>
-        <div class="fade-up mt-10 flex flex-wrap justify-center gap-4">
-          <!-- TODO: replace with your Calendly/scheduling link -->
-          <a href="mailto:kristijan.bartol@gmail.com?subject=KROY%20%E2%80%94%20fit-aware%20product%20data" class="inline-flex items-center rounded-full bg-ink text-paper px-8 py-4 text-base font-medium hover:bg-clay transition">Book a call</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="bg-bone border-t border-line">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 items-center gap-4 text-sm text-muted text-center">
-      <span class="font-display text-lg text-ink font-semibold sm:justify-self-start">KROY</span>
-      <span class="sm:justify-self-center">Fit-aware product data for brands and fashion retail.</span>
-      <a href="#contact" class="hover:text-clay transition sm:justify-self-end">Get in touch →</a>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    // Scroll reveal
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach((el) => io.observe(el));
+  <!-- ============ THE PAIR ============ -->
+  <section id="pair">
+    <div class="wrap">
+      <div class="hed reveal">
+        <p class="eyebrow">Two of them</p>
+        <h2>The chart cannot tell these two apart.</h2>
+        <p class="lede">
+          Every measurement it states puts them within about a centimetre of
+          each other, and the hip is identical to the millimetre. One of them
+          can wear the garment and one of them cannot. The reason is a
+          measurement the chart never asks for.
+        </p>
+      </div>
+      <table class="pair reveal measure" id="pair-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th>Body <span data-n="pair.a">115</span></th>
+            <th>Body <span data-n="pair.b">32</span></th>
+            <th>Difference</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="small" style="margin-top:14px">
+        Centimetres. A measurement marked <i>not on the chart</i> is one a size
+        chart of this kind does not carry, so two bodies may differ on it by any
+        amount at all and still be the same size.
+      </p>
+    </div>
+  </section>
 
-    // Demo toggle: "all look like the same M" (clustered) -> true fit revealed on one real scale (spread)
-    const markers = document.querySelectorAll('.marker');
-    const btn = document.getElementById('demoToggle');
-    const caption = document.getElementById('demoCaption');
-    const stateLabel = document.getElementById('stateLabel');
-    const axisLabels = document.getElementById('axisLabels');
-    const clusterLabel = document.getElementById('clusterLabel');
-    let revealed = false;
+  <!-- ============ WHAT THE CHART MISSES ============ -->
+  <section id="blind">
+    <div class="wrap">
+      <div class="hed reveal">
+        <p class="eyebrow">What the chart misses</p>
+        <h2>The measurements that decide it are the ones it never states.</h2>
+        <p class="lede">
+          Every measurement, ranked by how far it separates the bodies that
+          cannot wear the garment from the bodies that can.
+        </p>
+      </div>
+      <div class="bars reveal" id="bars"></div>
+      <div class="barkey">
+        <span><b style="background:var(--red)"></b>not on the chart</span>
+        <span><b style="background:var(--rail)"></b>on the chart</span>
+      </div>
+      <p class="small" style="margin-top:20px;max-width:64ch">
+        Unconstrained does not mean it matters. The rise varies more across this
+        cohort than anything else and separates the two groups by almost
+        nothing. Three measurements here are free and only two of them decide
+        the fit, which is what makes this rankable rather than merely alarming.
+      </p>
+    </div>
+  </section>
 
-    btn.addEventListener('click', () => {
-      revealed = !revealed;
-      markers.forEach((m) => {
-        m.style.left = revealed ? m.dataset.real : m.dataset.today;
-        m.querySelector('.dot').style.backgroundColor = revealed ? '#B4531F' : '#171511';
-        m.querySelector('.lbl').style.opacity = revealed ? '1' : '0';
-        m.querySelector('.tf').style.opacity = revealed ? '1' : '0';
-      });
-      clusterLabel.style.opacity = revealed ? '0' : '1';
-      axisLabels.style.opacity = revealed ? '1' : '0';
-      stateLabel.textContent = revealed ? 'On the KROY scale — true fit, one comparable measure' : 'What the shopper sees today';
-      btn.textContent = revealed ? '← Back to what shoppers see' : 'Reveal the real fit →';
-      caption.innerHTML = revealed
-        ? 'On one real waist scale, the truth shows — Brand&nbsp;1’s “M” fits like an XS, Brand&nbsp;4’s like an XL. Now the shopper can choose with confidence.'
-        : 'Online, all four just say “M”. They look identical — a shopper has no way to tell them apart.';
-    });
-  </script>
+  <!-- ============ THE FABRIC RAIL ============ -->
+  <section id="fabric">
+    <div class="wrap">
+      <div class="hed reveal">
+        <p class="eyebrow">The same garment, a different cloth</p>
+        <h2>What your fabric choice is worth, in bodies.</h2>
+        <p class="lede">
+          Nothing about the pattern changes along this rail. The only thing
+          moving is how far the yarn may stretch before it has run out.
+        </p>
+      </div>
+
+      <div class="strip left" id="strip-fabric" style="margin-top:44px">
+        <div class="strip-figure">
+          <div class="strip-stage"><canvas class="strip-canvas"></canvas></div>
+          <div class="strip-rail" tabindex="0" role="slider"
+               aria-label="the stretch the fabric gives"
+               aria-valuemin="0" aria-valuemax="80" aria-valuenow="16">
+            <div class="ticks" aria-hidden="true"></div>
+            <div class="handle" aria-hidden="true"></div>
+          </div>
+          <div class="stops" id="fabric-stops"></div>
+        </div>
+
+        <div>
+          <div class="readout bare">
+            <dl>
+              <div>
+                <dt>The fabric gives</dt>
+                <dd class="num" data-live="stretch">&mdash;</dd>
+              </div>
+              <div>
+                <dt>Cannot wear these</dt>
+                <dd class="num" data-live="nfail">&mdash;</dd>
+              </div>
+              <div>
+                <dt>On this body</dt>
+                <dd class="num" data-live="hero">&mdash;</dd>
+              </div>
+            </dl>
+            <p class="tally">
+              The figure is body <b><span data-n="pair.b">32</span></b>, the one
+              from the table above. Every count is over the same
+              <b><span data-n="strips.cohort.n_bodies">144</span></b> bodies,
+              standing.
+            </p>
+          </div>
+          <p class="small" style="margin-top:26px;max-width:46ch">
+            The rail reaches zero before its end, so past that point more
+            stretch buys nothing. That is worth knowing before anyone pays for
+            it. A fitted trouser of this cut, in the cloth anyone would actually
+            use, lives in the left half.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEATED ============ -->
+  <section id="seated">
+    <div class="wrap">
+      <div class="hed reveal">
+        <p class="eyebrow">And then she sits down</p>
+        <h2>Standing she fits. Seated she does not.</h2>
+        <p class="lede">
+          Sitting needs length through the seat and the rise, and a woven has
+          none to give. Same garment, same bodies, one cloth: a light stretch at
+          5 percent, hip and knee at 90 degrees.
+        </p>
+      </div>
+      <div class="strip" id="strip-seated" style="margin-top:44px">
+        <div>
+          <div class="stat" id="seated-stats"></div>
+          <div class="readout">
+            <dl>
+              <div>
+                <dt>Hip angle</dt>
+                <dd class="num" data-live="hip">&mdash;</dd>
+              </div>
+              <div>
+                <dt>Over capacity</dt>
+                <dd class="num" data-live="over">&mdash;</dd>
+              </div>
+            </dl>
+            <p class="tally">
+              The figure is body <b><span data-n="pair.b">32</span></b> again,
+              from the side, because a seated figure seen from the front is a
+              tangle. Drag her into the chair.
+            </p>
+          </div>
+        </div>
+
+        <div class="strip-figure">
+          <div class="strip-stage"><canvas class="strip-canvas"></canvas></div>
+          <div class="strip-rail" tabindex="0" role="slider"
+               aria-label="the hip angle, standing to seated"
+               aria-valuemin="0" aria-valuemax="18" aria-valuenow="0">
+            <div class="ticks" aria-hidden="true"></div>
+            <div class="handle" aria-hidden="true"></div>
+          </div>
+          <div class="rail-ends">
+            <span>standing</span>
+            <span class="drag-hint">drag</span>
+            <span>seated</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:26px;max-width:64ch">
+        The three seated poses are not interchangeable, so this one names the
+        pose rather than saying "seated" and quoting an ambiguous number.
+        Nothing in the model knows what elastane is for. It rediscovered why a
+        fitted trouser contains it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section id="method">
+    <div class="wrap">
+      <div class="hed reveal">
+        <p class="eyebrow">How it works</p>
+        <h2>Geometry, per triangle, on the bodies your own chart permits.</h2>
+      </div>
+      <div class="cols three reveal">
+        <div>
+          <p class="rule">01 &mdash; your chart</p>
+          <h3>One file, swappable</h3>
+          <p>
+            A size chart is a set of intervals. We build a cohort of bodies that
+            satisfy every one of them, over sixteen shape parameters rather than
+            the four the chart names, so the cohort spans what the chart
+            actually allows instead of what it mentions.
+          </p>
+        </div>
+        <div>
+          <p class="rule">02 &mdash; your garment</p>
+          <h3>Cut once, worn by all of them</h3>
+          <p>
+            The garment is flattened to the pattern a factory would cut, then
+            put on every body. Per triangle we compute how much room it gives
+            and how far the yarn must stretch to close, following that yarn
+            through the seam rather than stopping at the panel edge.
+          </p>
+        </div>
+        <div>
+          <p class="rule">03 &mdash; what you get</p>
+          <h3>Where it fails, and by how much</h3>
+          <p>
+            Which bodies the garment does not fit, where on the garment the
+            fabric runs out, and how many centimetres are missing. Hundreds of
+            shapes in minutes, without a physical sample.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols two reveal" style="margin-top:58px">
+        <div>
+          <p class="rule">What this cohort is</p>
+          <p>
+            Bodies we <b>built</b> inside this chart's size-M box. They are not a
+            sample of anyone's customers and they carry no frequencies, so every
+            count on this page is a count of <i>them</i>: of the bodies this
+            chart calls a size M. Give us your own population and we weight it.
+            We will not invent one.
+          </p>
+        </div>
+        <div>
+          <p class="rule">What we do not claim</p>
+          <p>
+            This is not validated against wear trials and we will not call it
+            that. It is a geometric assessment, corroborated independently by a
+            cloth solver that knows nothing about the design intent and agrees
+            with it on magnitude. Draping makes the picture; it never feeds a
+            verdict.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section id="team">
+    <div class="wrap">
+      <div class="hed reveal">
+        <p class="eyebrow">Team</p>
+        <h2>Two researchers in anthropometry and garment modelling.</h2>
+      </div>
+      <div class="people reveal">
+        <article class="person">
+          <img src="assets/kristijan-slika.jpeg" alt="" />
+          <div>
+            <h3>Kristijan Bartol, Ph.D.</h3>
+            <p class="role">Executive</p>
+            <p>Garment modelling infrastructure, and the fit engine behind this page.</p>
+          </div>
+        </article>
+        <article class="person">
+          <img src="assets/davidboja.jpeg" alt="" />
+          <div>
+            <h3>David Bojanić, Ph.D.</h3>
+            <p class="role">Product</p>
+            <p>Body modelling and measurement, with a focus on returns and on what a size chart can and cannot carry.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section id="contact" class="cta">
+    <div class="wrap">
+      <h2>Send us your size chart.</h2>
+      <p class="lede" style="margin-top:18px">
+        One garment, one size, the chart you already publish. We build the
+        cohort it permits and show you which of those bodies can wear it, where
+        the fabric runs out, and by how much. No samples, no photographs, no
+        customer data.
+      </p>
+      <p>
+        <a class="btn" href="mailto:kristijan.bartol@gmail.com?subject=KROY%20%E2%80%94%20our%20size%20chart&amp;body=Garment%3A%0ASize%3A%0AOur%20chart%20(pasted%20or%20attached)%3A%0A">Send us your size chart</a>
+      </p>
+      <p class="small" style="margin-top:8px">A photograph of the chart is enough to start.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>KROY</span>
+    <span class="small" id="provenance">&nbsp;</span>
+  </div>
+</footer>
+
+<script type="module" src="page.js"></script>
 </body>
 </html>

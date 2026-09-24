@@ -1,0 +1,1893 @@
+{
+ "built": "2026-09-24 18:51:24",
+ "what": "The landing page's numbers, re-derived from the engine. Never typed on the page.",
+ "rules": [
+  "the numbers here are re-derived at build time, never typed",
+  "deck/ holds only what ships; results/ is every render",
+  "a body counts as unable to wear the garment when more than 5% of it is over capacity",
+  "the cohort is built inside this chart's size-M box and is NOT a customer population: never quote it as a share of customers"
+ ],
+ "numbers": {
+  "design": "lower-v2",
+  "ease": "uniform-1.03",
+  "cohort": "designed-Mr-144",
+  "n_bodies": 144,
+  "fabric_shown": 0.02,
+  "cannot_wear_rule": "more than 5% of the garment over capacity",
+  "cannot_wear_percent": {
+   "standing": {
+    "0": 36.8,
+    "0.02": 13.2,
+    "0.05": 1.4,
+    "0.1": 0.0
+   },
+   "seated-90": {
+    "0": 100.0,
+    "0.02": 100.0,
+    "0.05": 67.4,
+    "0.1": 4.9
+   }
+  },
+  "hero_pair": {
+   "fits": {
+    "body": 115,
+    "thigh_cm": 44.9,
+    "over_capacity_percent": 0.0
+   },
+   "fails": {
+    "body": 32,
+    "thigh_cm": 51.6,
+    "over_capacity_percent": 6.85,
+    "seated_over_capacity_percent": 34.89
+   }
+  },
+  "thigh_gap_cm": 6.6
+ },
+ "strips": {
+  "cohort": {
+   "id": "cohort",
+   "size": [
+    480,
+    1535
+   ],
+   "n": 144,
+   "fabric": 0.02,
+   "ease": "uniform-1.03",
+   "design": "lower-v2",
+   "cohort": "designed-Mr-144",
+   "view": "front@25",
+   "elevation": 14.0,
+   "order": "thigh, smallest first",
+   "cannot_wear_rule": "more than 5% of the garment over capacity",
+   "n_fail": 19,
+   "n_bodies": 144,
+   "fail_percent": 13.2,
+   "one_in": 8,
+   "thigh_span_cm": [
+    43.5,
+    53.6
+   ],
+   "sheet": {
+    "files": [
+     "sheet-0.webp",
+     "sheet-1.webp"
+    ],
+    "cell": [
+     132,
+     422
+    ],
+    "cols": 12,
+    "per_sheet": 96,
+    "bytes": 404252,
+    "resident_mb": 32.1
+   },
+   "frame": "cohort/f%04d.webp",
+   "positions": [
+    {
+     "body": 43,
+     "thigh_cm": 43.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 58,
+     "thigh_cm": 44.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 80,
+     "thigh_cm": 44.3,
+     "over_capacity": 0.11,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 1,
+     "thigh_cm": 44.3,
+     "over_capacity": 0.22,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 139,
+     "thigh_cm": 44.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 15,
+     "thigh_cm": 44.5,
+     "over_capacity": 0.9,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 55,
+     "thigh_cm": 44.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 4,
+     "thigh_cm": 44.7,
+     "over_capacity": 0.25,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 118,
+     "thigh_cm": 44.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 71,
+     "thigh_cm": 44.9,
+     "over_capacity": 0.21,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 115,
+     "thigh_cm": 44.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 33,
+     "thigh_cm": 45.0,
+     "over_capacity": 1.06,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 119,
+     "thigh_cm": 45.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 70,
+     "thigh_cm": 45.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 22,
+     "thigh_cm": 45.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 67,
+     "thigh_cm": 45.2,
+     "over_capacity": 0.25,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 136,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 129,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 7,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 44,
+     "thigh_cm": 45.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 90,
+     "thigh_cm": 45.4,
+     "over_capacity": 0.23,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 107,
+     "thigh_cm": 45.5,
+     "over_capacity": 0.66,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 116,
+     "thigh_cm": 45.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 124,
+     "thigh_cm": 45.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 42,
+     "thigh_cm": 45.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 14,
+     "thigh_cm": 45.8,
+     "over_capacity": 0.12,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 65,
+     "thigh_cm": 45.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 137,
+     "thigh_cm": 45.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 82,
+     "thigh_cm": 46.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 35,
+     "thigh_cm": 46.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 110,
+     "thigh_cm": 46.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 31,
+     "thigh_cm": 46.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 51,
+     "thigh_cm": 46.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 41,
+     "thigh_cm": 46.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 54,
+     "thigh_cm": 46.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 68,
+     "thigh_cm": 46.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 48,
+     "thigh_cm": 46.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 29,
+     "thigh_cm": 46.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 109,
+     "thigh_cm": 46.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 92,
+     "thigh_cm": 46.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 122,
+     "thigh_cm": 46.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 141,
+     "thigh_cm": 46.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 125,
+     "thigh_cm": 46.8,
+     "over_capacity": 0.11,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 75,
+     "thigh_cm": 47.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 12,
+     "thigh_cm": 47.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 105,
+     "thigh_cm": 47.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 18,
+     "thigh_cm": 47.2,
+     "over_capacity": 1.22,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 98,
+     "thigh_cm": 47.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 132,
+     "thigh_cm": 47.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 8,
+     "thigh_cm": 47.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 95,
+     "thigh_cm": 47.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 113,
+     "thigh_cm": 47.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 2,
+     "thigh_cm": 47.5,
+     "over_capacity": 0.03,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 138,
+     "thigh_cm": 47.5,
+     "over_capacity": 0.11,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 26,
+     "thigh_cm": 47.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 19,
+     "thigh_cm": 47.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 34,
+     "thigh_cm": 47.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 87,
+     "thigh_cm": 47.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 63,
+     "thigh_cm": 47.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 140,
+     "thigh_cm": 47.7,
+     "over_capacity": 0.24,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 94,
+     "thigh_cm": 47.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 47,
+     "thigh_cm": 47.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 39,
+     "thigh_cm": 47.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 60,
+     "thigh_cm": 47.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 133,
+     "thigh_cm": 47.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 108,
+     "thigh_cm": 47.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 61,
+     "thigh_cm": 47.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 11,
+     "thigh_cm": 47.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 99,
+     "thigh_cm": 48.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 81,
+     "thigh_cm": 48.0,
+     "over_capacity": 0.26,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 100,
+     "thigh_cm": 48.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 120,
+     "thigh_cm": 48.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 130,
+     "thigh_cm": 48.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 123,
+     "thigh_cm": 48.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 16,
+     "thigh_cm": 48.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 30,
+     "thigh_cm": 48.3,
+     "over_capacity": 0.25,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 114,
+     "thigh_cm": 48.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 103,
+     "thigh_cm": 48.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 112,
+     "thigh_cm": 48.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 79,
+     "thigh_cm": 48.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 73,
+     "thigh_cm": 48.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 27,
+     "thigh_cm": 48.6,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 85,
+     "thigh_cm": 48.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 131,
+     "thigh_cm": 48.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 135,
+     "thigh_cm": 48.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 88,
+     "thigh_cm": 48.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 121,
+     "thigh_cm": 48.8,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 76,
+     "thigh_cm": 48.8,
+     "over_capacity": 0.67,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 36,
+     "thigh_cm": 48.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 49,
+     "thigh_cm": 48.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 24,
+     "thigh_cm": 49.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 3,
+     "thigh_cm": 49.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 142,
+     "thigh_cm": 49.1,
+     "over_capacity": 0.05,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 69,
+     "thigh_cm": 49.1,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 62,
+     "thigh_cm": 49.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 38,
+     "thigh_cm": 49.2,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 57,
+     "thigh_cm": 49.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 127,
+     "thigh_cm": 49.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 13,
+     "thigh_cm": 49.3,
+     "over_capacity": 4.93,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 101,
+     "thigh_cm": 49.4,
+     "over_capacity": 3.83,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 66,
+     "thigh_cm": 49.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 17,
+     "thigh_cm": 49.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 89,
+     "thigh_cm": 49.4,
+     "over_capacity": 0.95,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 106,
+     "thigh_cm": 49.4,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 50,
+     "thigh_cm": 49.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 93,
+     "thigh_cm": 49.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 74,
+     "thigh_cm": 49.7,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 64,
+     "thigh_cm": 49.8,
+     "over_capacity": 0.52,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 28,
+     "thigh_cm": 49.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 117,
+     "thigh_cm": 49.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 23,
+     "thigh_cm": 49.9,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 97,
+     "thigh_cm": 50.0,
+     "over_capacity": 0.14,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 134,
+     "thigh_cm": 50.0,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 52,
+     "thigh_cm": 50.1,
+     "over_capacity": 0.11,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 77,
+     "thigh_cm": 50.2,
+     "over_capacity": 4.18,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 111,
+     "thigh_cm": 50.3,
+     "over_capacity": 3.27,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 126,
+     "thigh_cm": 50.3,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 53,
+     "thigh_cm": 50.3,
+     "over_capacity": 0.02,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 46,
+     "thigh_cm": 50.4,
+     "over_capacity": 0.02,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 56,
+     "thigh_cm": 50.4,
+     "over_capacity": 0.9,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 20,
+     "thigh_cm": 50.5,
+     "over_capacity": 0.0,
+     "fails": false,
+     "cumulative_fails": 0
+    },
+    {
+     "body": 86,
+     "thigh_cm": 50.8,
+     "over_capacity": 6.36,
+     "fails": true,
+     "cumulative_fails": 1
+    },
+    {
+     "body": 45,
+     "thigh_cm": 50.8,
+     "over_capacity": 4.91,
+     "fails": false,
+     "cumulative_fails": 1
+    },
+    {
+     "body": 91,
+     "thigh_cm": 50.8,
+     "over_capacity": 1.78,
+     "fails": false,
+     "cumulative_fails": 1
+    },
+    {
+     "body": 6,
+     "thigh_cm": 50.8,
+     "over_capacity": 5.57,
+     "fails": true,
+     "cumulative_fails": 2
+    },
+    {
+     "body": 21,
+     "thigh_cm": 50.8,
+     "over_capacity": 3.72,
+     "fails": false,
+     "cumulative_fails": 2
+    },
+    {
+     "body": 5,
+     "thigh_cm": 51.0,
+     "over_capacity": 11.65,
+     "fails": true,
+     "cumulative_fails": 3
+    },
+    {
+     "body": 9,
+     "thigh_cm": 51.0,
+     "over_capacity": 9.48,
+     "fails": true,
+     "cumulative_fails": 4
+    },
+    {
+     "body": 78,
+     "thigh_cm": 51.1,
+     "over_capacity": 4.85,
+     "fails": false,
+     "cumulative_fails": 4
+    },
+    {
+     "body": 83,
+     "thigh_cm": 51.3,
+     "over_capacity": 13.22,
+     "fails": true,
+     "cumulative_fails": 5
+    },
+    {
+     "body": 102,
+     "thigh_cm": 51.3,
+     "over_capacity": 5.02,
+     "fails": true,
+     "cumulative_fails": 6
+    },
+    {
+     "body": 25,
+     "thigh_cm": 51.3,
+     "over_capacity": 19.87,
+     "fails": true,
+     "cumulative_fails": 7
+    },
+    {
+     "body": 143,
+     "thigh_cm": 51.4,
+     "over_capacity": 11.43,
+     "fails": true,
+     "cumulative_fails": 8
+    },
+    {
+     "body": 128,
+     "thigh_cm": 51.4,
+     "over_capacity": 7.01,
+     "fails": true,
+     "cumulative_fails": 9
+    },
+    {
+     "body": 32,
+     "thigh_cm": 51.6,
+     "over_capacity": 6.85,
+     "fails": true,
+     "cumulative_fails": 10
+    },
+    {
+     "body": 10,
+     "thigh_cm": 51.6,
+     "over_capacity": 10.77,
+     "fails": true,
+     "cumulative_fails": 11
+    },
+    {
+     "body": 37,
+     "thigh_cm": 51.8,
+     "over_capacity": 15.63,
+     "fails": true,
+     "cumulative_fails": 12
+    },
+    {
+     "body": 72,
+     "thigh_cm": 52.0,
+     "over_capacity": 18.67,
+     "fails": true,
+     "cumulative_fails": 13
+    },
+    {
+     "body": 96,
+     "thigh_cm": 52.4,
+     "over_capacity": 26.6,
+     "fails": true,
+     "cumulative_fails": 14
+    },
+    {
+     "body": 40,
+     "thigh_cm": 52.4,
+     "over_capacity": 30.85,
+     "fails": true,
+     "cumulative_fails": 15
+    },
+    {
+     "body": 84,
+     "thigh_cm": 52.4,
+     "over_capacity": 24.22,
+     "fails": true,
+     "cumulative_fails": 16
+    },
+    {
+     "body": 104,
+     "thigh_cm": 52.5,
+     "over_capacity": 41.04,
+     "fails": true,
+     "cumulative_fails": 17
+    },
+    {
+     "body": 0,
+     "thigh_cm": 53.4,
+     "over_capacity": 44.35,
+     "fails": true,
+     "cumulative_fails": 18
+    },
+    {
+     "body": 59,
+     "thigh_cm": 53.6,
+     "over_capacity": 45.09,
+     "fails": true,
+     "cumulative_fails": 19
+    }
+   ]
+  },
+  "fabric": {
+   "id": "fabric",
+   "size": [
+    480,
+    1535
+   ],
+   "n": 81,
+   "body": 32,
+   "ease": "uniform-1.03",
+   "design": "lower-v2",
+   "cohort": "designed-Mr-144",
+   "view": "front@25",
+   "elevation": 14.0,
+   "smax_percent": 10.0,
+   "cannot_wear_rule": "more than 5% of the garment over capacity",
+   "named": {
+    "0": "rigid woven",
+    "2": "a stable woven",
+    "5": "a light stretch",
+    "10": "10% elastane"
+   },
+   "sheet": {
+    "files": [
+     "sheet-0.webp"
+    ],
+    "cell": [
+     132,
+     422
+    ],
+    "cols": 12,
+    "per_sheet": 96,
+    "bytes": 228402,
+    "resident_mb": 18.0
+   },
+   "frame": "fabric/f%04d.webp",
+   "positions": [
+    {
+     "stretch": 0.0,
+     "cohort_fail_percent": 36.8,
+     "n_fail": 53,
+     "hero_over_capacity": 32.21
+    },
+    {
+     "stretch": 0.12,
+     "cohort_fail_percent": 33.3,
+     "n_fail": 48,
+     "hero_over_capacity": 29.95
+    },
+    {
+     "stretch": 0.25,
+     "cohort_fail_percent": 33.3,
+     "n_fail": 48,
+     "hero_over_capacity": 28.64
+    },
+    {
+     "stretch": 0.38,
+     "cohort_fail_percent": 29.9,
+     "n_fail": 43,
+     "hero_over_capacity": 27.57
+    },
+    {
+     "stretch": 0.5,
+     "cohort_fail_percent": 29.2,
+     "n_fail": 42,
+     "hero_over_capacity": 26.95
+    },
+    {
+     "stretch": 0.62,
+     "cohort_fail_percent": 25.0,
+     "n_fail": 36,
+     "hero_over_capacity": 25.9
+    },
+    {
+     "stretch": 0.75,
+     "cohort_fail_percent": 22.2,
+     "n_fail": 32,
+     "hero_over_capacity": 24.45
+    },
+    {
+     "stretch": 0.88,
+     "cohort_fail_percent": 20.8,
+     "n_fail": 30,
+     "hero_over_capacity": 23.67
+    },
+    {
+     "stretch": 1.0,
+     "cohort_fail_percent": 18.8,
+     "n_fail": 27,
+     "hero_over_capacity": 23.07
+    },
+    {
+     "stretch": 1.12,
+     "cohort_fail_percent": 18.1,
+     "n_fail": 26,
+     "hero_over_capacity": 22.11
+    },
+    {
+     "stretch": 1.25,
+     "cohort_fail_percent": 18.1,
+     "n_fail": 26,
+     "hero_over_capacity": 20.77
+    },
+    {
+     "stretch": 1.38,
+     "cohort_fail_percent": 16.7,
+     "n_fail": 24,
+     "hero_over_capacity": 18.12
+    },
+    {
+     "stretch": 1.5,
+     "cohort_fail_percent": 17.4,
+     "n_fail": 25,
+     "hero_over_capacity": 16.17
+    },
+    {
+     "stretch": 1.62,
+     "cohort_fail_percent": 17.4,
+     "n_fail": 25,
+     "hero_over_capacity": 12.34
+    },
+    {
+     "stretch": 1.75,
+     "cohort_fail_percent": 17.4,
+     "n_fail": 25,
+     "hero_over_capacity": 9.98
+    },
+    {
+     "stretch": 1.88,
+     "cohort_fail_percent": 15.3,
+     "n_fail": 22,
+     "hero_over_capacity": 8.58
+    },
+    {
+     "stretch": 2.0,
+     "cohort_fail_percent": 13.2,
+     "n_fail": 19,
+     "hero_over_capacity": 6.85
+    },
+    {
+     "stretch": 2.12,
+     "cohort_fail_percent": 11.8,
+     "n_fail": 17,
+     "hero_over_capacity": 5.96
+    },
+    {
+     "stretch": 2.25,
+     "cohort_fail_percent": 11.8,
+     "n_fail": 17,
+     "hero_over_capacity": 5.29
+    },
+    {
+     "stretch": 2.38,
+     "cohort_fail_percent": 10.4,
+     "n_fail": 15,
+     "hero_over_capacity": 4.67
+    },
+    {
+     "stretch": 2.5,
+     "cohort_fail_percent": 9.7,
+     "n_fail": 14,
+     "hero_over_capacity": 4.44
+    },
+    {
+     "stretch": 2.62,
+     "cohort_fail_percent": 9.7,
+     "n_fail": 14,
+     "hero_over_capacity": 4.04
+    },
+    {
+     "stretch": 2.75,
+     "cohort_fail_percent": 8.3,
+     "n_fail": 12,
+     "hero_over_capacity": 3.76
+    },
+    {
+     "stretch": 2.88,
+     "cohort_fail_percent": 8.3,
+     "n_fail": 12,
+     "hero_over_capacity": 3.38
+    },
+    {
+     "stretch": 3.0,
+     "cohort_fail_percent": 7.6,
+     "n_fail": 11,
+     "hero_over_capacity": 3.03
+    },
+    {
+     "stretch": 3.12,
+     "cohort_fail_percent": 7.6,
+     "n_fail": 11,
+     "hero_over_capacity": 2.58
+    },
+    {
+     "stretch": 3.25,
+     "cohort_fail_percent": 6.9,
+     "n_fail": 10,
+     "hero_over_capacity": 1.96
+    },
+    {
+     "stretch": 3.38,
+     "cohort_fail_percent": 6.9,
+     "n_fail": 10,
+     "hero_over_capacity": 1.35
+    },
+    {
+     "stretch": 3.5,
+     "cohort_fail_percent": 6.2,
+     "n_fail": 9,
+     "hero_over_capacity": 0.96
+    },
+    {
+     "stretch": 3.62,
+     "cohort_fail_percent": 4.9,
+     "n_fail": 7,
+     "hero_over_capacity": 0.42
+    },
+    {
+     "stretch": 3.75,
+     "cohort_fail_percent": 4.9,
+     "n_fail": 7,
+     "hero_over_capacity": 0.16
+    },
+    {
+     "stretch": 3.88,
+     "cohort_fail_percent": 4.9,
+     "n_fail": 7,
+     "hero_over_capacity": 0.16
+    },
+    {
+     "stretch": 4.0,
+     "cohort_fail_percent": 3.5,
+     "n_fail": 5,
+     "hero_over_capacity": 0.12
+    },
+    {
+     "stretch": 4.12,
+     "cohort_fail_percent": 3.5,
+     "n_fail": 5,
+     "hero_over_capacity": 0.01
+    },
+    {
+     "stretch": 4.25,
+     "cohort_fail_percent": 3.5,
+     "n_fail": 5,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 4.38,
+     "cohort_fail_percent": 2.8,
+     "n_fail": 4,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 4.5,
+     "cohort_fail_percent": 2.1,
+     "n_fail": 3,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 4.62,
+     "cohort_fail_percent": 2.1,
+     "n_fail": 3,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 4.75,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 4.88,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.0,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.12,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.25,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.38,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.5,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.62,
+     "cohort_fail_percent": 1.4,
+     "n_fail": 2,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.75,
+     "cohort_fail_percent": 0.7,
+     "n_fail": 1,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 5.88,
+     "cohort_fail_percent": 0.7,
+     "n_fail": 1,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.0,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.12,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.25,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.38,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.5,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.62,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.75,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 6.88,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.0,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.13,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.25,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.38,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.5,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.62,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.75,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 7.88,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.0,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.12,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.25,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.38,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.5,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.62,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.75,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 8.88,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.0,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.12,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.25,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.38,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.5,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.62,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.75,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 9.88,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    },
+    {
+     "stretch": 10.0,
+     "cohort_fail_percent": 0.0,
+     "n_fail": 0,
+     "hero_over_capacity": 0.0
+    }
+   ]
+  },
+  "seated": {
+   "id": "seated",
+   "size": [
+    480,
+    780
+   ],
+   "n": 19,
+   "body": 32,
+   "ease": "uniform-1.03",
+   "design": "lower-v2",
+   "cohort": "designed-Mr-144",
+   "view": "left",
+   "elevation": 14.0,
+   "fabric": 0.05,
+   "hip_deg": 90.0,
+   "pose": "seated-90",
+   "cannot_wear_rule": "more than 5% of the garment over capacity",
+   "sheet": {
+    "files": [
+     "sheet-0.webp"
+    ],
+    "cell": [
+     132,
+     214
+    ],
+    "cols": 12,
+    "per_sheet": 204,
+    "bytes": 28476,
+    "resident_mb": 2.1
+   },
+   "frame": "seated/f%04d.webp",
+   "positions": [
+    {
+     "hip_deg": 0.0,
+     "over_capacity": 0.0
+    },
+    {
+     "hip_deg": 5.0,
+     "over_capacity": 0.0
+    },
+    {
+     "hip_deg": 10.0,
+     "over_capacity": 0.0
+    },
+    {
+     "hip_deg": 15.0,
+     "over_capacity": 0.57
+    },
+    {
+     "hip_deg": 20.0,
+     "over_capacity": 1.91
+    },
+    {
+     "hip_deg": 25.0,
+     "over_capacity": 3.26
+    },
+    {
+     "hip_deg": 30.0,
+     "over_capacity": 6.17
+    },
+    {
+     "hip_deg": 35.0,
+     "over_capacity": 10.89
+    },
+    {
+     "hip_deg": 40.0,
+     "over_capacity": 15.02
+    },
+    {
+     "hip_deg": 45.0,
+     "over_capacity": 18.59
+    },
+    {
+     "hip_deg": 50.0,
+     "over_capacity": 19.63
+    },
+    {
+     "hip_deg": 55.0,
+     "over_capacity": 20.74
+    },
+    {
+     "hip_deg": 60.0,
+     "over_capacity": 21.96
+    },
+    {
+     "hip_deg": 65.0,
+     "over_capacity": 23.4
+    },
+    {
+     "hip_deg": 70.0,
+     "over_capacity": 26.25
+    },
+    {
+     "hip_deg": 75.0,
+     "over_capacity": 28.3
+    },
+    {
+     "hip_deg": 80.0,
+     "over_capacity": 31.94
+    },
+    {
+     "hip_deg": 85.0,
+     "over_capacity": 33.5
+    },
+    {
+     "hip_deg": 90.0,
+     "over_capacity": 34.89
+    }
+   ]
+  }
+ },
+ "blind": {
+  "n_cannot": 19,
+  "n_can": 125,
+  "n_bodies": 144,
+  "fabric_percent": 2.0,
+  "rows": [
+   {
+    "name": "thigh",
+    "stated": false,
+    "spread_cm": 10.1,
+    "difference_cm": 4.1
+   },
+   {
+    "name": "calf",
+    "stated": false,
+    "spread_cm": 7.0,
+    "difference_cm": 2.4
+   },
+   {
+    "name": "hip",
+    "stated": true,
+    "spread_cm": 3.5,
+    "difference_cm": 1.0
+   },
+   {
+    "name": "height",
+    "stated": true,
+    "spread_cm": 9.4,
+    "difference_cm": -0.5
+   },
+   {
+    "name": "waist",
+    "stated": true,
+    "spread_cm": 3.5,
+    "difference_cm": -0.4
+   },
+   {
+    "name": "rise",
+    "stated": false,
+    "spread_cm": 12.6,
+    "difference_cm": -0.3
+   },
+   {
+    "name": "inside leg",
+    "stated": true,
+    "spread_cm": 5.4,
+    "difference_cm": -0.1
+   }
+  ]
+ },
+ "pair": {
+  "a": 115,
+  "b": 32,
+  "rows": [
+   {
+    "name": "waist",
+    "stated": true,
+    "interval": [
+     74,
+     78
+    ],
+    "a": 75.9,
+    "b": 74.9,
+    "gap": 1.0
+   },
+   {
+    "name": "hip",
+    "stated": true,
+    "interval": [
+     96,
+     100
+    ],
+    "a": 96.9,
+    "b": 96.9,
+    "gap": 0.0
+   },
+   {
+    "name": "height",
+    "stated": true,
+    "interval": [
+     162,
+     172
+    ],
+    "a": 165.9,
+    "b": 165.7,
+    "gap": 0.2
+   },
+   {
+    "name": "inside leg",
+    "stated": true,
+    "interval": [
+     71,
+     77
+    ],
+    "a": 74.3,
+    "b": 75.2,
+    "gap": 0.8
+   },
+   {
+    "name": "thigh",
+    "stated": false,
+    "interval": null,
+    "a": 44.9,
+    "b": 51.6,
+    "gap": 6.6
+   },
+   {
+    "name": "calf",
+    "stated": false,
+    "interval": null,
+    "a": 32.6,
+    "b": 35.9,
+    "gap": 3.4
+   }
+  ]
+ },
+ "poses": {
+  "standing": {
+   "0": {
+    "n_fail": 53,
+    "n_bodies": 144,
+    "percent": 36.8
+   },
+   "2": {
+    "n_fail": 19,
+    "n_bodies": 144,
+    "percent": 13.2
+   },
+   "5": {
+    "n_fail": 2,
+    "n_bodies": 144,
+    "percent": 1.4
+   },
+   "10": {
+    "n_fail": 0,
+    "n_bodies": 144,
+    "percent": 0.0
+   }
+  },
+  "seated-90": {
+   "0": {
+    "n_fail": 144,
+    "n_bodies": 144,
+    "percent": 100.0
+   },
+   "2": {
+    "n_fail": 144,
+    "n_bodies": 144,
+    "percent": 100.0
+   },
+   "5": {
+    "n_fail": 97,
+    "n_bodies": 144,
+    "percent": 67.4
+   },
+   "10": {
+    "n_fail": 7,
+    "n_bodies": 144,
+    "percent": 4.9
+   }
+  }
+ }
+}
