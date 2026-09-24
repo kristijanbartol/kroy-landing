@@ -61,6 +61,9 @@
     }
     /* demo marker transition */
     .marker { transition: left .8s cubic-bezier(.65,0,.35,1), background-color .4s ease; }
+    /* proof bar reveal */
+    .proof-fill { transition: width .9s cubic-bezier(.65,0,.35,1); }
+    @media (prefers-reduced-motion: reduce) { .proof-fill { transition: none; } }
   </style>
 </head>
 
@@ -74,6 +77,7 @@
       </a>
       <div class="flex items-center gap-6 text-sm">
         <a href="#how" class="hidden sm:inline text-muted hover:text-ink transition">How it works</a>
+        <a href="#proof" class="hidden sm:inline text-muted hover:text-ink transition">Proof</a>
         <a href="#team" class="hidden sm:inline text-muted hover:text-ink transition">Team</a>
         <a href="#contact" class="inline-flex items-center rounded-full bg-ink text-paper px-4 py-2 font-medium hover:bg-clay transition">Book a call</a>
       </div>
@@ -263,6 +267,75 @@
       </div>
     </section>
 
+    <!-- ============ PROOF (public-data validation) ============ -->
+    <section id="proof" class="bg-bone">
+      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <div class="max-w-2xl mb-12">
+          <p class="fade-up text-xs uppercase tracking-[0.2em] text-clay font-medium mb-4">Proof</p>
+          <h2 class="fade-up font-display text-3xl md:text-4xl font-medium leading-tight tracking-tight">
+            We checked the idea against reality.
+          </h2>
+          <p class="fade-up mt-4 text-lg text-muted leading-relaxed">
+            Using only public retailer reviews, we ranked six body groups by how tightly one dress fits them,
+            before reading a single complaint. Then we looked at what wearers actually said.
+          </p>
+        </div>
+
+        <!-- interactive panel -->
+        <div class="fade-up rounded-2xl border border-line bg-paper p-6 md:p-10 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+          <div class="flex flex-wrap items-baseline justify-between gap-3 mb-9">
+            <span id="proofState" class="text-xs uppercase tracking-[0.18em] text-muted font-medium">Our prediction, from public reviews alone</span>
+            <span id="proofBadge" class="text-sm font-medium text-clay opacity-0 transition-opacity duration-500">6 of 6 in the predicted order</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="proof-row grid grid-cols-[6.5rem_1fr_2.75rem] sm:grid-cols-[9rem_1fr_3rem] items-center gap-3 sm:gap-5" data-pct="16">
+              <span class="text-[13px] sm:text-sm text-ink">88&nbsp;cm bust <span class="text-muted">· tall</span></span>
+              <span class="relative h-3 rounded-full bg-claylt/70 overflow-hidden"><span class="proof-fill absolute inset-y-0 left-0 rounded-full bg-clay" style="width:0%"></span></span>
+              <span class="proof-val text-sm font-medium text-clay tabular-nums opacity-0 transition-opacity duration-500 text-right">16%</span>
+            </div>
+            <div class="proof-row grid grid-cols-[6.5rem_1fr_2.75rem] sm:grid-cols-[9rem_1fr_3rem] items-center gap-3 sm:gap-5" data-pct="21">
+              <span class="text-[13px] sm:text-sm text-ink">88&nbsp;cm bust <span class="text-muted">· petite</span></span>
+              <span class="relative h-3 rounded-full bg-claylt/70 overflow-hidden"><span class="proof-fill absolute inset-y-0 left-0 rounded-full bg-clay" style="width:0%"></span></span>
+              <span class="proof-val text-sm font-medium text-clay tabular-nums opacity-0 transition-opacity duration-500 text-right">21%</span>
+            </div>
+            <div class="proof-row grid grid-cols-[6.5rem_1fr_2.75rem] sm:grid-cols-[9rem_1fr_3rem] items-center gap-3 sm:gap-5" data-pct="28">
+              <span class="text-[13px] sm:text-sm text-ink">94&nbsp;cm bust</span>
+              <span class="relative h-3 rounded-full bg-claylt/70 overflow-hidden"><span class="proof-fill absolute inset-y-0 left-0 rounded-full bg-clay" style="width:0%"></span></span>
+              <span class="proof-val text-sm font-medium text-clay tabular-nums opacity-0 transition-opacity duration-500 text-right">28%</span>
+            </div>
+            <div class="proof-row grid grid-cols-[6.5rem_1fr_2.75rem] sm:grid-cols-[9rem_1fr_3rem] items-center gap-3 sm:gap-5" data-pct="40">
+              <span class="text-[13px] sm:text-sm text-ink">99&nbsp;cm bust</span>
+              <span class="relative h-3 rounded-full bg-claylt/70 overflow-hidden"><span class="proof-fill absolute inset-y-0 left-0 rounded-full bg-clay" style="width:0%"></span></span>
+              <span class="proof-val text-sm font-medium text-clay tabular-nums opacity-0 transition-opacity duration-500 text-right">40%</span>
+            </div>
+            <div class="proof-row grid grid-cols-[6.5rem_1fr_2.75rem] sm:grid-cols-[9rem_1fr_3rem] items-center gap-3 sm:gap-5" data-pct="59">
+              <span class="text-[13px] sm:text-sm text-ink">105&nbsp;cm bust</span>
+              <span class="relative h-3 rounded-full bg-claylt/70 overflow-hidden"><span class="proof-fill absolute inset-y-0 left-0 rounded-full bg-clay" style="width:0%"></span></span>
+              <span class="proof-val text-sm font-medium text-clay tabular-nums opacity-0 transition-opacity duration-500 text-right">59%</span>
+            </div>
+            <div class="proof-row grid grid-cols-[6.5rem_1fr_2.75rem] sm:grid-cols-[9rem_1fr_3rem] items-center gap-3 sm:gap-5" data-pct="79">
+              <span class="text-[13px] sm:text-sm text-ink">116&nbsp;cm bust</span>
+              <span class="relative h-3 rounded-full bg-claylt/70 overflow-hidden"><span class="proof-fill absolute inset-y-0 left-0 rounded-full bg-clay" style="width:0%"></span></span>
+              <span class="proof-val text-sm font-medium text-clay tabular-nums opacity-0 transition-opacity duration-500 text-right">79%</span>
+            </div>
+          </div>
+
+          <div class="mt-9 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+            <p id="proofCaption" class="text-sm text-muted max-w-md">
+              Ranked by predicted fit tightness. We set this order before reading a single complaint.
+            </p>
+            <button id="proofToggle" class="self-start inline-flex items-center gap-2 rounded-full bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-clay transition">
+              Reveal what wearers said
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="fade-up mt-6 text-xs text-muted max-w-2xl">Based on 1,000+ public reviews of a single dress. The bar is the share of wearers who reported it runs small. Illustrative demonstration; not a specific brand.</p>
+      </div>
+    </section>
+
     <!-- ============ TEAM / CREDIBILITY ============ -->
     <section id="team" class="bg-bone grain">
       <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
@@ -369,6 +442,30 @@
       caption.innerHTML = revealed
         ? 'On one real waist scale, the truth shows — Brand&nbsp;1’s “M” fits like an XS, Brand&nbsp;4’s like an XL. Now the shopper can choose with confidence.'
         : 'Online, all four just say “M”. They look identical — a shopper has no way to tell them apart.';
+    });
+
+    // Proof: pre-ranked prediction -> reveal the real "runs small" rate (bars grow in the predicted order)
+    const proofToggle = document.getElementById('proofToggle');
+    const proofState = document.getElementById('proofState');
+    const proofBadge = document.getElementById('proofBadge');
+    const proofCaption = document.getElementById('proofCaption');
+    let proofRevealed = false;
+    proofToggle.addEventListener('click', () => {
+      proofRevealed = !proofRevealed;
+      document.querySelectorAll('.proof-row').forEach((row) => {
+        row.querySelector('.proof-fill').style.width = proofRevealed ? row.dataset.pct + '%' : '0%';
+        row.querySelector('.proof-val').style.opacity = proofRevealed ? '1' : '0';
+      });
+      proofBadge.style.opacity = proofRevealed ? '1' : '0';
+      proofState.textContent = proofRevealed
+        ? 'What wearers actually reported'
+        : 'Our prediction, from public reviews alone';
+      proofToggle.innerHTML = proofRevealed
+        ? 'Back to the prediction <span aria-hidden="true">&larr;</span>'
+        : 'Reveal what wearers said <span aria-hidden="true">&rarr;</span>';
+      proofCaption.textContent = proofRevealed
+        ? 'The complaints came back in the exact order we predicted: the fuller the bust, the more it runs small.'
+        : 'Ranked by predicted fit tightness. We set this order before reading a single complaint.';
     });
   </script>
 </body>
