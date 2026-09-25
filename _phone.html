@@ -20,4 +20,35 @@
 // spend twenty minutes wondering why an edit did nothing.
 const cb = Date.now();
 for (const id of ['a','b','c']) document.getElementById(id).src = '/?cb=' + cb;
+
+// `behavior: instant` matters: the page sets `scroll-behavior: smooth`, and a
+// smooth scroll is an animation, so it needs the rendering loop. Driving one
+// from automation that only paints during screenshots moves it a few pixels
+// per call and looks like the iframe refusing to scroll.
+window.go = (sel, dy = 0) => {
+  const out = {};
+  for (const id of ['a', 'b', 'c']) {
+    const w = document.getElementById(id).contentWindow;
+    const el = w.document.querySelector(sel);
+    if (!el) { out[id] = 'no ' + sel; continue; }
+    w.scrollTo({ top: el.getBoundingClientRect().top + w.scrollY + dy, behavior: 'instant' });
+    out[id] = Math.round(w.scrollY);
+  }
+  return out;
+};
+// Anything wider than the screen is the bug this review is looking for.
+window.overflow = () => {
+  const out = {};
+  for (const id of ['a', 'b', 'c']) {
+    const w = document.getElementById(id).contentWindow, d = w.document;
+    const wide = [...d.querySelectorAll('body *')]
+      .filter((e) => e.getBoundingClientRect().width > w.innerWidth + 1)
+      .map((e) => e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') +
+                  (e.className && typeof e.className === 'string' ? '.' + e.className.trim().split(/\s+/).join('.') : ''));
+    out[id] = { docWidth: d.documentElement.scrollWidth, vw: w.innerWidth,
+                scrollsSideways: d.documentElement.scrollWidth > w.innerWidth,
+                tooWide: [...new Set(wide)].slice(0, 6) };
+  }
+  return out;
+};
 </script>

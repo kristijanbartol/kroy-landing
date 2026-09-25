@@ -61,6 +61,9 @@ header.nav {
 }
 .nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .nav img { height: 26px; width: auto; mix-blend-mode: multiply; display: block; }
+/* The logo is a back-to-top link and was a 46x26 target. Padding, not size:
+ * the nav row is 64 px and centres it, so nothing moves. */
+.nav .wrap > a { display: flex; align-items: center; padding: 10px 0; }
 .nav nav { display: flex; align-items: center; gap: 20px; font-size: 0.87rem; }
 .nav nav a { color: var(--ink2); text-decoration: none; }
 .nav nav a:hover { color: var(--ink); }
@@ -199,6 +202,7 @@ section:first-of-type { border-top: 0; }
   --at: 0;
 }
 .strip-rail:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+@media (pointer: coarse) { .strip-rail { height: 50px; padding: 18px 0; } }
 .ticks { display: flex; gap: 1px; height: 14px; align-items: stretch; }
 .ticks i { flex: 1 1 0; background: var(--rail); border-radius: 0.5px; }
 .ticks i.bad { background: var(--red); opacity: .82; }
@@ -239,10 +243,21 @@ section:first-of-type { border-top: 0; }
 .pair td:last-child { font-weight: 600; }
 .pair .states { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
 
+/* On a phone this table is four columns of numbers in 375 px and it was 4 px
+ * too wide, which is enough to make the whole PAGE scroll sideways. The
+ * annotation goes under the measurement instead of beside it, and the header
+ * row stops spending letter-spacing it cannot afford. */
+@media (max-width: 560px) {
+  .pair { font-size: 0.93rem; }
+  .pair th, .pair td { padding: 10px 4px; }
+  .pair thead th { font-size: 0.6rem; letter-spacing: 0.03em; }
+  .pair .states { display: block; font-size: 0.68rem; line-height: 1.3; }
+}
+
 /* ---- the ranked bars ----------------------------------------------- */
 .bars { margin-top: 34px; max-width: 880px; display: grid; gap: 2px; }
 .bar { display: grid; grid-template-columns: 150px 1fr 74px; align-items: center; gap: 14px; padding: 7px 0; }
-@media (max-width: 620px) { .bar { grid-template-columns: 110px 1fr 62px; gap: 9px; } }
+@media (max-width: 620px) { .bar { grid-template-columns: 96px 1fr 72px; gap: 8px; } }
 .bar .who { font-size: 0.95rem; }
 .bar .who span { display: block; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .bar .track { height: 17px; background: transparent; position: relative; }
@@ -251,7 +266,7 @@ section:first-of-type { border-top: 0; }
   width: 0; background: var(--rail); transition: width .85s cubic-bezier(.65,0,.35,1);
 }
 .bar.free .track i { background: var(--red); }
-.bar .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.98rem; }
+.bar .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.98rem; white-space: nowrap; }
 .bar.free .val { color: var(--red); }
 .bar.pinned .who, .bar.pinned .val { color: var(--ink2); }
 @media (prefers-reduced-motion: reduce) { .bar .track i { transition: none; } }
@@ -263,6 +278,13 @@ section:first-of-type { border-top: 0; }
 .stops button {
   background: none; border: 0; padding: 4px 0; font: inherit; color: var(--muted);
   cursor: pointer; letter-spacing: -0.01em;
+}
+/* These were 82x26 on a phone, which is a link pretending to be a control: a
+ * thumb needs about 44 px of height and gets 26. The width is fine, so the
+ * padding goes on the other axis and nothing reflows. */
+@media (pointer: coarse), (max-width: 560px) {
+  .stops { gap: 4px; }
+  .stops button { padding: 16px 2px; font-size: 0.72rem; line-height: 1.15; }
 }
 .stops button:hover, .stops button[aria-current='true'] { color: var(--ink); }
 
