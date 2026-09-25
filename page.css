@@ -105,25 +105,67 @@ section:first-of-type { border-top: 0; }
   .strip.left { grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); }
   .strip.left .strip-figure { order: -1; }
 }
-#cohort { padding-top: clamp(40px, 5vw, 64px); }
+#cohort { padding-top: 26px; }
+@media (min-width: 900px) { #cohort { padding-top: clamp(40px, 5vw, 64px); } }
 
 /* The hero is three parts, and on a phone their ORDER is the whole point: the
  * headline, then the picture it is about, then the readout OF that picture. A
  * live readout stacked above the figure it reads is three numbers about
  * nothing. Named areas, so the two layouts cannot drift apart. */
-#strip-cohort { grid-template-areas: 'text' 'fig' 'read'; }
-#strip-cohort .strip-text { grid-area: text; }
+/* PHONE FIRST, and the hero is where that actually bites. This page is sent in
+ * a message and opened on a phone, so the default layout here is the phone's
+ * and the laptop is the variation.
+ *
+ * What was wrong: headline, then two paragraphs, THEN the figure. Measured at
+ * 390x844, that put the top of the figure 539 px down, so a phone with a
+ * browser bar showed about 190 px of it. The opening sweep could run perfectly
+ * and the reader would be looking at type while it happened.
+ *
+ * So the head and its explanation are separate blocks, and the figure sits
+ * BETWEEN them: title, picture, then the prose that qualifies it. On a laptop
+ * the two halves rejoin into one column beside the figure and nothing about
+ * that layout changes. */
+#strip-cohort { grid-template-areas: 'head' 'fig' 'read' 'lede' 'tally'; gap: 18px; }
+#strip-cohort .strip-head { grid-area: head; }
+#strip-cohort .strip-lede { grid-area: lede; }
 #strip-cohort .strip-figure { grid-area: fig; }
 #strip-cohort .strip-readout { grid-area: read; margin-top: 6px; }
+/* The sit stacks numbers-then-figure in the markup because that is the desktop
+ * order. On one column the figure has to come first, for the same reason the
+ * hero's does: the numbers are about a picture you have not been shown yet. */
+/* On a phone the three live numbers go with the rail that drives them and the
+ * sentence that explains the rule goes below the fold, where a sentence can
+ * live. `display: contents` is what lets one block be two grid items here and
+ * one block on a laptop, with no second copy of the markup to drift. */
+@media (max-width: 899px) {
+  #strip-cohort .strip-readout { display: contents; }
+  #strip-cohort .strip-readout dl {
+    grid-area: read; border-top: 1px solid var(--line); padding-top: 14px;
+  }
+  #strip-cohort .strip-readout .tally { grid-area: tally; margin: 0; }
+}
+
+#strip-seated .strip-figure { order: -1; }
+@media (min-width: 900px) { #strip-seated .strip-figure { order: 0; } }
+#strip-cohort .strip-lede .lede + .lede { margin-top: 0; }
 @media (min-width: 900px) {
   #strip-cohort {
     grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-    grid-template-areas: 'text fig' 'read fig';
+    grid-template-areas: 'head fig' 'lede fig' 'read fig';
     align-items: start;
+    gap: 0 64px;
   }
+  #strip-cohort .strip-lede { margin-top: 22px; }
   #strip-cohort .strip-readout { margin-top: 30px; }
 }
-#cohort .strip-stage { height: clamp(380px, 72vh, 760px); }
+/* The figure has to FIT the phone screen, not merely be on the page. At
+ * 390x844 the head above it is about 210 px and a browser bar takes another
+ * 110, which leaves roughly 460 for picture and rail. `dvh` rather than `vh`
+ * because iOS reports `vh` as the height with the URL bar HIDDEN, so a
+ * vh-sized picture is taller than the screen until you scroll. */
+#cohort .strip-stage { height: min(44vh, 380px); }
+@supports (height: 1dvh) { #cohort .strip-stage { height: min(44dvh, 380px); } }
+@media (min-width: 900px) { #cohort .strip-stage { height: clamp(380px, 72vh, 760px); } }
 /* Only the hero needs a figure that size. Below it the picture is
  * evidence for a claim made in type, not the claim itself. */
 #material .strip-stage, #seated .strip-stage { height: clamp(320px, 46vh, 500px); }
@@ -177,12 +219,13 @@ section:first-of-type { border-top: 0; }
 /* the live readout beside a strip */
 .readout { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 18px; }
 .readout.bare { border-top: 0; margin-top: 0; padding-top: 0; }
-.readout dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px; margin: 0; }
-@media (min-width: 560px) { .readout dl { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.readout dt { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-.readout dd { margin: 0; font-size: clamp(1.25rem, 3.4vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.readout dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 18px; margin: 0; }
+
+.readout dt { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.readout dd { margin: 0; font-size: clamp(1.05rem, 3.2vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .readout dd.verdict[data-fails='1'] { color: var(--red); }
-.tally { margin-top: 16px; font-size: 0.92rem; color: var(--ink2); }
+.tally { margin-top: 14px; font-size: 0.88rem; color: var(--ink2); }
+
 .tally b { font-weight: 600; color: var(--ink); }
 
 /* ---- the pair table ------------------------------------------------ */

@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><title>phone harness</title>
+<style>
+ body{margin:0;background:#222;color:#bbb;font:12px system-ui;display:flex;gap:16px;padding:14px}
+ figure{margin:0;text-align:center}
+ iframe{border:0;background:#fff;display:block;box-shadow:0 0 0 2px #444;transform:scale(.62);transform-origin:top left}
+ figure{width:calc(390px*.62)}
+ figure:nth-of-type(2){width:calc(375px*.62)}
+ figcaption{padding:6px 0}
+</style>
+<!-- A real phone viewport, locally. An iframe resolves media queries and
+     IntersectionObserver roots against ITS OWN box, so this is not a
+     simulation of narrow layout, it is narrow layout. Not shipped: the file
+     is gitignored and exists so nobody has to reason about phone geometry
+     from a 1440 px window again. -->
+<figure><iframe id="a" width="390" height="844"></iframe><figcaption>iPhone 390x844</figcaption></figure>
+<figure><iframe id="b" width="375" height="667"></iframe><figcaption>SE 375x667</figcaption></figure>
+<figure><iframe id="c" width="390" height="730"></iframe><figcaption>390x730, iPhone with Chrome's bars</figcaption></figure>
+<script>
+// Each load gets its own URL, or the iframes serve a cached stylesheet and you
+// spend twenty minutes wondering why an edit did nothing.
+const cb = Date.now();
+for (const id of ['a','b','c']) document.getElementById(id).src = '/?cb=' + cb;
+</script>
