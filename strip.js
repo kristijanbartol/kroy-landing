@@ -24,6 +24,31 @@ const SETTLE_MS = 110;          // how long a hand has to stop before full res
 const CACHE_MAX = 10;           // full-res frames held, in position order
 // A decoded frame is width x height x 4 bytes whatever it cost to fetch, so
 // the cache is small on purpose: 17 KB over the wire is 2.9 MB in memory.
+const WATCHABLE_PX = 240;       // picture on screen before a sweep is worth it
+const ARM_MS = 300;             // and how long it has to stay there
+
+/* WHY THE SWEEP IS TRIGGERED BY GEOMETRY WE MEASURE AND NOT BY AN
+ * IntersectionObserver THRESHOLD. Twice the sweep has failed to run on a phone
+ * while being perfect on a laptop, and both times the cause had the same
+ * shape: an observer threshold is A FRACTION OF THE ELEMENT, and the question
+ * actually being asked is "is enough of the picture on screen to watch", which
+ * is a number of PIXELS. A fraction of a two-column strip 620 px tall and a
+ * fraction of the same strip stacked to 1400 px on a phone are different
+ * quantities wearing the same number, and when the phone's one turns out to be
+ * unreachable nothing says so: there is no error, just a still picture.
+ *
+ * So the geometry is read directly, at most once per frame, and the condition
+ * is written in the units of the thing it is about. The events below are every
+ * way the answer can change, including the two that only exist on a phone:
+ * `orientationchange`, and `pageshow`, which is how a tab Safari restored from
+ * its page cache tells us it is back without running any of this file again. */
+const watchers = new Set();
+let ticking = false;
+const pump = () => { ticking = false; watchers.forEach((f) => f()); };
+const kick = () => { if (!ticking) { ticking = true; requestAnimationFrame(pump); } };
+['scroll', 'resize', 'orientationchange', 'pageshow'].forEach((k) =>
+  addEventListener(k, kick, { passive: true }));
+addEventListener('visibilitychange', kick);
 
 async function bitmaps(urls) {
   return Promise.all(urls.map(async (u) => {
@@ -218,12 +243,21 @@ export class Strip {
   }
 
   /* -- input ---------------------------------------------------------- */
+  /* Pointer capture is a nicety and it THROWS. `setPointerCapture` rejects an
+   * id the browser no longer considers active, and an uncaught throw here takes
+   * the rest of the handler with it: `dragFrom` never gets set and the figure
+   * is simply not draggable, with nothing on screen to say why. It is worth
+   * having and it is not worth the drag. */
+  capture(el, id) {
+    try { el.setPointerCapture?.(id); } catch (e) { /* not fatal, and not ours */ }
+  }
+
   bind() {
     const grab = (e) => {
       // The picture is draggable too, not only the rail. A control you can
       // only reach by its handle reads as a decoration with a handle.
       this.dragging = true;
-      this.rail.setPointerCapture?.(e.pointerId);
+      this.capture(this.rail, e.pointerId);
       this.root.classList.add('dragging');
       this.set(this.fromClientX(e.clientX), true);
       e.preventDefault();
@@ -248,7 +282,7 @@ export class Strip {
     // measured against the rail, so the two cannot disagree about position.
     this.canvas.addEventListener('pointerdown', (e) => {
       this.dragging = true;
-      this.canvas.setPointerCapture?.(e.pointerId);
+      this.capture(this.canvas, e.pointerId);
       this.root.classList.add('dragging');
       this.dragFrom = [e.clientX, this.f];
       e.preventDefault();
@@ -274,34 +308,72 @@ export class Strip {
   }
 
   /* -- the demonstration ---------------------------------------------- */
-  /* A strip nobody drags is a still. It sweeps itself once when it first comes
-   * into view, which says "this moves" without a caption saying it, then stops
-   * and leaves the handle where the argument is. Any input cancels it. */
+  /* A strip nobody drags is a still, so it sweeps itself to say "this moves"
+   * without a caption saying it. Three things about WHEN, and every one of
+   * them was learned on a phone after being got wrong on a laptop.
+   *
+   * IT IS NOT A ONE-SHOT ANY MORE. It used to play the first time the figure
+   * was ever seen and then never again. On a laptop that moment is the page
+   * opening, with the whole layout in one eyeful. On a phone the figure is
+   * half the screen and the sweep runs in the first seconds while the reader
+   * is still on the headline, so the page is a still for the rest of the
+   * visit and reads as sliders nobody was told to drag. It now re-arms
+   * whenever the figure has fully left the screen, so scrolling back to it
+   * plays it again.
+   *
+   * A HAND BEATS IT FOR GOOD. Once the reader has dragged or picked a stop,
+   * the position is theirs and nothing moves it on its own again.
+   *
+   * IT WAITS A BEAT after the figure arrives, and checks again when the beat
+   * is up. A reader scrolling straight past should not spend the sweep on a
+   * picture that is already leaving.
+   */
+
+  /* How much of the picture is on screen, and how much has to be. Both in
+   * PIXELS and both from one place, so the debug panel cannot report a
+   * different rule from the one the sweep applies. The requirement is capped at
+   * the element's own height, so a short figure can still satisfy it, and it is
+   * never a bare fraction, so it means the same thing on every screen. */
+  watch() {
+    const r = this.canvas.parentElement.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    return {
+      shown: Math.min(r.bottom, vh) - Math.max(r.top, 0),
+      need: Math.min(WATCHABLE_PX, r.height * 0.6),
+    };
+  }
+
+  enough() { const w = this.watch(); return w.shown >= w.need; }
+
   armAuto() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Skipped deliberately, and it lands on the body the argument is about
+      // rather than on the first one, so the page still says something.
       this.set(this.cfg.rest ?? 0);
+      this.reduced = true;
       return;
     }
-    // WATCH THE PICTURE, NOT THE WHOLE STRIP. This observed `this.root` at a
-    // 0.4 threshold, which is fine on a laptop, where the strip is two columns
-    // and about 620 px tall in a 720 px viewport, and quietly broken on a
-    // phone, where it is ONE COLUMN of headline, figure and readout stacked to
-    // 1400 px or more. Forty percent of 1400 is 560 px, and a phone with a
-    // browser chrome has about 600 px of the strip on screen at the top of the
-    // page, so the condition sat on the edge of never being met: the animation
-    // did not happen, and the page read as sliders nobody had told you to
-    // drag. The FIGURE is about 500 px on any device, so a fraction of IT
-    // means the same thing everywhere, and 0.3 of it leaves room for a
-    // headline that wraps to one more line than this one does.
-    const io = new IntersectionObserver((es) => {
-      es.forEach((en) => {
-        if (!en.isIntersecting || this.auto || this.played) return;
-        this.played = true;
-        io.disconnect();
+    this.check = () => {
+      if (this.userOwns) { watchers.delete(this.check); return; }
+      if (this.watch().shown <= 0) {
+        // Gone from the screen. Whatever it did while it was here, it may do
+        // again when it comes back.
+        this.done = false;
+        if (this.arming) { clearTimeout(this.arming); this.arming = null; }
+        return;
+      }
+      if (this.done || this.auto || this.arming) return;
+      if (document.visibilityState !== 'visible' || !this.enough()) return;
+      this.arming = setTimeout(() => {
+        this.arming = null;
+        if (this.userOwns || this.done || this.auto) return;
+        if (document.visibilityState !== 'visible' || !this.enough()) return;
+        this.done = true;
         this.playAuto();
-      });
-    }, { threshold: 0.3 });
-    io.observe(this.canvas.parentElement);
+      }, ARM_MS);
+    };
+    watchers.add(this.check);
+    this.check();
   }
 
   /* THE OPENING SWEEP, and both of its timings were wrong for the same reason.
@@ -325,8 +397,12 @@ export class Strip {
     const rest = Math.min(end, this.cfg.rest ?? end);
     const OUT = 5400, HOLD = 700, BACK = 1200;
     const smooth = (u) => u * u * (3 - 2 * u);
+    // Every sweep starts from the beginning, so a replay is the same argument
+    // and not a jump out of wherever the last one stopped.
+    this.set(0);
     const t0 = performance.now();
     const tick = (t) => {
+      if (this.userOwns) { this.auto = null; return; }
       const ms = t - t0;
       let at;
       if (ms < OUT) at = smooth(ms / OUT) * end;
@@ -341,6 +417,9 @@ export class Strip {
 
   stopAuto() {
     if (this.auto) { cancelAnimationFrame(this.auto); this.auto = null; }
-    this.played = true;
+    if (this.arming) { clearTimeout(this.arming); this.arming = null; }
+    // The reader's hand outranks the demonstration, permanently.
+    this.userOwns = true;
+    this.done = true;
   }
 }

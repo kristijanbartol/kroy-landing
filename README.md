@@ -66,6 +66,29 @@ python3 -m http.server 8000        # http://localhost:8000
 A `file://` open will not work: the page fetches `demo/data.json`, and modules
 and `fetch` both need an origin.
 
+## Checking it on a phone
+
+The page is opened on a phone, so `?debug` and `test/phone.mjs` are the two ways
+to find out what it is doing there, and both exist because the opening sweep was
+"fixed" twice without ever being reproduced.
+
+`https://.../?debug` prints a panel on the real page on the real device: the
+Reduce Motion setting, how many pixels of each figure are on screen against how
+many the sweep wants, which state each strip is in, the frame rate, and the
+build stamp so you can tell whether the phone has the file you just deployed.
+It is the only instrument that reaches the device.
+
+`test/phone.mjs` runs the page in Playwright's WebKit at three iPhone sizes with
+a touch pointer. Resizing a Chrome window is not a phone: it reports a different
+viewport from the one it was given, it is a different engine from Safari's, and
+its synthetic drag delivers no pointer events.
+
+```bash
+npm i -D playwright && npx playwright install webkit
+python3 -m http.server 8899
+node test/phone.mjs                 # PAGE=https://... to check what is live
+```
+
 ## Deploy
 
 Push to `origin` (github.com/kristijanbartol/kroy-landing); Netlify builds from

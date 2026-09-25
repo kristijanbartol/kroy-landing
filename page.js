@@ -11,7 +11,14 @@
  * picture, so a rate is never written on its own: every share is rendered as a
  * count out of the cohort, and the tally is in the markup beneath it.
  */
-import { Strip } from './strip.js';
+/* ONE VERSION STAMP AND THE WHOLE GRAPH FOLLOWS IT. `index.html` asks for
+ * `page.js?v=N`; this file hands the same N to `strip.js`, so bumping the
+ * number in ONE place moves every module to a URL no cache has ever seen.
+ * Netlify already sends must-revalidate, so this is not what makes a reload
+ * correct. It is what makes "the phone is still running the old file" a thing
+ * nobody can spend an evening on again, which has already happened twice. */
+const V = new URL(import.meta.url).search;
+let Strip;
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -190,34 +197,61 @@ function navHighlight() {
 }
 
 /* -- scroll reveal ---------------------------------------------------- */
+/* `.reveal` STARTS AT ZERO OPACITY, so this does not animate a decoration: it
+ * is what makes half the page visible at all, and a trigger that fails to fire
+ * does not lose a flourish, it loses a section. Two consequences.
+ *
+ * NO FRACTION. A threshold of 0.15 asks for a proportion of the element, which
+ * is a different number of pixels on every screen and is unreachable once an
+ * element is many viewports tall. The negative bottom margin asks the question
+ * that was meant instead: has this reached the lower part of the screen. It
+ * cannot be out of reach at any size.
+ *
+ * AND A FLOOR UNDER IT. If there is no observer to be had, everything is shown
+ * at once. A page missing its argument is worse than a page that arrives
+ * without the fade. */
 function reveal() {
+  const show = (el) => {
+    el.classList.add('in');
+    $$('.track i', el).forEach((i) => { i.style.width = i.dataset.w + '%'; });
+  };
+  if (!('IntersectionObserver' in window)) { $$('.reveal').forEach(show); return; }
   const io = new IntersectionObserver((es) => {
     es.forEach((e) => {
       if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      $$('.track i', e.target).forEach((i) => { i.style.width = i.dataset.w + '%'; });
+      show(e.target);
       io.unobserve(e.target);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
   $$('.reveal').forEach((el) => io.observe(el));
 }
 
 /* -- go --------------------------------------------------------------- */
-fetch('demo/data.json')
-  .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then((data) => {
+Promise.all([
+  fetch('demo/data.json')
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+  import('./strip.js' + V).then((m) => { Strip = m.Strip; }),
+])
+  .then(([data]) => {
     fill(data);
     pairTable(data);
     bars(data);
     seatedStats(data);
-    cohortStrip(data);
-    fabricStrip(data);
+    const strips = [cohortStrip(data), fabricStrip(data)];
     // The sit is the one strip the page can do without, so it is drawn only if
     // it was built. A section that half-appears is worse than one that does not.
-    if (data.strips.seated) seatedStrip(data);
+    if (data.strips.seated) strips.push(seatedStrip(data));
     else $('#strip-seated').classList.add('no-figure');
     reveal();
     navHighlight();
+    // THE PHONE IS THE ONLY DEVICE HERE AND IT HAS NO CONSOLE. `?debug` on the
+    // real page, not a copy of it, prints what the sweep is actually deciding:
+    // the Reduce Motion setting, how many pixels of the figure are on screen
+    // against how many it wants, and which state each strip is in. Two sessions
+    // went into guessing at these from a laptop.
+    if (/[?&]debug/.test(location.search) || location.hash === '#debug') {
+      import('./debug.js' + V).then((m) => m.panel(strips, data)).catch(() => {});
+    }
     const c = data.strips.cohort;
     $('#provenance').textContent =
       `${c.n_bodies} bodies, ${c.design}, ease ${c.ease.replace('uniform-', '')}, `

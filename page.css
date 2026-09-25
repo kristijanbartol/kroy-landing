@@ -180,8 +180,15 @@ section:first-of-type { border-top: 0; }
   display: flex; align-items: center; justify-content: center;
   position: relative;
 }
+/* `pan-y` AND NOT `none`, and the difference only shows on a phone. The figure
+ * is most of the screen there, so it is the natural place to put a thumb, and
+ * with `none` a swipe that starts on her scrubs the cohort and the PAGE DOES
+ * NOT SCROLL. The reader's first gesture makes the page feel stuck. `pan-y`
+ * gives vertical to the page and keeps horizontal for the scrub, which is also
+ * the only pair of meanings a reader would guess. The rail keeps `none`,
+ * because a 50 px band that is unambiguously a control can have both axes. */
 .strip-canvas {
-  display: block; touch-action: none; cursor: grab;
+  display: block; touch-action: pan-y; cursor: grab;
   opacity: 0; transition: opacity .35s ease;
 }
 .strip.ready .strip-canvas { opacity: 1; }
