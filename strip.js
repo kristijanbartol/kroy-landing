@@ -282,6 +282,17 @@ export class Strip {
       this.set(this.cfg.rest ?? 0);
       return;
     }
+    // WATCH THE PICTURE, NOT THE WHOLE STRIP. This observed `this.root` at a
+    // 0.4 threshold, which is fine on a laptop, where the strip is two columns
+    // and about 620 px tall in a 720 px viewport, and quietly broken on a
+    // phone, where it is ONE COLUMN of headline, figure and readout stacked to
+    // 1400 px or more. Forty percent of 1400 is 560 px, and a phone with a
+    // browser chrome has about 600 px of the strip on screen at the top of the
+    // page, so the condition sat on the edge of never being met: the animation
+    // did not happen, and the page read as sliders nobody had told you to
+    // drag. The FIGURE is about 500 px on any device, so a fraction of IT
+    // means the same thing everywhere, and 0.3 of it leaves room for a
+    // headline that wraps to one more line than this one does.
     const io = new IntersectionObserver((es) => {
       es.forEach((en) => {
         if (!en.isIntersecting || this.auto || this.played) return;
@@ -289,8 +300,8 @@ export class Strip {
         io.disconnect();
         this.playAuto();
       });
-    }, { threshold: 0.4 });
-    io.observe(this.root);
+    }, { threshold: 0.3 });
+    io.observe(this.canvas.parentElement);
   }
 
   playAuto() {
