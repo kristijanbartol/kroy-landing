@@ -76,10 +76,19 @@ export function panel(strips, data) {
       // own copy of the rule can agree with itself while the page disagrees.
       const { shown, need } = s.watch ? s.watch() : { shown: 0, need: 0 };
       const ok = shown >= need;
+      // THE SWEEP, MEASURED. `frames` against `wall` is the whole question when
+      // the complaint is "too fast to notice": a sweep that reports 7.3 s of
+      // painted time over 400 frames ran; one that reports it over 2 frames
+      // did not, it was computed as already finished on its first frame.
+      const run = s.sweeps
+        ? `#${s.sweeps} ${((s.swept || 0) / 1000).toFixed(1)}s/${s.ticks || 0}f`
+          + (s.wall ? ` wall ${(s.wall / 1000).toFixed(1)}s` : '')
+        : 'never swept';
       return `<tr><td><b>${s.cfg.id}</b></td>
         <td class="${ok ? 'g' : 'y'}">${Math.round(shown)}/${Math.round(need)}px</td>
         <td>at ${s.i}/${s.n - 1}</td>
-        <td>${state(s)}</td></tr>`;
+        <td>${state(s)}</td></tr>
+        <tr><td></td><td colspan="3" class="${(s.ticks > 60 || !s.sweeps) ? '' : 'r'}">${run}</td></tr>`;
     }).join('');
     el.innerHTML = `
       <div class="hd"><b>build ${new URL(import.meta.url).search.slice(1) || 'unversioned'}</b>

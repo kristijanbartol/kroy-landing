@@ -141,6 +141,36 @@ ok('a strip a hand has moved stays where it was left',
   Math.abs((await rd(p)).at - after.at) < 0.002);
 await p.context().close();
 
+/* 4b. THE CLOCK, which is what "there might be an animation but it is way too
+ * fast to notice" turned out to be. The sweep used to read `performance.now()`
+ * before its first frame and then measure against the frame timestamps. Those
+ * two agree only while the browser is painting, and a phone stops painting
+ * routinely: while a freshly opened page settles, during a scroll Safari is
+ * handling itself, while the tab is not frontmost, across a sleeping screen.
+ * When frames resume the first timestamp is seconds past the reading, the sweep
+ * computes that it is already over, and the strip crosses the whole cohort in
+ * ONE frame. Modelled here in its minimal form: frames stamped ahead of
+ * `performance.now()`. Before the fix this printed one moved sample out of
+ * twenty-three. */
+for (const skew of [3000, 9000]) {
+  const c = await b.newContext({ ...devices['iPhone 13'] });
+  const pp = await c.newPage();
+  await pp.addInitScript((ms) => {
+    const raf = window.requestAnimationFrame.bind(window);
+    window.requestAnimationFrame = (f) => raf((t) => f(t + ms));
+  }, skew);
+  await pp.goto(URL + '?v=' + Date.now(), { waitUntil: 'load' });
+  const seen = [];
+  for (let i = 0; i < 24; i++) {
+    seen.push((await rd(pp)).at);
+    await pp.waitForTimeout(450);
+  }
+  const moved = seen.filter((v, i) => i && Math.abs(v - seen[i - 1]) > 0.004).length;
+  ok(`frames stamped ${skew} ms ahead: the sweep is still watchable`, moved >= 6,
+    `${moved} of ${seen.length - 1} samples moved`);
+  await c.close();
+}
+
 /* 5. REDUCE MOTION. Skipped deliberately, and it has to park somewhere that
  * still makes the page's point. Ask before debugging a still phone. */
 p = await open({ ...devices['iPhone 13'], reducedMotion: 'reduce' }, 'reduce');

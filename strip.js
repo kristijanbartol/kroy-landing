@@ -26,6 +26,7 @@ const CACHE_MAX = 10;           // full-res frames held, in position order
 // the cache is small on purpose: 17 KB over the wire is 2.9 MB in memory.
 const WATCHABLE_PX = 240;       // picture on screen before a sweep is worth it
 const ARM_MS = 300;             // and how long it has to stay there
+const PAUSE_MS = 250;           // a frame gap longer than this was not watched
 
 /* WHY THE SWEEP IS TRIGGERED BY GEOMETRY WE MEASURE AND NOT BY AN
  * IntersectionObserver THRESHOLD. Twice the sweep has failed to run on a phone
@@ -400,18 +401,50 @@ export class Strip {
     // Every sweep starts from the beginning, so a replay is the same argument
     // and not a jump out of wherever the last one stopped.
     this.set(0);
-    const t0 = performance.now();
+    /* THE CLOCK IS THE PAINTED FRAMES AND NOTHING ELSE, and getting that wrong
+     * is how a 7.3 second sweep becomes something a phone reader describes as
+     * "too fast to notice". It used to read `performance.now()` here, BEFORE
+     * the first frame, and measure against it. Those are two different clocks
+     * in the only case that matters: a browser that is not painting does not
+     * run rAF at all, and when it resumes the first timestamp can be seconds
+     * past the reading. The sweep then computes that it is already over and
+     * the strip snaps to the end in a single frame.
+     *
+     * A phone does this routinely and a laptop almost never: Safari suspends
+     * frames while a freshly opened page settles, during a scroll it is
+     * handling itself, while the tab is not frontmost, and across a screen
+     * that slept. So elapsed time is counted only across frames that actually
+     * happened, and a gap longer than a few of them is treated as the browser
+     * having stopped rather than as time the reader spent watching. The sweep
+     * resumes where it was instead of being consumed by a pause. */
+    let t0 = null, prev = null;
+    // Wall time as well as painted time, because the difference between the two
+    // IS the diagnosis: 7.3 s of frames spread over 40 s of wall clock is a
+    // browser that kept suspending us, and nothing else looks like that.
+    const w0 = Date.now();
     const tick = (t) => {
       if (this.userOwns) { this.auto = null; return; }
+      if (t0 === null) { t0 = t; prev = t; }
+      if (t - prev > PAUSE_MS) t0 += t - prev;
+      prev = t;
       const ms = t - t0;
+      this.swept = ms;               // what ?debug reports, measured not assumed
       let at;
       if (ms < OUT) at = smooth(ms / OUT) * end;
       else if (ms < OUT + HOLD) at = end;
       else at = end + (rest - end) * smooth(Math.min(1, (ms - OUT - HOLD) / BACK));
       this.set(at);
+      this.ticks = (this.ticks || 0) + 1;
       if (ms < OUT + HOLD + BACK) this.auto = requestAnimationFrame(tick);
-      else { this.auto = null; this.set(rest); this.want(this.i); }
+      else {
+        this.auto = null;
+        this.wall = Date.now() - w0;
+        this.set(rest);
+        this.want(this.i);
+      }
     };
+    this.ticks = 0;
+    this.sweeps = (this.sweeps || 0) + 1;
     this.auto = requestAnimationFrame(tick);
   }
 
