@@ -304,17 +304,37 @@ export class Strip {
     io.observe(this.canvas.parentElement);
   }
 
+  /* THE OPENING SWEEP, and both of its timings were wrong for the same reason.
+   *
+   * It used to ease OUT over 5.6 s from 0 to the resting body, which front-
+   * loads the travel: half the cohort went past in the first 1.1 s and 88 per
+   * cent inside 2.8, leaving the last 2.8 s to crawl through a tenth of the
+   * rail. And the only high-contrast event on the whole rail, the red arriving
+   * where the thighs get big, lives in the LAST TENTH of the travel. So it ran
+   * fast where there was nothing to see and slow where the thing to see was,
+   * and it read as a flicker that might not have happened at all.
+   *
+   * Now: smoothstep, which is even through the middle and only eases at the
+   * two ends, across the WHOLE rail so the reddest body is actually reached.
+   * Then a beat, then back to the body the rest of the page is about. That
+   * last move is not a flourish: it is the honest note, that a body near the
+   * centre of the chart fails too, and by less.
+   */
   playAuto() {
-    const rest = this.cfg.rest ?? this.n - 1;
+    const end = this.n - 1;
+    const rest = Math.min(end, this.cfg.rest ?? end);
+    const OUT = 5400, HOLD = 700, BACK = 1200;
+    const smooth = (u) => u * u * (3 - 2 * u);
     const t0 = performance.now();
-    const ms = 5600;
     const tick = (t) => {
-      const u = Math.min(1, (t - t0) / ms);
-      // Ease out, so it arrives at the argument rather than stopping dead on it.
-      const e = 1 - Math.pow(1 - u, 3);
-      this.set(e * rest);
-      if (u < 1) this.auto = requestAnimationFrame(tick);
-      else { this.auto = null; this.want(this.i); }
+      const ms = t - t0;
+      let at;
+      if (ms < OUT) at = smooth(ms / OUT) * end;
+      else if (ms < OUT + HOLD) at = end;
+      else at = end + (rest - end) * smooth(Math.min(1, (ms - OUT - HOLD) / BACK));
+      this.set(at);
+      if (ms < OUT + HOLD + BACK) this.auto = requestAnimationFrame(tick);
+      else { this.auto = null; this.set(rest); this.want(this.i); }
     };
     this.auto = requestAnimationFrame(tick);
   }
