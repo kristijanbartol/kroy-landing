@@ -1,5 +1,5 @@
 {
- "built": "2026-10-07 16:02:53",
+ "built": "2026-10-12 11:59:36",
  "what": "The landing page's numbers, re-derived from the engine. Never typed on the page.",
  "rules": [
   "the numbers here are re-derived at build time, never typed",
@@ -1630,7 +1630,7 @@
    "cohort": "designed-Mr-144",
    "view": "left",
    "elevation": 14.0,
-   "fabric": 0.02,
+   "fabric": 0.1,
    "hip_deg": 90.0,
    "pose": "seated-90",
    "cannot_wear_rule": "more than 5% of the garment over capacity",
@@ -1644,86 +1644,86 @@
     ],
     "cols": 12,
     "per_sheet": 204,
-    "bytes": 33370,
+    "bytes": 29224,
     "resident_mb": 2.2
    },
    "frame": "seated/f%04d.webp",
    "positions": [
     {
      "hip_deg": 0.0,
-     "over_capacity": 32.23
+     "over_capacity": 0.0
     },
     {
      "hip_deg": 5.0,
-     "over_capacity": 34.04
+     "over_capacity": 0.0
     },
     {
      "hip_deg": 10.0,
-     "over_capacity": 35.3
+     "over_capacity": 0.0
     },
     {
      "hip_deg": 15.0,
-     "over_capacity": 36.06
+     "over_capacity": 0.0
     },
     {
      "hip_deg": 20.0,
-     "over_capacity": 36.35
+     "over_capacity": 0.0
     },
     {
      "hip_deg": 25.0,
-     "over_capacity": 36.75
+     "over_capacity": 0.0
     },
     {
      "hip_deg": 30.0,
-     "over_capacity": 37.27
+     "over_capacity": 0.02
     },
     {
      "hip_deg": 35.0,
-     "over_capacity": 38.12
+     "over_capacity": 0.05
     },
     {
      "hip_deg": 40.0,
-     "over_capacity": 38.89
+     "over_capacity": 0.26
     },
     {
      "hip_deg": 45.0,
-     "over_capacity": 40.13
+     "over_capacity": 1.04
     },
     {
      "hip_deg": 50.0,
-     "over_capacity": 42.01
+     "over_capacity": 4.5
     },
     {
      "hip_deg": 55.0,
-     "over_capacity": 43.1
+     "over_capacity": 8.52
     },
     {
      "hip_deg": 60.0,
-     "over_capacity": 44.5
+     "over_capacity": 11.92
     },
     {
      "hip_deg": 65.0,
-     "over_capacity": 46.14
+     "over_capacity": 13.84
     },
     {
      "hip_deg": 70.0,
-     "over_capacity": 47.71
+     "over_capacity": 15.68
     },
     {
      "hip_deg": 75.0,
-     "over_capacity": 48.74
+     "over_capacity": 16.68
     },
     {
      "hip_deg": 80.0,
-     "over_capacity": 48.85
+     "over_capacity": 17.18
     },
     {
      "hip_deg": 85.0,
-     "over_capacity": 49.87
+     "over_capacity": 17.52
     },
     {
      "hip_deg": 90.0,
-     "over_capacity": 50.94
+     "over_capacity": 17.47
     }
    ]
   }

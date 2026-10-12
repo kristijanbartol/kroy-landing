@@ -82,7 +82,7 @@ header.nav {
 .btn.ghost:hover { background: #F2F1EC; }
 
 /* ---- sections ----------------------------------------------------- */
-section { padding: clamp(64px, 9vw, 116px) 0; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+section { padding: clamp(64px, 9vw, 116px) 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
 section:first-of-type { border-top: 0; }
 .hed { max-width: 62ch; }
 .hed h2 { margin-bottom: 18px; }

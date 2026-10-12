@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KROY — fit assessment across the shapes one size chart permits</title>
-  <meta name="description" content="One trouser, one manufactured size, and every body shape a single size chart permits. We show which of them can actually wear it, where the material runs out, and by how much." />
+  <title>KROY — who can actually wear the size you make</title>
+  <meta name="description" content="One trouser, one size, and every body shape the chart lets through. We show which of them can actually wear it, where the fabric runs out, and by how much." />
 
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-  <meta property="og:title" content="KROY — fit assessment across the shapes one size chart permits" />
-  <meta property="og:description" content="Bodies that all satisfy the same size chart. Drag through them and see which of them can wear the garment." />
+  <meta property="og:title" content="KROY — who can actually wear the size you make" />
+  <meta property="og:description" content="144 women, all the same size by the same chart. Drag through them and see which ones can actually wear the trouser." />
   <meta property="og:type" content="website" />
   <!-- The card is BUILT, from the cohort itself: scripts/build_page.py draws
        eight figures across the thigh order with the real tally under them, so the
@@ -20,8 +20,8 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KROY — fit assessment across the shapes one size chart permits" />
-  <meta name="twitter:description" content="Bodies that all satisfy the same size chart. Drag through them and see which of them can wear the garment." />
+  <meta name="twitter:title" content="KROY — who can actually wear the size you make" />
+  <meta name="twitter:description" content="144 women, all the same size by the same chart. Drag through them and see which ones can actually wear the trouser." />
   <meta name="twitter:image" content="demo/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,7 +32,7 @@
      lives. Bump it whenever a fix has to be provably on a device: Netlify
      revalidates correctly, but "is the phone running the new file" has now
      cost two sessions and a URL no cache has seen ends that question. -->
-  <link rel="stylesheet" href="page.css?v=20260925b" />
+  <link rel="stylesheet" href="page.css?v=20261012a" />
 </head>
 
 <body>
@@ -41,11 +41,11 @@
   <div class="wrap">
     <a href="#top" aria-label="KROY"><img src="assets/kroy-logo.png" alt="KROY" /></a>
     <nav>
-      <a class="hide-sm" href="#cohort">Population &amp; Fit</a>
+      <a class="hide-sm" href="#cohort">Who can wear it</a>
       <a class="hide-sm" href="#chart">Size chart</a>
-      <a class="hide-sm" href="#seated">Pose &amp; Movement</a>
+      <a class="hide-sm" href="#seated">Sitting down</a>
       <a class="hide-sm" href="#material">Material</a>
-      <a class="hide-md" href="#method">Details</a>
+      <a class="hide-md" href="#method">How it works</a>
       <a class="hide-md" href="#team">Team</a>
       <a class="hide-md" href="#contact">Start here</a>
       <a class="btn" href="#contact">Send us your size chart</a>
@@ -61,19 +61,19 @@
       <div class="strip" id="strip-cohort">
 
         <div class="strip-head">
-          <p class="eyebrow">Fit analytics for the population</p>
-          <h1>All the <span data-n="numbers.n_bodies">144</span> women are the same size&nbsp;group.</h1>
+          <p class="eyebrow">Who can wear it</p>
+          <h1>All <span data-n="numbers.n_bodies">144</span> of these women are the same&nbsp;size.</h1>
         </div>
 
         <div class="strip-lede">
           <p class="lede">
-            They are, by your own size chart. Every one of them sits inside
-            the interval it states for the waist, the hip, the height and the
-            inside leg. This is one trouser, cut once, in one manufactured
+            That is your size chart's verdict, not ours. Every one of them
+            falls inside the range it states for the waist, the hip, the height
+            and the inside leg. This is one trouser, cut once, made in that one
             size.
             <b><span data-n="strips.cohort.n_fail">19</span> of them cannot wear it.</b>
           </p>
-          <p class="lede">Drag through the cohort and stop anywhere you like.</p>
+          <p class="lede">Drag through them and stop wherever you like.</p>
         </div>
 
         <div class="readout strip-readout">
@@ -83,7 +83,7 @@
                 <dd class="num" data-live="thigh">&mdash;</dd>
               </div>
               <div>
-                <dt>Over capacity</dt>
+                <dt>Too tight</dt>
                 <dd class="num" data-live="over">&mdash;</dd>
               </div>
               <div>
@@ -94,9 +94,9 @@
             <p class="tally">
               <b><span data-n="strips.cohort.n_fail">19</span> of
               <span data-n="strips.cohort.n_bodies">144</span></b>
-              cannot wear these, where a body counts as unable when more than 5
-              percent of the garment is asked to stretch further than the material
-            gives. The material here is a stable woven, which gives 2 percent.
+              cannot wear these. Our rule: she cannot wear them when more than 5
+              percent of the trouser has to stretch further than the fabric can.
+              The fabric here is a stable woven, and it gives 2 percent.
           </p>
         </div>
 
@@ -130,10 +130,10 @@
         <p class="eyebrow">Size chart</p>
         <h2>Your chart cannot tell these two apart.</h2>
         <p class="lede">
-          Every measurement it states puts them within about a centimetre of
-          each other, and the hip is identical to the millimetre. One of them
-          can wear the garment and one of them cannot. The reason is a
-          measurement the chart never asks for.
+          On every measurement your chart states, these two are within about
+          a centimetre of each other, and their hips match to the millimetre.
+          One of them can wear the trouser and one of them cannot. The reason is
+          a measurement the chart never asks for.
         </p>
       </div>
       <table class="pair reveal measure" id="pair-table">
@@ -148,17 +148,19 @@
         <tbody></tbody>
       </table>
       <p class="small" style="margin-top:14px">
-        Centimetres. A measurement marked <i>not on the chart</i> is one a size
-        chart of this kind does not carry, so two bodies may differ on it by any
-        amount at all and still be the same size.
+        Centimetres. Where a row says <i>not on the chart</i>, a chart of this
+        kind never asks for that measurement, so two women can differ on it by
+        any amount at all and still count as the same size.
       </p>
 
       <div class="sub reveal">
         <h3>And it is not only these two.</h3>
         <p>
-          Every measurement across the whole cohort, ranked by how far it
-          separates the bodies that cannot wear the garment from the bodies
-          that can. The two longest bars are both missing from the chart.
+          The same comparison across all
+          <span data-n="blind.n_bodies">144</span>. Each bar is how far apart
+          the two groups sit on that measurement: the women who cannot wear the
+          trouser against the women who can. The two longest bars are both
+          measurements the chart never asks for.
         </p>
       </div>
       <div class="bars reveal" id="bars"></div>
@@ -167,10 +169,11 @@
         <span><b style="background:var(--rail)"></b>on the chart</span>
       </div>
       <p class="small" style="margin-top:20px;max-width:64ch">
-        Unconstrained does not mean it matters. The rise varies more across this
-        cohort than anything else and separates the two groups by almost
-        nothing. Three measurements here are free and only two of them decide
-        the fit, which is what makes this rankable rather than merely alarming.
+        A measurement missing from the chart is not automatically one that
+        matters. The rise varies more here than anything else, and it tells the
+        two groups apart by almost nothing. Three measurements are missing and
+        only two of them decide the fit. That is the useful part: they can be
+        ranked, so you know which two are worth adding.
       </p>
     </div>
   </section>
@@ -179,12 +182,14 @@
   <section id="seated">
     <div class="wrap">
       <div class="hed reveal">
-        <p class="eyebrow">Pose &amp; Movement</p>
+        <p class="eyebrow">Sitting down</p>
         <h2>Standing she fits. Seated she does not.</h2>
         <p class="lede">
-          Sitting needs length through the seat and the rise, and a woven has
-          none to give. Same garment, same bodies, one material: a light stretch at
-          5 percent, hip and knee at 90 degrees.
+          Sitting asks for length through the seat and the rise, and a woven
+          has none to give. The counts below are in a light stretch fabric. The
+          figure goes further than that: she is in 10 percent elastane, the
+          stretchiest thing anyone puts in a fitted trouser, and standing, it
+          fits her.
         </p>
       </div>
       <div class="strip" id="strip-seated" style="margin-top:44px">
@@ -197,14 +202,14 @@
                 <dd class="num" data-live="hip">&mdash;</dd>
               </div>
               <div>
-                <dt>Over capacity</dt>
+                <dt>Too tight</dt>
                 <dd class="num" data-live="over">&mdash;</dd>
               </div>
             </dl>
             <p class="tally">
-              The figure is body <b><span data-n="pair.b">32</span></b> again,
-              from the side, because a seated figure seen from the front is a
-              tangle. Drag her into the chair.
+              This is body <b><span data-n="pair.b">32</span></b> again, in 10
+              percent elastane, seen from the side: from the front, a seated
+              figure is unreadable. Drag her hip down to 90 degrees.
             </p>
           </div>
         </div>
@@ -226,11 +231,11 @@
       </div>
 
       <p class="small" style="margin-top:26px;max-width:64ch">
-        The three seated poses are not interchangeable, so this one names the
-        pose rather than saying "seated" and quoting an ambiguous number.
-        Nothing in the model knows what elastane is for. It rediscovered why a
-        fitted trouser contains it. What a different material buys, standing
-        and seated, is next.
+        Sitting is not one pose, so this one is stated exactly rather than
+        called "seated" with a number that could mean anything. Nothing in the
+        model was ever told what elastane is for. It arrived at why a fitted
+        trouser contains it. What a different fabric buys you, standing and
+        seated, is next.
       </p>
     </div>
   </section>
@@ -242,8 +247,8 @@
         <p class="eyebrow">Material</p>
         <h2>What your material choice is worth, in bodies.</h2>
         <p class="lede">
-          Nothing about the pattern changes along this rail. The only thing
-          moving is how far the yarn may stretch before it has run out.
+          The pattern does not change anywhere along this rail. The only thing
+          changing is how far the fabric can stretch before it runs out.
         </p>
       </div>
 
@@ -276,17 +281,17 @@
               </div>
             </dl>
             <p class="tally">
-              The figure is body <b><span data-n="pair.b">32</span></b>, the one
-              from the table above. Every count is over the same
-              <b><span data-n="strips.cohort.n_bodies">144</span></b> bodies,
+              This is body <b><span data-n="pair.b">32</span></b>, the one from
+              the table above. Every count is out of the same
+              <b><span data-n="strips.cohort.n_bodies">144</span></b> women,
               standing.
             </p>
           </div>
           <p class="small" style="margin-top:26px;max-width:46ch">
-            The rail reaches zero before its end, so past that point more
-            stretch buys nothing. That is worth knowing before anyone pays for
-            it. A fitted trouser of this cut, in the material anyone would actually
-            use, lives in the left half.
+            The count reaches zero before the end of the rail, so past that
+            point more stretch buys you nothing. Worth knowing before you pay
+            for it. A fitted trouser like this one, in a fabric anyone would
+            really use, sits in the left half.
           </p>
         </div>
       </div>
@@ -297,61 +302,64 @@
   <section id="method">
     <div class="wrap">
       <div class="hed reveal">
-        <p class="eyebrow">Details</p>
-        <h2>Geometry, per triangle, on the bodies your own chart permits.</h2>
+        <p class="eyebrow">How it works</p>
+        <h2>Your chart, your garment, and where it runs&nbsp;out.</h2>
       </div>
       <div class="cols three reveal">
         <div>
           <p class="rule">01 &mdash; your chart</p>
           <h3>One file, swappable</h3>
           <p>
-            A size chart is a set of intervals. We build a cohort of bodies that
-            satisfy every one of them, over sixteen shape parameters rather than
-            the four the chart names, so the cohort spans what the chart
-            actually allows instead of what it mentions.
+            Your chart gives a range for each measurement. We build a set of
+            bodies that land inside every one of those ranges at once, and we
+            let the rest of the body shape vary freely, not just the four
+            measurements the chart names. So they cover what your chart really
+            allows, rather than what it happens to mention.
           </p>
         </div>
         <div>
           <p class="rule">02 &mdash; your garment</p>
           <h3>Cut once, worn by all of them</h3>
           <p>
-            Built from whatever you can give us, from a size and a material up to
-            a tech pack, then flattened to the pattern a factory would cut and
-            put on every body. Per triangle we compute how much room it gives
-            and how far the yarn must stretch to close, following that yarn
-            through the seam rather than stopping at the panel edge.
+            We build it from whatever you can give us, a size and a fabric at
+            one end, a full tech pack at the other. We open it out into the flat
+            pattern a factory would cut, and put it on every one of those
+            bodies. Everywhere on the trouser we work out how much room it gives
+            and how far the fabric would have to stretch to close, following the
+            fabric straight across the seams instead of stopping at each panel
+            edge.
           </p>
         </div>
         <div>
           <p class="rule">03 &mdash; what you get</p>
           <h3>Where it fails, and by how much</h3>
           <p>
-            Which bodies the garment does not fit, where on the garment the
-            material runs out, and how many centimetres are missing. Hundreds of
-            shapes in minutes, without a physical sample.
+            Which of those bodies the trouser does not fit, where on it the
+            fabric runs out, and how many centimetres are missing. Hundreds of
+            shapes in minutes, and not one physical sample.
           </p>
         </div>
       </div>
 
       <div class="cols two reveal" style="margin-top:58px">
         <div>
-          <p class="rule">What this cohort is</p>
+          <p class="rule">What these bodies are</p>
           <p>
-            Bodies we <b>built</b> inside this chart's size-M box. They are not a
-            sample of anyone's customers and they carry no frequencies, so every
-            count on this page is a count of <i>them</i>: of the bodies this
-            chart calls a size M. Give us your own population and we weight it.
-            We will not invent one.
+            Bodies we <b>built</b> to fit this chart's size M. They are not a
+            sample of anyone's customers, and nothing here says how common each
+            shape is, so every count on this page is a count of <i>these</i>
+            women and nothing more. Give us the figures for your own customers
+            and we will weight it to them. We will not invent them.
           </p>
         </div>
         <div>
           <p class="rule">What we do not claim</p>
           <p>
-            This is not validated against wear trials and we will not call it
-            that. It is a geometric assessment, corroborated independently by a
-            cloth solver that knows nothing about the design intent and agrees
-            with it on magnitude. Draping makes the picture; it never feeds a
-            verdict.
+            Nobody has worn these, so we will not call this validated. It is a
+            measurement of the garment against the body, checked independently
+            by a cloth simulation that was told nothing about how the garment
+            was designed and lands on the same size of answer. The draping you
+            see makes the picture. It never decides a verdict.
           </p>
         </div>
       </div>
@@ -363,7 +371,7 @@
     <div class="wrap">
       <div class="hed reveal">
         <p class="eyebrow">Team</p>
-        <h2>Two researchers in anthropometry and garment modelling.</h2>
+        <h2>Two researchers in body measurement and garment&nbsp;modelling.</h2>
       </div>
       <div class="people reveal">
         <article class="person">
@@ -371,7 +379,7 @@
           <div>
             <h3>Kristijan Bartol, Ph.D.</h3>
             <p class="role">Executive</p>
-            <p>Garment modelling infrastructure, and the fit engine behind this page.</p>
+            <p>Garment modelling, and the fit engine behind this page.</p>
           </div>
         </article>
         <article class="person">
@@ -379,7 +387,7 @@
           <div>
             <h3>David Bojanić, Ph.D.</h3>
             <p class="role">Product</p>
-            <p>Body modelling and measurement, with a focus on returns and on what a size chart can and cannot carry.</p>
+            <p>Body modelling and measurement, and what a size chart can and cannot tell you.</p>
           </div>
         </article>
       </div>
@@ -393,32 +401,32 @@
       <h2>What does your own size chart let&nbsp;through?</h2>
       <p class="lede">
         Everything on this page came out of one size chart and one trouser.
-        Send us yours and you get the same thing back, run on your garment.
+        Send us yours and you get the same thing back, on your own garment.
       </p>
 
       <div class="gets">
         <div>
           <p class="rule">You send</p>
           <p>
-            The size chart you already publish, with one garment, the size you
-            manufacture it in and the material. That is enough. Anything more you
+            The size chart you already publish, one garment, the size you make
+            it in, and the fabric. That is enough to start. Anything else you
             have, a spec sheet, a tech pack, graded measurements, a pattern,
-            puts the garment we assess closer to the one you make.
+            puts the garment we measure closer to the one you actually make.
           </p>
         </div>
         <div>
           <p class="rule">We build</p>
           <p>
-            A cohort of bodies that satisfy <i>every</i> interval your chart
-            states, over sixteen shape parameters rather than the four it
-            names, so it spans what your chart actually allows.
+            A set of bodies that land inside <i>every</i> range your chart
+            states at once, varying in all the ways your chart leaves open, so
+            they cover what it really allows.
           </p>
         </div>
         <div>
           <p class="rule">You get back</p>
           <p>
             Which of those bodies can wear it and which cannot, where on the
-            garment the material runs out and by how many centimetres, and which
+            garment the fabric runs out and by how many centimetres, and which
             measurements decide it. On the figure and on the flat pattern.
           </p>
         </div>
@@ -428,8 +436,9 @@
         <a class="btn big" href="mailto:kristijan.bartol@gmail.com?subject=KROY%20%E2%80%94%20our%20size%20chart&amp;body=Garment%3A%0ASize%20we%20manufacture%3A%0AMaterial%3A%0AOur%20size%20chart%20(pasted%2C%20attached%2C%20or%20a%20photograph)%3A%0A%0AAnything%20else%20you%20can%20attach%2C%20all%20optional%3A%0A-%20spec%20sheet%20or%20tech%20pack%0A-%20graded%20measurements%0A-%20fit%20model%20measurements%0A-%20a%20pattern%0A">Send us your size chart</a>
       </p>
       <p class="small">
-        A photograph of the chart will do, and anything beyond it is optional.
-        No physical sample, no photographs of the garment, no customer data.
+        A photograph of the chart will do, and everything beyond it is
+        optional. No physical sample, no photographs of the garment, no
+        customer data.
         Would rather talk it through first?
         <a href="mailto:kristijan.bartol@gmail.com?subject=KROY%20%E2%80%94%20a%20call">Write and say so</a>
         and we will find a time.
@@ -446,6 +455,6 @@
   </div>
 </footer>
 
-<script type="module" src="page.js?v=20260925b"></script>
+<script type="module" src="page.js?v=20261012a"></script>
 </body>
 </html>

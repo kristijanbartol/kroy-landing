@@ -63,9 +63,9 @@ function seatedStats(data) {
   const b = data.poses['seated-90']['5'];
   const c = data.poses['seated-90']['10'];
   $('#seated-stats').innerHTML = `
-    <div><b>${a.n_fail} of ${n}</b><span>cannot wear these standing, in a light stretch</span></div>
-    <div><b style="color:var(--red)">${b.n_fail} of ${n}</b><span>cannot sit down in them. Same material, same bodies</span></div>
-    <div><b>${c.n_fail} of ${n}</b><span>seated, in 10 percent elastane</span></div>`;
+    <div><b>${a.n_fail} of ${n}</b><span>cannot wear these standing, in a light stretch fabric</span></div>
+    <div><b style="color:var(--red)">${b.n_fail} of ${n}</b><span>cannot sit down in them. Same fabric, same women</span></div>
+    <div><b>${c.n_fail} of ${n}</b><span>still cannot sit down, even in 10 percent elastane</span></div>`;
 }
 
 function seatedStrip(data) {
@@ -128,7 +128,7 @@ function cohortStrip(data) {
       thigh.textContent = p.thigh_cm.toFixed(1) + ' cm';
       over.textContent = p.over_capacity < 0.05 ? 'none'
         : p.over_capacity.toFixed(1) + '%';
-      verdict.textContent = p.fails ? 'Cannot wear these' : 'Fits';
+      verdict.textContent = p.fails ? 'Cannot wear' : 'Fits';
       verdict.dataset.fails = p.fails ? '1' : '0';
     },
   });
@@ -253,9 +253,12 @@ Promise.all([
       import('./debug.js' + V).then((m) => m.panel(strips, data)).catch(() => {});
     }
     const c = data.strips.cohort;
+    // The footer says where the numbers came from, in words a visitor can
+    // read. The build names stay in demo/data.json, which is one click away
+    // and is the thing to quote when a number is ever questioned.
     $('#provenance').textContent =
-      `${c.n_bodies} bodies, ${c.design}, ease ${c.ease.replace('uniform-', '')}, `
-      + `re-derived ${data.built.slice(0, 10)}`;
+      `${c.n_bodies} bodies, one trouser, one size. `
+      + `Every number re-derived ${data.built.slice(0, 10)}`;
   })
   .catch((e) => {
     console.error('demo/data.json', e);

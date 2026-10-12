@@ -35,10 +35,18 @@ cd ~/kroy/fit-demo
 # renders the figures; needs the fitdrape environment (cloth)
 python scripts/page_strip.py --strip cohort
 python scripts/page_strip.py --strip fabric
-python scripts/page_strip.py --strip seated --fabric 0.05
+python scripts/page_strip.py --strip seated --fabric 0.10   # NOT the default
 # encodes them here and derives every number on the page; fitdemo environment
 python scripts/build_page.py --check
 ```
+
+**`--fabric 0.10` on the seated strip is not optional.** It is the one strip
+whose figure is drawn in a different fabric from the rest of the page, and the
+section's headline, "Standing she fits. Seated she does not.", is only TRUE at
+that fabric: at the shipping cut body 32 is 12.7 percent over capacity standing
+in a 5 percent stretch and 32.2 in a 2 percent woven. The 2026-10-07 rebuild
+dropped the flag and the page spent five days contradicting its own headline.
+The number the figure must show standing is **0.0**.
 
 `build_page.py` writes `demo/` and nothing else, so it can never overwrite the
 page. It fails the build if a rate reaches `data.json` without the tally it is a
@@ -49,9 +57,9 @@ share of.
 The cohort is **144 bodies we built** inside one chart's size-M box. It is not a
 sample of anyone's customers and it carries no frequencies.
 
-- **say:** "of the bodies this chart calls a size M, one in eight cannot wear
-  these", with the tally visible.
-- **never say:** "13 percent of your customers."
+- **say:** "of the bodies this chart calls a size M, better than one in four
+  cannot wear these", with the tally visible.
+- **never say:** "28 percent of your customers." 
 
 A sentence on a website travels without its picture, so every share on this page
 is written as a count out of the cohort. Keep it that way.
