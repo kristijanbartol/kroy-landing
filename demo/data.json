@@ -1,5 +1,5 @@
 {
- "built": "2026-10-12 11:59:36",
+ "built": "2026-10-21 09:02:44",
  "what": "The landing page's numbers, re-derived from the engine. Never typed on the page.",
  "rules": [
   "the numbers here are re-derived at build time, never typed",
@@ -7,42 +7,6 @@
   "a body counts as unable to wear the garment when more than 5% of it is over capacity",
   "the cohort is built inside this chart's size-M box and is NOT a customer population: never quote it as a share of customers"
  ],
- "numbers": {
-  "design": "lower-v2",
-  "ease": "uniform-1.03",
-  "cohort": "designed-Mr-144",
-  "n_bodies": 144,
-  "fabric_shown": 0.02,
-  "cannot_wear_rule": "more than 5% of the garment over capacity",
-  "cannot_wear_percent": {
-   "standing": {
-    "0": 36.8,
-    "0.02": 13.2,
-    "0.05": 1.4,
-    "0.1": 0.0
-   },
-   "seated-90": {
-    "0": 100.0,
-    "0.02": 100.0,
-    "0.05": 67.4,
-    "0.1": 4.9
-   }
-  },
-  "hero_pair": {
-   "fits": {
-    "body": 115,
-    "thigh_cm": 44.9,
-    "over_capacity_percent": 0.0
-   },
-   "fails": {
-    "body": 32,
-    "thigh_cm": 51.6,
-    "over_capacity_percent": 6.85,
-    "seated_over_capacity_percent": 34.89
-   }
-  },
-  "thigh_gap_cm": 6.6
- },
  "strips": {
   "cohort": {
    "id": "cohort",
