@@ -128,7 +128,7 @@ section:first-of-type { border-top: 0; }
  * BETWEEN them: title, picture, then the prose that qualifies it. On a laptop
  * the two halves rejoin into one column beside the figure and nothing about
  * that layout changes. */
-#strip-cohort { grid-template-areas: 'head' 'fig' 'read' 'lede' 'tally'; gap: 18px; }
+#strip-cohort { grid-template-areas: 'head' 'fig' 'read' 'lede' 'note'; gap: 18px; }
 #strip-cohort .strip-head { grid-area: head; }
 #strip-cohort .strip-lede { grid-area: lede; }
 #strip-cohort .strip-figure { grid-area: fig; }
@@ -138,14 +138,15 @@ section:first-of-type { border-top: 0; }
  * hero's does: the numbers are about a picture you have not been shown yet. */
 /* On a phone the three live numbers go with the rail that drives them and the
  * sentence that explains the rule goes below the fold, where a sentence can
- * live. `display: contents` is what lets one block be two grid items here and
+ * live. That slot now holds a `details.note` rather than a paragraph, so what
+ * is below the fold is one tappable line and the explanation is behind it. `display: contents` is what lets one block be two grid items here and
  * one block on a laptop, with no second copy of the markup to drift. */
 @media (max-width: 899px) {
   #strip-cohort .strip-readout { display: contents; }
   #strip-cohort .strip-readout dl {
     grid-area: read; border-top: 1px solid var(--line); padding-top: 14px;
   }
-  #strip-cohort .strip-readout .tally { grid-area: tally; margin: 0; }
+  #strip-cohort .strip-readout .note { grid-area: note; margin: 0; }
 }
 
 #strip-seated .strip-figure { order: -1; }
@@ -235,6 +236,29 @@ section:first-of-type { border-top: 0; }
 .readout dt { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
 .readout dd { margin: 0; font-size: clamp(1.05rem, 3.2vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .readout dd.verdict[data-fails='1'] { color: var(--red); }
+/* A SECTION'S CAVEATS, ONE TAP AWAY. Every section ends on the definitions,
+ * parameters and qualifications that used to sit in its opening paragraph.
+ * None of them was cut: honesty the reader can open is still on the page, and
+ * a reader who has not yet decided to care is no longer made to read it first.
+ * Closed it is a quiet line; there is no card, no border and no icon beyond
+ * the marker, because it must not compete with the figure above it. */
+.note { margin-top: 16px; font-size: 0.88rem; color: var(--ink2); }
+.note > summary {
+  cursor: pointer; list-style: none; display: inline-flex; align-items: baseline;
+  gap: 8px; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.01em;
+  padding: 2px 0; transition: color .15s ease;
+}
+.note > summary::-webkit-details-marker { display: none; }
+.note > summary::before {
+  content: '+'; font-variant-numeric: tabular-nums; font-weight: 600;
+  color: var(--muted); transition: color .15s ease;
+}
+.note[open] > summary::before { content: '\2013'; }
+.note > summary:hover, .note > summary:hover::before { color: var(--ink); }
+.note > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.note > p { margin: 10px 0 0; max-width: 46ch; }
+.note b { font-weight: 600; color: var(--ink); }
+
 .tally { margin-top: 14px; font-size: 0.88rem; color: var(--ink2); }
 
 .tally b { font-weight: 600; color: var(--ink); }

@@ -67,13 +67,12 @@
 
         <div class="strip-lede">
           <p class="lede">
-            That is your size chart's verdict, not ours. Every one of them
-            falls inside the range it states for the waist, the hip, the height
-            and the inside leg. This is one trouser, cut once, made in that one
-            size.
-            <b><span data-n="strips.cohort.n_fail">40</span> of them cannot wear it.</b>
+            Every one fits the range your chart states. One trouser, cut once,
+            in a stable woven.
+            <b><span data-n="strips.cohort.n_fail">40</span> of them cannot
+            wear&nbsp;it.</b>
           </p>
-          <p class="lede">Drag through them and stop wherever you like.</p>
+          <p class="lede">Drag through them and stop anywhere.</p>
         </div>
 
         <div class="readout strip-readout">
@@ -91,13 +90,23 @@
                 <dd class="verdict" data-live="verdict">&mdash;</dd>
               </div>
             </dl>
-            <p class="tally">
-              <b><span data-n="strips.cohort.n_fail">40</span> of
-              <span data-n="strips.cohort.n_bodies">144</span></b>
-              cannot wear these. Our rule: she cannot wear them when more than 5
-              percent of the trouser has to stretch further than the fabric can.
-              The fabric here is a stable woven, and it gives 2 percent.
-          </p>
+            <!-- THE SECTION'S CAVEATS, OUT OF THE READER'S PATH AND NOT CUT.
+                 This was a `p.tally` that repeated "40 of 144" three lines
+                 under the lede's own copy of it, then spent two sentences
+                 defining the threshold and naming the fabric's capacity. The
+                 count is the hook and belongs in the lede; the definition is
+                 what a reader asks for only once they believe the picture. The
+                 claim guard wants a count beside every RATE, and the hero
+                 quotes none, so nothing here is load-bearing for it. -->
+            <details class="note">
+              <summary>What &ldquo;cannot wear&rdquo; means</summary>
+              <p>
+                More than 5 percent of the trouser has to stretch further than
+                the fabric can. A stable woven gives
+                <span data-n="blind.fabric_percent">2.0</span> percent. Our
+                threshold, and yours to move.
+              </p>
+            </details>
         </div>
 
         <div class="strip-figure">
@@ -129,11 +138,16 @@
       <div class="hed reveal">
         <p class="eyebrow">Size chart</p>
         <h2>Your chart cannot tell these two apart.</h2>
+        <!-- The spoken version of this section, which is the one that lands.
+             Four sentences that never reached a number became three that are
+             nothing but numbers. `pair.rows.4` is the thigh row; it is bound by
+             INDEX, so if the table's row order ever changes this reads the
+             wrong measurement. The binding guard checks the VALUE, which is
+             what would catch it. -->
         <p class="lede">
-          On every measurement your chart states, these two are within about
-          a centimetre of each other, and their hips match to the millimetre.
-          One of them can wear the trouser and one of them cannot. The reason is
-          a measurement the chart never asks for.
+          Their hips match to the millimetre. Their thighs are
+          <b><span data-n="pair.rows.4.gap">6.6</span> cm apart.</b>
+          Your chart only measures one of those.
         </p>
       </div>
       <table class="pair reveal measure" id="pair-table">
@@ -148,19 +162,18 @@
         <tbody></tbody>
       </table>
       <p class="small" style="margin-top:14px">
-        Centimetres. Where a row says <i>not on the chart</i>, a chart of this
-        kind never asks for that measurement, so two women can differ on it by
-        any amount at all and still count as the same size.
+        Centimetres. Your chart never asks for the rows marked
+        <i>not on the chart</i>, so two women can differ there by any amount at
+        all.
       </p>
 
       <div class="sub reveal">
         <h3>And it is not only these two.</h3>
         <p>
           The same comparison across all
-          <span data-n="blind.n_bodies">144</span>. Each bar is how far apart
-          the two groups sit on that measurement: the women who cannot wear the
-          trouser against the women who can. The two longest bars are both
-          measurements the chart never asks for.
+          <span data-n="blind.n_bodies">144</span>. Each bar is how far the two
+          groups sit apart on that measurement. The two longest are both ones
+          your chart never asks for.
         </p>
       </div>
       <div class="bars reveal" id="bars"></div>
@@ -169,12 +182,16 @@
         <span><b style="background:var(--rail)"></b>on the chart</span>
       </div>
       <p class="small" style="margin-top:20px;max-width:64ch">
-        A measurement missing from the chart is not automatically one that
-        matters. The rise varies more here than anything else, and it tells the
-        two groups apart by almost nothing. Three measurements are missing and
-        only two of them decide the fit. That is the useful part: they can be
-        ranked, so you know which two are worth adding.
+        Three measurements are missing here and two of them decide the fit. The
+        ranking tells you which two are worth adding.
       </p>
+      <details class="note">
+        <summary>Does every missing measurement matter?</summary>
+        <p>
+          No. The rise varies more here than anything else and tells the two
+          groups apart by almost nothing.
+        </p>
+      </details>
     </div>
   </section>
 
@@ -186,10 +203,7 @@
         <h2>Standing she fits. Seated she does not.</h2>
         <p class="lede">
           Sitting asks for length through the seat and the rise, and a woven
-          has none to give. The counts below are in a light stretch fabric. The
-          figure goes further than that: she is in 10 percent elastane, the
-          stretchiest thing anyone puts in a fitted trouser, and standing, it
-          fits her.
+          has none to give.
         </p>
       </div>
       <div class="strip" id="strip-seated" style="margin-top:44px">
@@ -207,9 +221,8 @@
               </div>
             </dl>
             <p class="tally">
-              This is body <b><span data-n="pair.b">32</span></b> again, in 10
-              percent elastane, seen from the side: from the front, a seated
-              figure is unreadable. Drag her hip down to 90 degrees.
+              Body <b><span data-n="pair.b">32</span></b> again, in 10 percent
+              elastane. Drag her hip down to 90 degrees.
             </p>
           </div>
         </div>
@@ -230,13 +243,14 @@
         </div>
       </div>
 
-      <p class="small" style="margin-top:26px;max-width:64ch">
-        Sitting is not one pose, so this one is stated exactly rather than
-        called "seated" with a number that could mean anything. Nothing in the
-        model was ever told what elastane is for. It arrived at why a fitted
-        trouser contains it. What a different fabric buys you, standing and
-        seated, is next.
-      </p>
+      <details class="note" style="margin-top:26px">
+        <summary>How this was tested</summary>
+        <p>
+          Sitting is not one pose, so this one is stated exactly: the hip at 90
+          degrees. We never told the model what elastane is for. It arrived at
+          that by itself.
+        </p>
+      </details>
     </div>
   </section>
 
@@ -281,18 +295,23 @@
               </div>
             </dl>
             <p class="tally">
-              This is body <b><span data-n="pair.b">32</span></b>, the one from
-              the table above. Every count is out of the same
+              Body <b><span data-n="pair.b">32</span></b> again. Every count is
+              out of the same
               <b><span data-n="strips.cohort.n_bodies">144</span></b> women,
               standing.
             </p>
           </div>
           <p class="small" style="margin-top:26px;max-width:46ch">
-            The count reaches zero before the end of the rail, so past that
-            point more stretch buys you nothing. Worth knowing before you pay
-            for it. A fitted trouser like this one, in a fabric anyone would
-            really use, sits in the left half.
+            The count reaches zero before the end of the rail. Past that point
+            more stretch buys you nothing. Worth knowing before you pay for it.
           </p>
+          <details class="note">
+            <summary>Where a real trouser sits on this rail</summary>
+            <p>
+              A fitted trouser like this one, in a fabric anyone would really
+              use, sits in the left half.
+            </p>
+          </details>
         </div>
       </div>
     </div>
@@ -310,33 +329,27 @@
           <p class="rule">01 &mdash; your chart</p>
           <h3>One file, swappable</h3>
           <p>
-            Your chart gives a range for each measurement. We build a set of
-            bodies that land inside every one of those ranges at once, and we
-            let the rest of the body shape vary freely, not just the four
-            measurements the chart names. So they cover what your chart really
-            allows, rather than what it happens to mention.
+            Your chart gives a range for each measurement. We build bodies that
+            land inside all of them at once, and let everything your chart does
+            not mention vary freely.
           </p>
         </div>
         <div>
           <p class="rule">02 &mdash; your garment</p>
           <h3>Cut once, worn by all of them</h3>
           <p>
-            We build it from whatever you can give us, a size and a fabric at
-            one end, a full tech pack at the other. We open it out into the flat
-            pattern a factory would cut, and put it on every one of those
-            bodies. Everywhere on the trouser we work out how much room it gives
-            and how far the fabric would have to stretch to close, following the
-            fabric straight across the seams instead of stopping at each panel
-            edge.
+            We build it from whatever you give us, a size and a fabric at one
+            end, a full tech pack at the other. We open it into the flat pattern
+            a factory would cut, put it on every body, and measure the room it
+            gives and the stretch it needs, everywhere.
           </p>
         </div>
         <div>
           <p class="rule">03 &mdash; what you get</p>
           <h3>Where it fails, and by how much</h3>
           <p>
-            Which of those bodies the trouser does not fit, where on it the
-            fabric runs out, and how many centimetres are missing. Hundreds of
-            shapes in minutes, and not one physical sample.
+            Which bodies it does not fit, where the fabric runs out, and how
+            many centimetres are missing. Hundreds of shapes in minutes.
           </p>
         </div>
       </div>
@@ -345,21 +358,20 @@
         <div>
           <p class="rule">What these bodies are</p>
           <p>
-            Bodies we <b>built</b> to fit this chart's size M. They are not a
-            sample of anyone's customers, and nothing here says how common each
-            shape is, so every count on this page is a count of <i>these</i>
-            women and nothing more. Give us the figures for your own customers
-            and we will weight it to them. We will not invent them.
+            Bodies we <b>built</b> to fit this chart's size M, not a sample of
+            anyone's customers. Every count on this page is a count of
+            <i>these</i> women and nothing more. Give us your own customer
+            figures and we will weight it to them. We will not invent them.
           </p>
         </div>
         <div>
           <p class="rule">What we do not claim</p>
           <p>
             Nobody has worn these, so we will not call this validated. It is a
-            measurement of the garment against the body, checked independently
-            by a cloth simulation that was told nothing about how the garment
-            was designed and lands on the same size of answer. The draping you
-            see makes the picture. It never decides a verdict.
+            measurement of the garment against the body, checked by a cloth
+            simulation that knew nothing about how the garment was designed and
+            lands on the same answer. The draping makes the picture. It never
+            decides a verdict.
           </p>
         </div>
       </div>
@@ -409,25 +421,24 @@
           <p class="rule">You send</p>
           <p>
             The size chart you already publish, one garment, the size you make
-            it in, and the fabric. That is enough to start. Anything else you
-            have, a spec sheet, a tech pack, graded measurements, a pattern,
-            puts the garment we measure closer to the one you actually make.
+            it in, and the fabric. That is enough to start. Anything else, a
+            tech pack, graded measurements, a pattern, a CLO or Browzwear file,
+            gets us closer to the garment you actually make.
           </p>
         </div>
         <div>
           <p class="rule">We build</p>
           <p>
-            A set of bodies that land inside <i>every</i> range your chart
-            states at once, varying in all the ways your chart leaves open, so
-            they cover what it really allows.
+            Bodies that land inside <i>every</i> range your chart states at
+            once, varying in all the ways it leaves open.
           </p>
         </div>
         <div>
           <p class="rule">You get back</p>
           <p>
-            Which of those bodies can wear it and which cannot, where on the
-            garment the fabric runs out and by how many centimetres, and which
-            measurements decide it. On the figure and on the flat pattern.
+            Which bodies can wear it and which cannot, where the fabric runs out
+            and by how many centimetres, and which measurements decide it. On
+            the figure and on the flat pattern.
           </p>
         </div>
       </div>
