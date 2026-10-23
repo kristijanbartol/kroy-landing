@@ -33,13 +33,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- THREE FACES AND EACH HAS ONE JOB. Archivo carries the headlines and
+       the mark, Inter the prose, IBM Plex Mono every measurement and every
+       label. A number set in the same face as the sentence around it reads
+       as a claim; set in mono beside other numbers it reads as a reading
+       off an instrument, which is what they are. -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <!-- ONE STAMP FOR THE WHOLE PAGE. `page.js` reads its own `?v=` and passes it
      on to every module it imports, so this is the only place the number
      lives. Bump it whenever a fix has to be provably on a device: Netlify
      revalidates correctly, but "is the phone running the new file" has now
      cost two sessions and a URL no cache has seen ends that question. -->
-  <link rel="stylesheet" href="page.css?v=20261023b" />
+  <link rel="stylesheet" href="page.css?v=20261023c" />
 </head>
 
 <body>
@@ -67,8 +72,29 @@
     <div class="wrap">
       <div class="strip" id="strip-cohort">
 
+        <!-- THE SPEC BAND CAPTIONS THE EXHIBIT, NEVER THE PAGE. Under the nav
+             it would label the company and the whole site would read as one
+             trouser's spec sheet; inside the section it answers the first
+             question a fit lead asks, which is what am I looking at. It is also
+             the only position that generalises: a second garment gets its own
+             band. The two numbers in it are bound to `demo/data.json` like every
+             other number on the page; the words are the garment's own name,
+             said the way you would say it out loud. -->
+        <div class="stamp">
+          <span>Garment <b>women&rsquo;s trouser<span class="wide-only">, cut once</span></b></span>
+          <span>Size <b>M<span class="wide-only"> &middot; regular</span></b></span>
+          <span>Fabric <b>stable woven, <span data-n="blind.fabric_percent" data-dp="1">2.0</span>%</b></span>
+          <span>Bodies <b data-n="strips.cohort.n_bodies">144</b></span>
+        </div>
+
         <div class="strip-head">
-          <p class="eyebrow">Who can wear it</p>
+          <!-- THE ONE SLOT THAT WAS BEING WASTED. This said "Who can wear it",
+               which is the nav item immediately above it, so the page answered
+               "who is this" with the mark and never answered "what do they do"
+               in words at all: it read as a demo rather than as a company. The
+               line costs no height, no scroll and no words anywhere else, and
+               the headline is still the first thing anyone reads. -->
+          <p class="eyebrow">Fit assessment across every body your size chart admits</p>
           <h1>All <span data-n="strips.cohort.n_bodies">144</span> of these women are the same&nbsp;size.</h1>
         </div>
 
@@ -110,7 +136,7 @@
               <p>
                 More than 5 percent of the trouser has to stretch further than
                 the fabric can. A stable woven gives
-                <span data-n="blind.fabric_percent">2.0</span> percent. Our
+                <span data-n="blind.fabric_percent" data-dp="1">2.0</span> percent. Our
                 threshold, and yours to move.
               </p>
             </details>
@@ -170,8 +196,8 @@
       </table>
       <p class="small" style="margin-top:14px">
         Centimetres. Your chart never asks for the rows marked
-        <i>not on the chart</i>, so two women can differ there by any amount at
-        all.
+        <b class="mark-off">&#10022;</b>, so two women can differ there by any
+        amount at all.
       </p>
 
       <div class="sub reveal">
@@ -456,12 +482,20 @@
 
 </main>
 
+<!-- A REAL PLACE, A REAL ADDRESS AND A PRIVACY LINE. What a procurement
+     reader takes credibility from in a footer is that the company is somewhere
+     and can be written to. No OIB and no entity details: settled 2026-10-21,
+     the registration number discloses entity status, nobody checks one at
+     outreach stage, and it belongs on the invoice. -->
 <footer>
   <div class="wrap">
     <span class="brand" aria-label="KROY"><span aria-hidden="true">KR</span><svg class="o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg><span aria-hidden="true">Y</span></span>
+    <span class="where">Zagreb, Croatia</span>
+    <a href="mailto:kristijan.bartol@gmail.com">kristijan.bartol@gmail.com</a>
+    <a href="privacy.html">Privacy</a>
   </div>
 </footer>
 
-<script type="module" src="page.js?v=20261023b"></script>
+<script type="module" src="page.js?v=20261023c"></script>
 </body>
 </html>

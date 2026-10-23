@@ -27,7 +27,11 @@ const dig = (o, path) => path.split('.').reduce((v, k) => (v == null ? v : v[k])
 function fill(data) {
   $$('[data-n]').forEach((el) => {
     const v = dig(data, el.dataset.n);
-    if (v !== undefined && v !== null) el.textContent = v;
+    if (v === undefined || v === null) return;
+    // `data-dp` is how many decimals to hold on to. Without it a stable woven's
+    // 2.0 percent arrives from JSON as the number 2 and prints as "2", which is
+    // a different claim from the one the page makes everywhere else in words.
+    el.textContent = el.dataset.dp === undefined ? v : Number(v).toFixed(+el.dataset.dp);
   });
 }
 
@@ -35,9 +39,12 @@ function fill(data) {
 function pairTable(data) {
   const body = $('#pair-table tbody');
   const widest = Math.max(...data.pair.rows.map((r) => r.gap));
+  // `off` is a row the chart does not state, and the treatment marks it with a
+  // red star and a rule rather than with four words inside the cell. The
+  // sentence under the table is what says what the mark means.
   body.innerHTML = data.pair.rows.map((r) => `
-    <tr class="${r.gap === widest ? 'key' : ''}">
-      <td>${r.name}${r.stated ? '' : ' <span class="states">not on the chart</span>'}</td>
+    <tr class="${[r.gap === widest ? 'key' : '', r.stated ? '' : 'off'].join(' ').trim()}">
+      <td>${r.name}</td>
       <td class="num">${r.a.toFixed(1)}</td>
       <td class="num">${r.b.toFixed(1)}</td>
       <td class="num">${r.gap.toFixed(1)}</td>

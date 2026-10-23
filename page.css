@@ -18,6 +18,14 @@
   --cloth: #B5BFCC;
   --page: 1180px;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  /* THREE FACES, ONE JOB EACH, settled as treatment C2s. Archivo carries the
+   * headlines and the mark; Inter carries the prose; IBM Plex Mono carries
+   * every measurement and every small capital label. The division is the whole
+   * treatment: a number set in the same face as the sentence around it reads as
+   * a claim, and the same number set in mono among other numbers reads as a
+   * reading taken off an instrument, which is what all of ours are. */
+  --arch: 'Archivo', 'Inter', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -35,21 +43,42 @@ body {
   font-feature-settings: 'tnum' 0;
 }
 
-h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.022em; line-height: 1.08; }
-h1 { font-size: clamp(2.05rem, 4.1vw, 3.2rem); }
-h2 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); }
-h3 { font-size: 1.06rem; letter-spacing: -0.01em; }
+/* Archivo at 700 and tight. The catalogue voice is a heavy grotesque set
+ * close, in sentence case rather than the capitals the treatment's first draft
+ * used: capitals at hero size turned the hook into a sign. */
+h1, h2, h3 { margin: 0; font-family: var(--arch); font-weight: 700;
+  letter-spacing: -0.028em; line-height: 1.02; }
+/* 17ch is the measure that keeps a hero headline from running the width of a
+ * laptop. On a phone it is NARROWER than the screen, so it was forcing a third
+ * line and charging the figure 44 px for it. */
+h1 { font-size: clamp(1.85rem, 3.9vw, 2.9rem); max-width: 17ch; }
+@media (max-width: 899px) { h1 { max-width: none; } }
+/* THE NARROWEST PHONE SETS ITS OWN HEADLINE. At 320 px the hook takes three
+ * lines where every other phone gives it two, and the third line costs 39 px
+ * of a 568 px screen, which is the drag hint and part of the rail. Measured,
+ * not guessed: 29.6 px gives a head of 147 and 25.3 px gives 108. */
+@media (max-width: 380px) { h1 { font-size: 1.58rem; } }
+h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
+h3 { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.012em; line-height: 1.2; }
 p { margin: 0 0 1em; }
 a { color: inherit; }
 
 .wrap { max-width: var(--page); margin: 0 auto; padding: 0 28px; }
+/* The eyebrow is INK and not muted now. It stopped being a quiet section label
+ * the moment the hero's one started saying what the company does; a line that
+ * carries the only answer to "what do they do" cannot be the faintest thing on
+ * the screen. */
 .eyebrow {
-  font-size: 0.74rem; letter-spacing: 0.13em; text-transform: uppercase;
-  color: var(--muted); font-weight: 500; margin: 0 0 18px;
+  font-family: var(--arch); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.35;
+  color: var(--ink); margin: 0 0 14px;
 }
-.lede { font-size: clamp(1.02rem, 1.5vw, 1.18rem); color: var(--ink2); max-width: 46ch; }
+.lede { font-size: clamp(1.0rem, 1.4vw, 1.1rem); color: var(--ink2); max-width: 48ch; }
+/* A figure inside a sentence: mono, ink, so the eye finds the numbers in a
+ * paragraph without the paragraph shouting. */
+.lede b, .tally b, .note b, .small b { font-family: var(--mono); font-weight: 500; color: var(--ink); }
 .small { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-.num { font-variant-numeric: tabular-nums; }
+.num, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .red { color: var(--red); }
 
 /* ---- nav ---------------------------------------------------------- */
@@ -65,11 +94,11 @@ header.nav {
  * the old PNG could not do. `assets/favicon.svg` is the same circle. */
 .brand {
   display: inline-flex; align-items: center;
-  font-weight: 600; letter-spacing: 0.085em; line-height: 1;
+  font-family: var(--arch); font-weight: 700; letter-spacing: 0.03em; line-height: 1;
   color: var(--ink); text-decoration: none;
 }
-.brand .o { width: 0.89em; height: 0.89em; display: block; margin-right: 0.085em; }
-.brand .o circle { fill: none; stroke: currentColor; stroke-width: 3; }
+.brand .o { width: 0.86em; height: 0.86em; display: block; margin-right: 0.03em; }
+.brand .o circle { fill: none; stroke: currentColor; stroke-width: 3.4; }
 .nav .brand { font-size: 19px; }
 /* The logo is a back-to-top link and was a 46x26 target. Padding, not size:
  * the nav row is 64 px and centres it, so nothing moves. */
@@ -94,7 +123,11 @@ header.nav {
 /* ---- sections ----------------------------------------------------- */
 section { padding: clamp(64px, 9vw, 116px) 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
 section:first-of-type { border-top: 0; }
-.hed { max-width: 62ch; }
+/* THE RULE OVER THE HEAD, which is the catalogue's one piece of furniture. A
+ * 3 px rule above the eyebrow turns a section into an entry in a sheet. The
+ * hero does not get one: the spec band is directly above it and two heavy
+ * horizontals stacked read as a mistake. */
+.hed { max-width: 62ch; border-top: 3px solid var(--ink); padding-top: 14px; }
 .hed h2 { margin-bottom: 18px; }
 @media (min-width: 900px) {
   .hed { max-width: none; display: grid; grid-template-columns: 1.05fr 1fr; gap: 20px 60px; align-items: start; }
@@ -110,6 +143,28 @@ section:first-of-type { border-top: 0; }
 .sub { margin-top: 62px; max-width: 62ch; }
 .sub h3 { font-size: 1.32rem; letter-spacing: -0.015em; margin-bottom: 8px; }
 .sub p { color: var(--ink2); font-size: 0.98rem; margin: 0; }
+
+/* ---- the spec band ------------------------------------------------- */
+/* IT CAPTIONS THE EXHIBIT AND NEVER THE PAGE. Under the nav it would label the
+ * company and the whole site would read as one trouser's spec sheet, which is
+ * false the day there are two garments. Inside the section it answers the first
+ * question a fit lead asks, which is what am I looking at, and a second garment
+ * gets its own band. Reversed out of black because it is the only element on
+ * the page that is a label rather than an argument, and it has to be legible as
+ * furniture at a glance without competing with the figure under it. */
+.stamp {
+  display: flex; flex-wrap: wrap; gap: 4px 26px;
+  padding: 13px 18px; margin-bottom: 16px;
+  background: var(--ink); color: #9C9A94;
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5;
+}
+.stamp b { color: var(--paper); font-weight: 500; }
+@media (max-width: 899px) {
+  .stamp { font-size: 0.58rem; gap: 2px 14px; padding: 9px 12px;
+    margin: 14px 0 0; letter-spacing: 0.06em; }
+  .wide-only { display: none; }
+}
 
 /* ---- the strip ---------------------------------------------------- */
 .strip { display: grid; gap: 34px; align-items: end; }
@@ -173,30 +228,41 @@ section:first-of-type { border-top: 0; }
  * second copy of the markup to drift. */
 @media (max-width: 899px) {
   #strip-cohort {
-    grid-template-columns: minmax(82px, 104px) minmax(0, 1fr);
+    /* The readings column is wider than the picture needs it to be, and that
+     * costs nothing: the figure is height-limited, so widening this column
+     * takes nothing off the figure and buys "Cannot wear" a single line. */
+    grid-template-columns: minmax(100px, 128px) minmax(0, 1fr);
+    /* THE BAND GOES UNDER THE EXHIBIT ON A PHONE, and above it on a laptop.
+     * It is a caption either way. A 568 px SE cannot hold the nav, a caption,
+     * the line saying what we do, the headline, a figure worth looking at, the
+     * rail and its hint; something has to become the first thing you meet when
+     * you start scrolling, and a label belongs under the thing it labels
+     * sooner than the hook, the picture or the numbers do. */
     grid-template-areas: 'head head' 'read stage' 'rail rail' 'ends ends'
-                         'lede lede' 'note note';
+                         'band band' 'lede lede' 'note note';
     gap: 10px 14px;
   }
+  #strip-cohort .stamp { grid-area: band; }
   #strip-cohort .strip-figure { display: contents; }
   #strip-cohort .strip-stage { grid-area: stage; }
   #strip-cohort .strip-rail { grid-area: rail; }
   #strip-cohort .rail-ends { grid-area: ends; max-width: none; margin-top: 0; }
   #strip-cohort .strip-readout { display: contents; }
-  #strip-cohort .strip-readout dl {
-    grid-area: read; grid-template-columns: 1fr; gap: 16px;
-    align-self: center; border-top: 0; padding-top: 0;
-  }
-  #strip-cohort .strip-readout dd { font-size: 1.05rem; }
+  /* One column of three cells, so the rule between them turns on its side. */
+  #strip-cohort .strip-readout dl { grid-area: read; grid-template-columns: 1fr;
+    align-self: center; }
+  #strip-cohort .strip-readout dl > div { padding: 8px 10px; }
+  #strip-cohort .strip-readout dl > div + div {
+    border-left: 0; border-top: 1px solid var(--ink); }
+  #strip-cohort .strip-readout dd { font-size: 0.95rem; }
   #strip-cohort .strip-readout .note { grid-area: note; margin: 0; }
-  /* THE ONE THING CUT TO AFFORD IT, and it is a real cost. The hero's eyebrow
-   * repeats the nav item back at the reader, and it is 37 px with its margin,
-   * which is exactly the "smallest thigh / DRAG / largest" line. Keeping both
-   * pushes the drag hint off an iPhone 13 and further off an SE, where it is
-   * already cut today. The label loses. Note for whoever puts the "what we do"
-   * line in this slot during the treatment: on a phone it will need somewhere
-   * else to live, because this is where it would have gone. */
-  #strip-cohort .strip-head .eyebrow { display: none; }
+  /* THE EYEBROW IS BACK AND IT IS NOT A LABEL ANY MORE. It was hidden here
+   * earlier the same day, when it still said "Who can wear it" and was
+   * repeating the nav item immediately above it, and 37 px bought figure. It
+   * now carries the only sentence on the page that says what KROY does, so it
+   * is the last thing that would be cut for space and the figure gives the
+   * height back. */
+  #strip-cohort .strip-head .eyebrow { max-width: 30ch; margin-bottom: 11px; }
 }
 
 #strip-seated .strip-figure { order: -1; }
@@ -205,10 +271,17 @@ section:first-of-type { border-top: 0; }
 @media (min-width: 900px) {
   #strip-cohort {
     grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-    grid-template-areas: 'head fig' 'lede fig' 'read fig';
+    /* The last row exists only to take up the slack. The figure is 620 px tall
+     * and spans the text column's rows, so without somewhere for the leftover
+     * height to go it is shared out between the headline, the lede and the
+     * readings, and the column reads as three things that have drifted apart.
+     * The void is below them, where empty paper is just margin. */
+    grid-template-areas: 'band band' 'head fig' 'lede fig' 'read fig' 'void fig';
+    grid-template-rows: auto auto auto auto 1fr;
     align-items: start;
     gap: 0 64px;
   }
+  #strip-cohort .stamp { grid-area: band; }
   #strip-cohort .strip-lede { margin-top: 22px; }
   #strip-cohort .strip-readout { margin-top: 30px; }
 }
@@ -221,16 +294,19 @@ section:first-of-type { border-top: 0; }
  * that happened to fit one phone; this is the quantity that was actually meant,
  * so it holds on an SE and on a Pro Max without three breakpoints. The chrome
  * is everything that has to share the first screen with the picture, measured
- * rather than estimated: nav 64, the section's own 26, the headline at three
- * lines 106, three gaps 30, the rail's touch target 50, the ends line 20, and
- * 6 px of slack. Change any of those and change this number with them.
+ * rather than estimated: nav 64, the section's own 26, the line saying what we
+ * do plus the headline 144 at its tallest on the narrowest phone, three gaps
+ * 30, the rail's touch target 50, the ends line 20. Change any of those and
+ * change this number with them, and re-measure on all three phones: the
+ * headline wraps to three lines on an SE and two on everything else, so the
+ * narrowest screen is the one that sets this and not the shortest.
  *
  * `min-height` is capped against the viewport as well, or a phone turned
  * sideways asks for 260 px of picture inside 390 px of screen. */
 #cohort .strip-stage { height: min(44vh, 380px); }
 @supports (height: 1dvh) {
   #cohort .strip-stage {
-    height: calc(100dvh - 302px);
+    height: calc(100dvh - 334px);
     max-height: 620px;
     min-height: min(260px, 46dvh);
   }
@@ -310,16 +386,28 @@ section:first-of-type { border-top: 0; }
   width: 11px; height: 11px; margin-left: -5.5px;
   background: var(--ink); border-radius: 50%;
 }
-.rail-ends { display: flex; justify-content: space-between; width: 100%; max-width: 360px; font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
-.drag-hint { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.rail-ends { display: flex; justify-content: space-between; width: 100%; max-width: 360px;
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.drag-hint { letter-spacing: 0.18em; }
 
-/* the live readout beside a strip */
-.readout { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 18px; }
-.readout.bare { border-top: 0; margin-top: 0; padding-top: 0; }
-.readout dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 18px; margin: 0; }
-
-.readout dt { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-.readout dd { margin: 0; font-size: clamp(1.05rem, 3.2vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+/* THE LIVE READOUT, boxed. Three cells in one ruled frame rather than three
+ * numbers floating under a line: the frame is what makes them read as one
+ * instrument with three dials, which is exactly what they are, and it is the
+ * difference between a website statistic and a reading. */
+.readout { margin-top: 26px; }
+.readout.bare { margin-top: 0; }
+.readout dl {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0; margin: 0; border: 1px solid var(--ink);
+}
+.readout dl > div { padding: 9px 13px; min-width: 0; }
+.readout dl > div + div { border-left: 1px solid var(--ink); }
+.readout dt { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.readout dd { margin: 0; font-family: var(--arch); font-weight: 700;
+  font-size: clamp(1rem, 2.6vw, 1.2rem); letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums; line-height: 1.15; }
 .readout dd.verdict[data-fails='1'] { color: var(--red); }
 /* A SECTION'S CAVEATS, ONE TAP AWAY. Every section ends on the definitions,
  * parameters and qualifications that used to sit in its opening paragraph.
@@ -330,7 +418,8 @@ section:first-of-type { border-top: 0; }
 .note { margin-top: 16px; font-size: 0.88rem; color: var(--ink2); }
 .note > summary {
   cursor: pointer; list-style: none; display: inline-flex; align-items: baseline;
-  gap: 8px; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.01em;
+  gap: 8px; color: var(--muted); font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em;
   padding: 2px 0; transition: color .15s ease;
 }
 .note > summary::-webkit-details-marker { display: none; }
@@ -354,25 +443,38 @@ section:first-of-type { border-top: 0; }
 .tally b { font-weight: 600; color: var(--ink); }
 
 /* ---- the pair table ------------------------------------------------ */
-.pair { width: 100%; max-width: 880px; border-collapse: collapse; margin-top: 26px; font-variant-numeric: tabular-nums; }
-.pair th, .pair td { text-align: right; padding: 11px 10px; border-bottom: 1px solid var(--line); }
+/* THE TABLE AS A SPEC SHEET: one ruled frame, a header reversed out of black,
+ * every figure in mono. The red-soft band that used to fill the thigh row is
+ * gone and is not missed: red on this page means the fabric ran out, and a
+ * tinted row was spending it on a table cell. What marks the rows that decide
+ * everything is that the chart does not state them, so they carry the mark and
+ * their difference is the thing set in red. */
+.pair { width: 100%; max-width: 880px; border-collapse: collapse; margin-top: 26px;
+  border: 1px solid var(--ink); }
+.pair th, .pair td { text-align: right; padding: 8px 10px; }
 .pair th:first-child, .pair td:first-child { text-align: left; }
-.pair thead th { font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.pair thead th { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--paper); background: var(--ink); font-weight: 400; }
+.pair tbody td { font-family: var(--mono); font-size: 0.88rem;
+  font-variant-numeric: tabular-nums; border-top: 1px solid var(--line); }
+.pair tbody td:first-child { font-family: var(--arch); font-weight: 500; font-size: 0.82rem;
+  text-transform: uppercase; letter-spacing: 0.04em; }
 .pair tbody tr.key td { font-weight: 600; }
-.pair tbody tr.key { background: var(--red-soft); }
-.pair tbody tr.key td:last-child { color: var(--red); }
-.pair td:last-child { font-weight: 600; }
-.pair .states { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+/* NOT ON THE CHART, said with a mark rather than with four words in the cell. */
+.pair tbody tr.off td { border-top: 1px solid var(--ink); }
+.pair tbody tr.off td:first-child::after { content: ' \2726'; color: var(--red); }
+.pair tbody tr.off td:last-child { color: var(--red); }
+.mark-off { color: var(--red); font-weight: 400; }
 
 /* On a phone this table is four columns of numbers in 375 px and it was 4 px
  * too wide, which is enough to make the whole PAGE scroll sideways. The
  * annotation goes under the measurement instead of beside it, and the header
  * row stops spending letter-spacing it cannot afford. */
 @media (max-width: 560px) {
-  .pair { font-size: 0.93rem; }
-  .pair th, .pair td { padding: 10px 4px; }
-  .pair thead th { font-size: 0.6rem; letter-spacing: 0.03em; }
-  .pair .states { display: block; font-size: 0.68rem; line-height: 1.3; }
+  .pair th, .pair td { padding: 7px 5px; }
+  .pair tbody td { font-size: 0.8rem; }
+  .pair tbody td:first-child { font-size: 0.72rem; letter-spacing: 0.02em; }
+  .pair thead th { font-size: 0.54rem; letter-spacing: 0.03em; }
 }
 
 /* ---- the ranked bars ----------------------------------------------- */
@@ -380,22 +482,22 @@ section:first-of-type { border-top: 0; }
 .bar { display: grid; grid-template-columns: 150px 1fr 74px; align-items: center; gap: 14px; padding: 7px 0; }
 @media (max-width: 620px) { .bar { grid-template-columns: 96px 1fr 72px; gap: 8px; } }
 .bar .who { font-size: 0.95rem; }
-.bar .who span { display: block; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.bar .who span { display: block; font-family: var(--mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
 .bar .track { height: 17px; background: transparent; position: relative; }
 .bar .track i {
   position: absolute; top: 0; bottom: 0; left: 0; display: block;
   width: 0; background: var(--rail); transition: width .85s cubic-bezier(.65,0,.35,1);
 }
 .bar.free .track i { background: var(--red); }
-.bar .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.98rem; white-space: nowrap; }
+.bar .val { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 500; font-size: 0.88rem; white-space: nowrap; }
 .bar.free .val { color: var(--red); }
 .bar.pinned .who, .bar.pinned .val { color: var(--ink2); }
 @media (prefers-reduced-motion: reduce) { .bar .track i { transition: none; } }
-.barkey { display: flex; gap: 22px; margin-top: 18px; font-size: 0.8rem; color: var(--muted); }
+.barkey { display: flex; gap: 22px; margin-top: 18px; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .barkey b { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: baseline; }
 
 /* ---- fabric stops -------------------------------------------------- */
-.stops { display: flex; justify-content: space-between; width: 100%; max-width: 360px; margin-top: 4px; font-size: 0.74rem; color: var(--muted); }
+.stops { display: flex; justify-content: space-between; width: 100%; max-width: 360px; margin-top: 4px; font-family: var(--mono); font-size: 0.66rem; color: var(--muted); }
 .stops button {
   background: none; border: 0; padding: 4px 0; font: inherit; color: var(--muted);
   cursor: pointer; letter-spacing: -0.01em;
@@ -414,10 +516,10 @@ section:first-of-type { border-top: 0; }
 @media (min-width: 760px) { .cols.three { grid-template-columns: repeat(3, 1fr); } .cols.two { grid-template-columns: 1fr 1fr; } }
 .cols h3 { margin-bottom: 8px; }
 .cols p { color: var(--ink2); font-size: 0.96rem; margin: 0; }
-.rule { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.rule { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 
 .stat { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 26px 34px; margin-top: 4px; }
-.stat b { display: block; font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stat b { display: block; font-family: var(--arch); font-size: clamp(1.9rem, 3.8vw, 2.7rem); font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .stat span { font-size: 0.88rem; color: var(--ink2); }
 
 /* ---- team, contact, footer ---------------------------------------- */
@@ -426,7 +528,7 @@ section:first-of-type { border-top: 0; }
 .person { display: flex; gap: 18px; align-items: flex-start; }
 .person img { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
 .person p { font-size: 0.93rem; color: var(--ink2); margin: 4px 0 0; }
-.person .role { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.person .role { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
 .cta { text-align: center; }
 .cta p { margin-left: auto; margin-right: auto; }
@@ -451,8 +553,24 @@ section:first-of-type { border-top: 0; }
 .gets .rule { color: var(--muted); margin-bottom: 8px; }
 
 footer { border-top: 1px solid var(--line); padding: 34px 0; }
-footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 0.84rem; color: var(--muted); }
-footer .brand { font-size: 0.84rem; color: inherit; letter-spacing: 0.1em; }
+/* A REAL PLACE AND A REAL ADDRESS. What a procurement reader takes from a
+ * footer is that the company is somewhere and can be written to; the mark on
+ * its own said neither. Mono, because this is the colophon. */
+footer .wrap { display: flex; justify-content: space-between; gap: 10px 26px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); }
+footer .brand { font-size: 0.8rem; color: inherit; letter-spacing: 0.08em; }
+footer a { text-decoration: none; }
+/* An address is not a label: uppercasing one makes it look like a heading and
+ * is the one thing in a colophon a reader may want to copy exactly. */
+footer a[href^="mailto:"] { text-transform: none; letter-spacing: 0.03em; }
+footer a:hover { color: var(--ink); }
+
+/* The privacy page: one column of prose, nothing else on it. */
+.prose { max-width: 62ch; }
+.prose h1 { margin-bottom: 26px; }
+.prose h3 { margin-top: 34px; margin-bottom: 8px; }
+.prose p { color: var(--ink2); }
 
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
