@@ -6,6 +6,10 @@
   <title>KROY — who can actually wear the size you make</title>
   <meta name="description" content="One trouser, one size, and every body shape the chart lets through. We show which of them can actually wear it, where the fabric runs out, and by how much." />
 
+  <!-- The mark is a drawn circle, so the tab icon is the same shape as the nav
+       wordmark at any size. The SVG is what modern browsers take; the PNGs are
+       the fallback and the home-screen icon. -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
@@ -39,7 +43,7 @@
 
 <header class="nav">
   <div class="wrap">
-    <a href="#top" aria-label="KROY"><img src="assets/kroy-logo.png" alt="KROY" /></a>
+    <a class="brand" href="#top" aria-label="KROY"><span aria-hidden="true">KR</span><svg class="o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg><span aria-hidden="true">Y</span></a>
     <nav>
       <a class="hide-sm" href="#cohort">Who can wear it</a>
       <a class="hide-sm" href="#chart">Size chart</a>
@@ -461,7 +465,7 @@
 
 <footer>
   <div class="wrap">
-    <span>KROY</span>
+    <span class="brand" aria-label="KROY"><span aria-hidden="true">KR</span><svg class="o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg><span aria-hidden="true">Y</span></span>
     <span class="small" id="provenance">&nbsp;</span>
   </div>
 </footer>

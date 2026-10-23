@@ -60,7 +60,17 @@ header.nav {
   border-bottom: 1px solid var(--line);
 }
 .nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.nav img { height: 26px; width: auto; mix-blend-mode: multiply; display: block; }
+/* The mark: text and one drawn circle, never an image. The O is an SVG so it
+ * stays a true ring at 26 px in the nav and at 16 px in a browser tab, which
+ * the old PNG could not do. `assets/favicon.svg` is the same circle. */
+.brand {
+  display: inline-flex; align-items: center;
+  font-weight: 600; letter-spacing: 0.085em; line-height: 1;
+  color: var(--ink); text-decoration: none;
+}
+.brand .o { width: 0.89em; height: 0.89em; display: block; margin-right: 0.085em; }
+.brand .o circle { fill: none; stroke: currentColor; stroke-width: 3; }
+.nav .brand { font-size: 19px; }
 /* The logo is a back-to-top link and was a 46x26 target. Padding, not size:
  * the nav row is 64 px and centres it, so nothing moves. */
 .nav .wrap > a { display: flex; align-items: center; padding: 10px 0; }
@@ -358,6 +368,7 @@ section:first-of-type { border-top: 0; }
 
 footer { border-top: 1px solid var(--line); padding: 34px 0; }
 footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 0.84rem; color: var(--muted); }
+footer .brand { font-size: 0.84rem; color: inherit; letter-spacing: 0.1em; }
 
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="KROY">
+  <style>
+    circle { fill: none; stroke: #0B0B0B; }
+    @media (prefers-color-scheme: dark) { circle { stroke: #FCFCFB; } }
+  </style>
+  <circle cx="12" cy="12" r="9.2" stroke-width="3.4" />
+</svg>
