@@ -1,5 +1,5 @@
 {
- "built": "2026-10-21 10:50:25",
+ "built": "2026-10-23 21:01:38",
  "what": "The landing page's numbers, re-derived from the engine. Never typed on the page.",
  "rules": [
   "the numbers here are re-derived at build time, never typed",
@@ -11,8 +11,8 @@
   "cohort": {
    "id": "cohort",
    "size": [
-    480,
-    1493
+    900,
+    2800
    ],
    "n": 144,
    "fabric": 0.02,
@@ -42,7 +42,7 @@
     ],
     "cols": 12,
     "per_sheet": 108,
-    "bytes": 463424,
+    "bytes": 466688,
     "resident_mb": 31.2
    },
    "frame": "cohort/f%04d.webp",
