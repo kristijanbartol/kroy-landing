@@ -138,7 +138,6 @@ section:first-of-type { border-top: 0; }
  * BETWEEN them: title, picture, then the prose that qualifies it. On a laptop
  * the two halves rejoin into one column beside the figure and nothing about
  * that layout changes. */
-#strip-cohort { grid-template-areas: 'head' 'fig' 'read' 'lede' 'note'; gap: 18px; }
 #strip-cohort .strip-head { grid-area: head; }
 #strip-cohort .strip-lede { grid-area: lede; }
 #strip-cohort .strip-figure { grid-area: fig; }
@@ -151,12 +150,53 @@ section:first-of-type { border-top: 0; }
  * live. That slot now holds a `details.note` rather than a paragraph, so what
  * is below the fold is one tappable line and the explanation is behind it. `display: contents` is what lets one block be two grid items here and
  * one block on a laptop, with no second copy of the markup to drift. */
+/* THE HERO IS ONE SCREEN, 2026-10-23, and the move that paid for it was not
+ * making the figure taller. It was putting the three live numbers BESIDE the
+ * figure instead of under the rail.
+ *
+ * What was wrong: on a phone the readout sat below the rail, which put it at
+ * 661 px on a 664 px screen. So the opening sweep ran, the figure changed shape
+ * through 144 women, and Thigh, Too tight and Verdict were all below the fold.
+ * A reader who never scrolled saw an animation and not one number. The numbers
+ * are the argument; the figure is the evidence for them.
+ *
+ * Beside is also what the laptop already does, so this is the desktop
+ * arrangement at phone scale rather than a second idea. It costs nothing in
+ * width, because a 900 x 2800 figure in a 390 px screen is height-limited and
+ * leaves about a hundred pixels of empty paper down each side.
+ *
+ * `display: contents` on the figure is what lets the stage, the rail and the
+ * ends become grid items of the hero, so the numbers can sit beside the STAGE
+ * while the rail still spans the full width underneath. A rail squeezed into
+ * one column would be 210 px for 144 bodies, which is 1.4 px of travel each.
+ * Same trick as the readout below it, same reason: one block, two layouts, no
+ * second copy of the markup to drift. */
 @media (max-width: 899px) {
+  #strip-cohort {
+    grid-template-columns: minmax(82px, 104px) minmax(0, 1fr);
+    grid-template-areas: 'head head' 'read stage' 'rail rail' 'ends ends'
+                         'lede lede' 'note note';
+    gap: 10px 14px;
+  }
+  #strip-cohort .strip-figure { display: contents; }
+  #strip-cohort .strip-stage { grid-area: stage; }
+  #strip-cohort .strip-rail { grid-area: rail; }
+  #strip-cohort .rail-ends { grid-area: ends; max-width: none; margin-top: 0; }
   #strip-cohort .strip-readout { display: contents; }
   #strip-cohort .strip-readout dl {
-    grid-area: read; border-top: 1px solid var(--line); padding-top: 14px;
+    grid-area: read; grid-template-columns: 1fr; gap: 16px;
+    align-self: center; border-top: 0; padding-top: 0;
   }
+  #strip-cohort .strip-readout dd { font-size: 1.05rem; }
   #strip-cohort .strip-readout .note { grid-area: note; margin: 0; }
+  /* THE ONE THING CUT TO AFFORD IT, and it is a real cost. The hero's eyebrow
+   * repeats the nav item back at the reader, and it is 37 px with its margin,
+   * which is exactly the "smallest thigh / DRAG / largest" line. Keeping both
+   * pushes the drag hint off an iPhone 13 and further off an SE, where it is
+   * already cut today. The label loses. Note for whoever puts the "what we do"
+   * line in this slot during the treatment: on a phone it will need somewhere
+   * else to live, because this is where it would have gone. */
+  #strip-cohort .strip-head .eyebrow { display: none; }
 }
 
 #strip-seated .strip-figure { order: -1; }
@@ -177,8 +217,24 @@ section:first-of-type { border-top: 0; }
  * 110, which leaves roughly 460 for picture and rail. `dvh` rather than `vh`
  * because iOS reports `vh` as the height with the URL bar HIDDEN, so a
  * vh-sized picture is taller than the screen until you scroll. */
+/* SIZED TO WHAT IS LEFT, not to a fraction of the screen. `44dvh` was a guess
+ * that happened to fit one phone; this is the quantity that was actually meant,
+ * so it holds on an SE and on a Pro Max without three breakpoints. The chrome
+ * is everything that has to share the first screen with the picture, measured
+ * rather than estimated: nav 64, the section's own 26, the headline at three
+ * lines 106, three gaps 30, the rail's touch target 50, the ends line 20, and
+ * 6 px of slack. Change any of those and change this number with them.
+ *
+ * `min-height` is capped against the viewport as well, or a phone turned
+ * sideways asks for 260 px of picture inside 390 px of screen. */
 #cohort .strip-stage { height: min(44vh, 380px); }
-@supports (height: 1dvh) { #cohort .strip-stage { height: min(44dvh, 380px); } }
+@supports (height: 1dvh) {
+  #cohort .strip-stage {
+    height: calc(100dvh - 302px);
+    max-height: 620px;
+    min-height: min(260px, 46dvh);
+  }
+}
 @media (min-width: 900px) { #cohort .strip-stage { height: clamp(380px, 72vh, 760px); } }
 /* Only the hero needs a figure that size. Below it the picture is
  * evidence for a claim made in type, not the claim itself. */

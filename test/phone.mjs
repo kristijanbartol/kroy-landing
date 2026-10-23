@@ -95,6 +95,21 @@ for (const dev of PHONES) {
   await p.waitForTimeout(6000);
   ok(`${dev}: it rests on the argued body`, (await rd(p)).thigh.startsWith(REST_THIGH));
 
+  /* THE WHOLE HERO ON THE FIRST SCREEN, which is what the 2026-10-23 layout is
+   * for and what nothing here asserted before it. The readout used to sit under
+   * the rail, at 661 px on a 664 px screen: the sweep ran, 144 women went past,
+   * and Thigh, Too tight and Verdict were all below the fold, so a reader who
+   * never scrolled saw an animation and not one number. Measured before any
+   * scrolling has happened, because that is the state being tested. */
+  const fold = await p.evaluate(() => {
+    const bot = (s) => Math.round(document.querySelector(s).getBoundingClientRect().bottom);
+    return { read: bot('#strip-cohort .strip-readout dl'),
+      ends: bot('#strip-cohort .rail-ends'), vh: innerHeight };
+  });
+  ok(`${dev}: the figure, the rail, the drag hint and all three numbers fit one screen`,
+    fold.read <= fold.vh && fold.ends <= fold.vh,
+    `numbers end ${fold.read}, drag hint ${fold.ends}, screen ${fold.vh}`);
+
   for (const [sec, id] of [['#material', '#strip-material'], ['#seated', '#strip-seated']]) {
     if (!(await toFigure(p, sec))) { ok(`${dev}: ${sec} is on the page`, false); continue; }
     await p.waitForTimeout(1200);
