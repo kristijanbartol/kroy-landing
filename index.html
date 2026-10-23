@@ -9,9 +9,12 @@
   <!-- The mark is a drawn circle, so the tab icon is the same shape as the nav
        wordmark at any size. The SVG is what modern browsers take; the PNGs are
        the fallback and the home-screen icon. -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <!-- STAMPED LIKE THE CSS AND THE JS, and for the same reason: a browser
+       keeps a favicon long after it has revalidated everything else, so the
+       old mark survives at the old URL. A URL no cache has seen ends that. -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20261023a" />
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=20261023a" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20261023a" />
 
   <meta property="og:title" content="KROY — who can actually wear the size you make" />
   <meta property="og:description" content="144 women, all the same size by the same chart. Drag through them and see which ones can actually wear the trouser." />
