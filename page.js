@@ -252,13 +252,11 @@ Promise.all([
     if (/[?&]debug/.test(location.search) || location.hash === '#debug') {
       import('./debug.js' + V).then((m) => m.panel(strips, data)).catch(() => {});
     }
-    const c = data.strips.cohort;
-    // The footer says where the numbers came from, in words a visitor can
-    // read. The build names stay in demo/data.json, which is one click away
-    // and is the thing to quote when a number is ever questioned.
-    $('#provenance').textContent =
-      `${c.n_bodies} bodies, one trouser, one size. `
-      + `Every number re-derived ${data.built.slice(0, 10)}`;
+    // The footer carried a provenance line, "144 bodies, one trouser, one
+    // size, every number re-derived <date>". Cut 2026-10-23: it spoke to a
+    // reader checking our working, and the page is read by someone deciding
+    // whether to write. `demo/data.json` still carries the build date and the
+    // names, and is the thing to quote if a number is ever questioned.
   })
   .catch((e) => {
     console.error('demo/data.json', e);

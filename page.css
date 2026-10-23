@@ -266,6 +266,11 @@ section:first-of-type { border-top: 0; }
 .note[open] > summary::before { content: '\2013'; }
 .note > summary:hover, .note > summary:hover::before { color: var(--ink); }
 .note > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* Two notes side by side under the method steps, stacked on a phone. Closed
+ * they are two lines; open they are the answer a fit lead came looking for. */
+.notes { display: grid; gap: 14px; margin-top: 46px; }
+@media (min-width: 760px) { .notes { grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; } }
 .note > p { margin: 10px 0 0; max-width: 46ch; }
 .note b { font-weight: 600; color: var(--ink); }
 
@@ -361,7 +366,11 @@ section:first-of-type { border-top: 0; }
  * with no narrator has to close that itself. Left-aligned inside a centred
  * block, because centred body copy in three columns is unreadable. */
 .gets { display: grid; gap: 26px; margin: 46px auto 42px; max-width: 980px; text-align: left; }
-@media (min-width: 760px) { .gets { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+@media (min-width: 760px) {
+  .gets { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  /* Two blocks since the middle one was cut: the exchange, not a pipeline. */
+  .gets.two { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
+}
 .gets > div { border-top: 1px solid var(--line); padding-top: 16px; }
 .gets p { color: var(--ink2); font-size: 0.95rem; margin: 0; }
 .gets .rule { color: var(--muted); margin-bottom: 8px; }
