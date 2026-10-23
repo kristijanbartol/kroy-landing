@@ -211,6 +211,25 @@ section:first-of-type { border-top: 0; }
 .strip.ready .strip-stage::after, .strip.failed .strip-stage::after { content: none; }
 .strip.failed .strip-stage::after { content: 'the figures could not be loaded'; }
 
+/* THE OPENING, which on the hero is a video, laid exactly over the canvas it
+ * hands over to. `object-fit: contain` inside a box the size of the stage
+ * computes the same fit the canvas computes for itself, and both are centred in
+ * it, so the swap at the end does not move the figure by a pixel.
+ *
+ * `pointer-events: none` is what keeps the scrub the code that was already
+ * tested: a thumb goes straight through to the canvas underneath and every
+ * input handler in `strip.js` runs exactly as it does with no video present.
+ *
+ * It is NOT hidden with `display: none` while it waits. A display-none video
+ * does not reliably preload, and the whole point of building the element at
+ * page load is that the 1.6 MB is on its way before anybody is waiting on it. */
+.strip-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; pointer-events: none;
+  opacity: 0; background: var(--paper);
+}
+.strip-video.on { opacity: 1; }
+
 /* The rail is the argument as well as the control: one tick per body, red
  * where a body cannot wear the garment, so the failures visibly gather at the
  * thick-thigh end before anyone drags anything. */

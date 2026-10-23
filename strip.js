@@ -1,9 +1,16 @@
 /* A strip the viewer drags: one canvas, one sprite sheet, one full-res frame.
  *
- * WHY NOT A VIDEO. The cohort strip exists to answer "you picked two bodies
- * that suit you". A video of 144 bodies is still something we authored and the
- * viewer has to take on faith. A strip they drag lets them CHECK, including on
- * the bodies we would least want them to stop on.
+ * WHY THE INTERACTION IS NOT A VIDEO. The cohort strip exists to answer "you
+ * picked two bodies that suit you". A video of 144 bodies is still something we
+ * authored and the viewer has to take on faith. A strip they drag lets them
+ * CHECK, including on the bodies we would least want them to stop on.
+ *
+ * THE OPENING, HOWEVER, IS ONE, on the hero and nowhere else. Amended
+ * 2026-10-23. What a reader watches before they touch anything is ours to
+ * choose, and at hero size the scrub sheet cannot carry it: see `videoOpening`
+ * at the foot of this file for the number that decided it. Nothing about the
+ * interaction changed, and the video hands over to this canvas the moment a
+ * hand arrives or the sweep is done.
  *
  * THE BAR IS RANDOM ACCESS AT 60 fps, and it is why this does not reuse the
  * demo shell's player: that one buffers forward from a playhead, so a backwards
@@ -27,6 +34,26 @@ const CACHE_MAX = 10;           // full-res frames held, in position order
 const WATCHABLE_PX = 240;       // picture on screen before a sweep is worth it
 const ARM_MS = 300;             // and how long it has to stay there
 const PAUSE_MS = 250;           // a frame gap longer than this was not watched
+
+/* THE OPENING'S CHOREOGRAPHY, in one place because two things now play it: the
+ * canvas, in `playAuto` below, and the video `scripts/hero_video.py` bakes for
+ * the hero out of these same three numbers. That script names them and says
+ * where they live; if they move here, move them there, or the two will show
+ * different pictures at the same position.
+ *
+ * Smoothstep across the WHOLE rail, so the reddest body is actually reached; a
+ * beat on it; then back to the body the rest of the page is about. Why it is
+ * not an ease-out, which is what it used to be, is in `playAuto`.
+ */
+const OUT_MS = 5400, HOLD_MS = 700, BACK_MS = 1200;
+export const OPENING_MS = OUT_MS + HOLD_MS + BACK_MS;
+const smooth = (u) => u * u * (3 - 2 * u);
+
+export function openingAt(ms, end, rest) {
+  if (ms < OUT_MS) return smooth(ms / OUT_MS) * end;
+  if (ms < OUT_MS + HOLD_MS) return end;
+  return end + (rest - end) * smooth(Math.min(1, (ms - OUT_MS - HOLD_MS) / BACK_MS));
+}
 
 /* WHY THE SWEEP IS TRIGGERED BY GEOMETRY WE MEASURE AND NOT BY AN
  * IntersectionObserver THRESHOLD. Twice the sweep has failed to run on a phone
@@ -86,6 +113,11 @@ export class Strip {
     this.dragging = false;
     this.auto = null;
     this.wantAuto = opts.autoplay !== false;
+    // What plays the opening, if it is not this canvas. `videoOpening` builds
+    // one; null means the canvas sweeps itself, as it always did.
+    this.opening = opts.opening || null;
+    this.playing = false;
+    this.stopOpening = null;
 
     this.resize();
     this.bind();
@@ -224,18 +256,43 @@ export class Strip {
     this.i = i;
     if (moved || !this.drawnOnce) { this.draw(); this.drawnOnce = true; }
     if (changed || !this.toldOnce) { this.onIndex(i, this.cfg.positions[i]); this.toldOnce = true; }
-    if (this.rail) {
-      this.rail.style.setProperty('--at', (this.n < 2 ? 0 : f / (this.n - 1)));
-      this.rail.setAttribute('aria-valuenow', i);
-    }
+    this.mark();
     clearTimeout(this.settle);
     this.settle = setTimeout(() => {
       // Land on the body, not between two of them.
       this.f = this.i;
-      if (this.rail) this.rail.style.setProperty('--at', (this.n < 2 ? 0 : this.f / (this.n - 1)));
+      this.mark();
       this.draw();
       this.want(this.i);
     }, SETTLE_MS);
+  }
+
+  /* The rail and the number beside it: the two things that have to agree with
+   * the picture whoever is painting it. */
+  mark() {
+    if (!this.rail) return;
+    this.rail.style.setProperty('--at', (this.n < 2 ? 0 : this.f / (this.n - 1)));
+    this.rail.setAttribute('aria-valuenow', this.i);
+  }
+
+  /* Position without drawing, for when something else is painting: the hero's
+   * opening is a video laid over this canvas, and the rail and the readout
+   * still have to follow it, because THE READOUT IS THE ARGUMENT. A thigh
+   * measurement that sits at an em-dash while the figure changes shape says
+   * nothing. What is skipped is the blit, which underneath an opaque element
+   * would sample a 31 MB sheet sixty times a second for nobody, competing with
+   * the decoder for the one thing a phone is short of.
+   *
+   * No settle timer either: settling is what fetches a full-res frame, and the
+   * frame worth fetching during an opening is the one it ENDS on. */
+  follow(f) {
+    f = Math.min(this.n - 1, Math.max(0, f));
+    this.f = f;
+    const i = Math.round(f);
+    const changed = i !== this.i;
+    this.i = i;
+    if (changed || !this.toldOnce) { this.onIndex(i, this.cfg.positions[i]); this.toldOnce = true; }
+    this.mark();
   }
 
   fromClientX(x) {
@@ -285,6 +342,11 @@ export class Strip {
       this.dragging = true;
       this.capture(this.canvas, e.pointerId);
       this.root.classList.add('dragging');
+      // THE PRESS CLAIMS IT, not the first move. A thumb held on the figure
+      // used to leave the opening running underneath it, which on the hero
+      // means the picture walks out from under a finger that is holding it
+      // still. `set` with `fromUser` is also the one path that stops a video.
+      this.set(this.f, true);
       this.dragFrom = [e.clientX, this.f];
       e.preventDefault();
     });
@@ -363,18 +425,50 @@ export class Strip {
         if (this.arming) { clearTimeout(this.arming); this.arming = null; }
         return;
       }
-      if (this.done || this.auto || this.arming) return;
+      if (this.done || this.auto || this.playing || this.arming) return;
       if (document.visibilityState !== 'visible' || !this.enough()) return;
       this.arming = setTimeout(() => {
         this.arming = null;
-        if (this.userOwns || this.done || this.auto) return;
+        if (this.userOwns || this.done || this.auto || this.playing) return;
         if (document.visibilityState !== 'visible' || !this.enough()) return;
         this.done = true;
-        this.playAuto();
+        this.startOpening();
       }, ARM_MS);
     };
     watchers.add(this.check);
     this.check();
+  }
+
+  /* WHAT plays the opening, which is the only part of this the hero changes.
+   * Everything about WHEN stays in `armAuto` above: every rule there was
+   * learned on a phone, and not one of them cares what is doing the painting.
+   */
+  startOpening() {
+    if (!this.opening) { this.playAuto(); return; }
+    this.playing = true;
+    this.stopOpening = this.opening(this);
+  }
+
+  /* Played to its end, and the strip is resting on the argued body. */
+  openingEnded() {
+    this.playing = false;
+    this.stopOpening = null;
+  }
+
+  /* It could not play at all: no decoder for it, the file is not there, or an
+   * autoplay the browser refused, which iOS does in Low Power Mode however
+   * muted the video is. Fall back to the canvas sweep for the rest of the
+   * visit, and run it NOW, because the figure is on screen and armed and
+   * nobody should be left looking at a still while we think about it. */
+  openingFailed(why) {
+    // RECORDED, because this is the one state that cannot be reproduced off
+    // the device: Low Power Mode refuses an autoplay and leaves no trace. The
+    // `?debug` panel prints it.
+    this.noVideo = why || 'failed';
+    this.opening = null;
+    this.playing = false;
+    this.stopOpening = null;
+    this.playAuto();
   }
 
   /* THE OPENING SWEEP, and both of its timings were wrong for the same reason.
@@ -396,8 +490,6 @@ export class Strip {
   playAuto() {
     const end = this.n - 1;
     const rest = Math.min(end, this.cfg.rest ?? end);
-    const OUT = 5400, HOLD = 700, BACK = 1200;
-    const smooth = (u) => u * u * (3 - 2 * u);
     // Every sweep starts from the beginning, so a replay is the same argument
     // and not a jump out of wherever the last one stopped.
     this.set(0);
@@ -429,13 +521,9 @@ export class Strip {
       prev = t;
       const ms = t - t0;
       this.swept = ms;               // what ?debug reports, measured not assumed
-      let at;
-      if (ms < OUT) at = smooth(ms / OUT) * end;
-      else if (ms < OUT + HOLD) at = end;
-      else at = end + (rest - end) * smooth(Math.min(1, (ms - OUT - HOLD) / BACK));
-      this.set(at);
+      this.set(openingAt(ms, end, rest));
       this.ticks = (this.ticks || 0) + 1;
-      if (ms < OUT + HOLD + BACK) this.auto = requestAnimationFrame(tick);
+      if (ms < OPENING_MS) this.auto = requestAnimationFrame(tick);
       else {
         this.auto = null;
         this.wall = Date.now() - w0;
@@ -451,8 +539,148 @@ export class Strip {
   stopAuto() {
     if (this.auto) { cancelAnimationFrame(this.auto); this.auto = null; }
     if (this.arming) { clearTimeout(this.arming); this.arming = null; }
+    // Whatever else was playing the opening hands the position back here.
+    if (this.stopOpening) { this.stopOpening(); this.stopOpening = null; this.playing = false; }
     // The reader's hand outranks the demonstration, permanently.
     this.userOwns = true;
     this.done = true;
   }
+}
+
+/* ---- the opening as a video, which is the hero's and nothing else's ------
+ *
+ * The canvas sweeps for free, so this exists for exactly one reason: RESIDENT
+ * PIXELS. The scrub sheet is decoded whole, so its cells are 132 x 411 and the
+ * sheet costs 31.2 MB in memory however small the file was. At the figure's
+ * old size that is a 2.5x upscale and invisible under motion. At hero size it
+ * is 6.8x and it is mush, and a cell big enough to fill a phone would cost 50
+ * to 60 MB, which is the failure that killed this sweep on an iPhone twice. A
+ * video is hardware decoded and costs almost nothing resident, so the opening
+ * became one, 1.6 MB on the wire, and the thumb kept the canvas.
+ *
+ * THE HANDOVER IS THE POINT, and it is why this drives the rail off the
+ * video's own clock through `openingAt` instead of just letting it play. The
+ * strip's position is always the position the video is showing, so a reader can
+ * take it away at any instant and get the frame they were looking at, in full
+ * resolution, with that body's own numbers beside it.
+ *
+ * THE FILE NAME IS A CONVENTION AND NOT A MANIFEST FACT, deliberately.
+ * `scripts/hero_video.py` writes `demo/<id>/sweep.mp4`, and `build_page.py`
+ * rebuilds each strip's manifest entry from scratch, so a key the video script
+ * added would be dropped by the next page build without anyone noticing. The
+ * page's rule is that no NUMBER is typed, and a file name is not a number: if
+ * the file is absent the `error` path below falls back to the canvas sweep,
+ * and `test/phone.mjs` runs that path by refusing the request.
+ *
+ * Returns null when there is no video to be had, and the strip then sweeps its
+ * canvas exactly as it did before any of this existed.
+ */
+export function videoOpening(root, cfg, base = 'demo/') {
+  // Reduce Motion gets no video and no download. `armAuto` has its own branch
+  // for it, which parks on the argued body, and that is still the behaviour.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+  const v = document.createElement('video');
+  if (!v.canPlayType('video/mp4')) return null;
+
+  // Muted as a property AND as an attribute: iOS has refused to autoplay a
+  // video muted only by property, and the attribute costs nothing to add.
+  v.muted = true;
+  v.defaultMuted = true;
+  v.setAttribute('muted', '');
+  v.playsInline = true;
+  v.setAttribute('playsinline', '');
+  v.preload = 'auto';
+  v.className = 'strip-video';
+  // The poster is the frame the canvas downloads anyway, so the picture behind
+  // a video that has not started is real and costs nothing. It matters on a
+  // slow connection, where it is what a reader looks at while 1.6 MB arrives.
+  v.poster = base + cfg.frame.replace('%04d', '0000');
+  v.src = base + cfg.id + '/sweep.mp4';
+  root.querySelector('.strip-stage').appendChild(v);
+
+  // An element built at page load but asked to play much later, so a load
+  // failure lands long before anyone wants it. It takes itself off the page
+  // when it does: a video that will never play is dead weight over the canvas,
+  // and `test/phone.mjs` refuses the request on purpose to check that.
+  let broken = false;
+  v.addEventListener('error', () => { broken = true; v.remove(); });
+
+  return (strip) => {
+    if (broken) { strip.openingFailed('no file'); return null; }
+    const end = strip.n - 1;
+    const rest = Math.min(end, strip.cfg.rest ?? end);
+    let live = true, raf = 0;
+
+    // Warmed NOW and not at the end: the frame the reader stops on is the one
+    // they look at for ten seconds, and it should be the full-res webp from
+    // the moment the video gets out of the way. 50 KB, during a 7 s video.
+    strip.want(rest);
+
+    /* MEASURED THE SAME WAY THE CANVAS SWEEP IS, in the fields `?debug` already
+     * prints: how many openings have played, how much of one has, over how
+     * many frames, against the wall clock. That panel is the only instrument
+     * that reaches a real phone, and it would otherwise report "never swept"
+     * about a video it could see playing. */
+    const w0 = Date.now();
+    strip.sweeps = (strip.sweeps || 0) + 1;
+    strip.ticks = 0;
+
+    const clock = () => { if (raf) cancelAnimationFrame(raf); raf = 0; live = false; };
+    const hide = () => { v.classList.remove('on'); v.pause(); };
+
+    const tick = () => {
+      if (!live) return;
+      strip.swept = v.currentTime * 1000;
+      strip.ticks++;
+      strip.follow(openingAt(strip.swept, end, rest));
+      raf = requestAnimationFrame(tick);
+    };
+
+    // Draw before hiding, always, or the swap shows one frame of whatever the
+    // canvas was left holding, which is the first body in the cohort.
+    const ended = () => {
+      if (!live) return;
+      clock();
+      strip.wall = Date.now() - w0;
+      strip.set(rest);
+      strip.want(rest);
+      hide();
+      strip.openingEnded();
+    };
+
+    const failed = (why) => {
+      if (!live) return;
+      clock();
+      hide();
+      v.remove();
+      strip.openingFailed(why);
+    };
+
+    v.addEventListener('ended', ended, { once: true });
+    v.addEventListener('error', () => failed('decode error'), { once: true });
+    v.currentTime = 0;                 // a replay is the same argument again
+    v.classList.add('on');
+    raf = requestAnimationFrame(tick);
+    const p = v.play();
+    // An autoplay the browser refuses rejects here. So does a pause issued
+    // while a play is still pending, which is our own doing: `live` is already
+    // false by then, so the refusal and the handover cannot be confused.
+    if (p && p.catch) p.catch(() => failed('autoplay refused'));
+
+    /* HOW THE READER TAKES IT AWAY. Hide the video and draw where the video
+     * had got to, which `follow` has kept current to the frame. `stopAuto`
+     * calls this, and `stopAuto` is what every path that claims the strip for
+     * a hand already called, so not one input handler needed changing.
+     *
+     * The element goes with it: once a hand has moved the strip nothing
+     * animates it again for the rest of the visit, so a buffered 1.6 MB video
+     * is dead weight on the device least able to carry it. */
+    return () => {
+      clock();
+      strip.draw();
+      strip.want(strip.i);
+      hide();
+      v.remove();
+    };
+  };
 }

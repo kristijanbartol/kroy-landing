@@ -18,7 +18,7 @@
  * correct. It is what makes "the phone is still running the old file" a thing
  * nobody can spend an evening on again, which has already happened twice. */
 const V = new URL(import.meta.url).search;
-let Strip;
+let Strip, videoOpening;
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -124,6 +124,15 @@ function cohortStrip(data) {
   const verdict = $('[data-live="verdict"]', root);
   return new Strip(root, cfg, {
     start: 0,
+    /* THE OPENING IS A VIDEO HERE AND ON NO OTHER STRIP, because this is the
+     * only figure that is ever hero sized, and a sprite sheet upscaled 6.8x is
+     * mush. It plays the same choreography the canvas would have played, it
+     * drives this strip's own rail and readout while it runs, and it hands the
+     * position back the instant a hand arrives. If there is no video to be had,
+     * for a reader who asked for less motion or a file that did not load,
+     * `videoOpening` returns null and the canvas sweeps as it always did. The
+     * whole argument for it is at the foot of `strip.js`. */
+    opening: videoOpening(root, cfg),
     onIndex: (i, p) => {
       thigh.textContent = p.thigh_cm.toFixed(1) + ' cm';
       over.textContent = p.over_capacity < 0.05 ? 'none'
@@ -230,7 +239,7 @@ function reveal() {
 Promise.all([
   fetch('demo/data.json')
     .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-  import('./strip.js' + V).then((m) => { Strip = m.Strip; }),
+  import('./strip.js' + V).then((m) => { ({ Strip, videoOpening } = m); }),
 ])
   .then(([data]) => {
     fill(data);

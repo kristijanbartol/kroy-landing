@@ -36,6 +36,7 @@ const on = (v) => (v ? '<span class="r">ON</span>' : '<span class="g">off</span>
 function state(s) {
   if (s.reduced) return '<span class="r">reduced-motion: skipped</span>';
   if (s.userOwns) return '<span class="y">yours (dragged)</span>';
+  if (s.playing) return '<span class="g">VIDEO PLAYING</span>';
   if (s.auto) return '<span class="g">SWEEPING</span>';
   if (s.arming) return '<span class="y">arming</span>';
   if (!s.sheets) return s.root.classList.contains('failed')
@@ -84,11 +85,19 @@ export function panel(strips, data) {
         ? `#${s.sweeps} ${((s.swept || 0) / 1000).toFixed(1)}s/${s.ticks || 0}f`
           + (s.wall ? ` wall ${(s.wall / 1000).toFixed(1)}s` : '')
         : 'never swept';
+      // WHICH THING IS PLAYING THE OPENING, and if it is not the video, why
+      // not. An autoplay refused in Low Power Mode is invisible everywhere
+      // else: the page looks exactly like a page that never had a video.
+      const vid = s.root.querySelector('video');
+      const how = s.opening
+        ? `video ${vid ? `rs${vid.readyState} ${vid.currentTime.toFixed(1)}s` : 'not built'}`
+        : (s.noVideo ? `<span class="r">canvas: ${s.noVideo}</span>` : 'canvas');
       return `<tr><td><b>${s.cfg.id}</b></td>
         <td class="${ok ? 'g' : 'y'}">${Math.round(shown)}/${Math.round(need)}px</td>
         <td>at ${s.i}/${s.n - 1}</td>
         <td>${state(s)}</td></tr>
-        <tr><td></td><td colspan="3" class="${(s.ticks > 60 || !s.sweeps) ? '' : 'r'}">${run}</td></tr>`;
+        <tr><td></td><td colspan="2" class="${(s.ticks > 60 || !s.sweeps) ? '' : 'r'}">${run}</td>
+        <td>${how}</td></tr>`;
     }).join('');
     el.innerHTML = `
       <div class="hd"><b>build ${new URL(import.meta.url).search.slice(1) || 'unversioned'}</b>
