@@ -74,6 +74,12 @@ a { color: inherit; }
   color: var(--ink); margin: 0 0 14px;
 }
 .lede { font-size: clamp(1.0rem, 1.4vw, 1.1rem); color: var(--ink2); max-width: 48ch; }
+/* The hook sits under the hero headline and above the figure, and it is the
+ * only line a visitor is guaranteed to read before the picture starts moving.
+ * Ink rather than grey, because it carries the number the whole page is about. */
+.hook { font-size: clamp(1.02rem, 1.4vw, 1.14rem); color: var(--ink2);
+  max-width: 34ch; margin: 14px 0 0; line-height: 1.38; }
+.hook b { font-family: inherit; font-weight: 600; color: var(--ink); }
 /* A figure inside a sentence: mono, ink, so the eye finds the numbers in a
  * paragraph without the paragraph shouting. */
 .lede b, .tally b, .note b, .small b { font-family: var(--mono); font-weight: 500; color: var(--ink); }
@@ -262,7 +268,10 @@ section:first-of-type { border-top: 0; }
    * now carries the only sentence on the page that says what KROY does, so it
    * is the last thing that would be cut for space and the figure gives the
    * height back. */
-  #strip-cohort .strip-head .eyebrow { max-width: 30ch; margin-bottom: 11px; }
+  #strip-cohort .strip-head .eyebrow { max-width: 30ch; margin-bottom: 8px; }
+  /* 34ch is the measure for a line sitting beside a figure on a laptop. On a
+   * phone it is narrower than the screen and buys a third line nobody wants. */
+  #strip-cohort .hook { max-width: none; margin-top: 10px; font-size: 1rem; }
 }
 
 #strip-seated .strip-figure { order: -1; }
@@ -306,9 +315,9 @@ section:first-of-type { border-top: 0; }
 #cohort .strip-stage { height: min(44vh, 380px); }
 @supports (height: 1dvh) {
   #cohort .strip-stage {
-    height: calc(100dvh - 334px);
+    height: calc(100dvh - 352px);
     max-height: 620px;
-    min-height: min(260px, 46dvh);
+    min-height: min(210px, 40dvh);
   }
 }
 @media (min-width: 900px) { #cohort .strip-stage { height: clamp(380px, 72vh, 760px); } }

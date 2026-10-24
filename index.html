@@ -44,7 +44,7 @@
      lives. Bump it whenever a fix has to be provably on a device: Netlify
      revalidates correctly, but "is the phone running the new file" has now
      cost two sessions and a URL no cache has seen ends that question. -->
-  <link rel="stylesheet" href="page.css?v=20261023c" />
+  <link rel="stylesheet" href="page.css?v=20261024a" />
 </head>
 
 <body>
@@ -94,18 +94,23 @@
                in words at all: it read as a demo rather than as a company. The
                line costs no height, no scroll and no words anywhere else, and
                the headline is still the first thing anyone reads. -->
-          <p class="eyebrow">Fit assessment across every body your size chart admits</p>
+          <p class="eyebrow">Fit testing for apparel brands</p>
           <h1>All <span data-n="strips.cohort.n_bodies">144</span> of these women are the same&nbsp;size.</h1>
+          <!-- THE ONE LINE THAT STOPS CURIOSITY BECOMING CONFUSION. The
+               demonstration opens the page on purpose, but a visitor who gets
+               a headline and a moving figure and nothing else has to work out
+               what they are looking at before they can be interested in it.
+               This says whose claim it is and what the catch is, in two short
+               sentences, and then gets out of the way. -->
+          <p class="hook">Your size chart says so.
+            <b><span data-n="strips.cohort.n_fail">40</span> of them can&rsquo;t wear the&nbsp;trousers.</b></p>
         </div>
 
         <div class="strip-lede">
           <p class="lede">
-            Every one fits the range your chart states. One trouser, cut once,
-            in a stable woven.
-            <b><span data-n="strips.cohort.n_fail">40</span> of them cannot
-            wear&nbsp;it.</b>
+            Every one of them fits the range your chart states. One trouser,
+            cut once, in a stable woven. Drag through them and stop anywhere.
           </p>
-          <p class="lede">Drag through them and stop anywhere.</p>
         </div>
 
         <div class="readout strip-readout">
@@ -136,8 +141,8 @@
               <p>
                 More than 5 percent of the trouser has to stretch further than
                 the fabric can. A stable woven gives
-                <span data-n="blind.fabric_percent" data-dp="1">2.0</span> percent. Our
-                threshold, and yours to move.
+                <span data-n="blind.fabric_percent" data-dp="1">2.0</span> percent.
+                The 5 percent is our cut-off. Tell us yours and we&rsquo;ll use it.
               </p>
             </details>
         </div>
@@ -170,7 +175,7 @@
     <div class="wrap">
       <div class="hed reveal">
         <p class="eyebrow">Size chart</p>
-        <h2>Your chart cannot tell these two apart.</h2>
+        <h2>Your chart can&rsquo;t tell these two apart.</h2>
         <!-- The spoken version of this section, which is the one that lands.
              Four sentences that never reached a number became three that are
              nothing but numbers. `pair.rows.4` is the thigh row; it is bound by
@@ -197,16 +202,16 @@
       <p class="small" style="margin-top:14px">
         Centimetres. Your chart never asks for the rows marked
         <b class="mark-off">&#10022;</b>, so two women can differ there by any
-        amount at all.
+        amount.
       </p>
 
       <div class="sub reveal">
-        <h3>And it is not only these two.</h3>
+        <h3>It&rsquo;s not just these two.</h3>
         <p>
           The same comparison across all
-          <span data-n="blind.n_bodies">144</span>. Each bar is how far the two
-          groups sit apart on that measurement. The two longest are both ones
-          your chart never asks for.
+          <span data-n="blind.n_bodies">144</span>. Each bar shows how far the
+          two groups sit apart on one measurement. The two longest are both
+          ones your chart never asks for.
         </p>
       </div>
       <div class="bars reveal" id="bars"></div>
@@ -215,14 +220,14 @@
         <span><b style="background:var(--rail)"></b>on the chart</span>
       </div>
       <p class="small" style="margin-top:20px;max-width:64ch">
-        Three measurements are missing here and two of them decide the fit. The
-        ranking tells you which two are worth adding.
+        Three measurements are missing. Two of them decide whether the
+        trousers fit. The ranking shows you which two.
       </p>
       <details class="note">
         <summary>Does every missing measurement matter?</summary>
         <p>
-          No. The rise varies more here than anything else and tells the two
-          groups apart by almost nothing.
+          No. The rise varies more than anything else here and still barely
+          separates the two groups.
         </p>
       </details>
     </div>
@@ -233,10 +238,10 @@
     <div class="wrap">
       <div class="hed reveal">
         <p class="eyebrow">Sitting down</p>
-        <h2>Standing she fits. Seated she does not.</h2>
+        <h2>She fits standing up. She can&rsquo;t sit down.</h2>
         <p class="lede">
-          Sitting asks for length through the seat and the rise, and a woven
-          has none to give.
+          Sitting needs more length through the seat and the rise. A woven
+          doesn&rsquo;t have it.
         </p>
       </div>
       <div class="strip" id="strip-seated" style="margin-top:44px">
@@ -279,9 +284,9 @@
       <details class="note" style="margin-top:26px">
         <summary>How this was tested</summary>
         <p>
-          Sitting is not one pose, so this one is stated exactly: the hip at 90
-          degrees. We never told the model what elastane is for. It arrived at
-          that by itself.
+          Sitting is not one pose, so we state this one exactly: the hip at 90
+          degrees. Nothing in the simulation was ever told what elastane is
+          for.
         </p>
       </details>
     </div>
@@ -292,10 +297,10 @@
     <div class="wrap">
       <div class="hed reveal">
         <p class="eyebrow">Material</p>
-        <h2>What your material choice is worth, in bodies.</h2>
+        <h2>What a stretchier fabric actually buys you.</h2>
         <p class="lede">
-          The pattern does not change anywhere along this rail. The only thing
-          changing is how far the fabric can stretch before it runs out.
+          The pattern never changes along this rail. The only thing changing is
+          how far the fabric stretches before it runs out.
         </p>
       </div>
 
@@ -336,13 +341,13 @@
           </div>
           <p class="small" style="margin-top:26px;max-width:46ch">
             The count reaches zero before the end of the rail. Past that point
-            more stretch buys you nothing. Worth knowing before you pay for it.
+            you are paying for stretch that does nothing.
           </p>
           <details class="note">
             <summary>Where a real trouser sits on this rail</summary>
             <p>
-              A fitted trouser like this one, in a fabric anyone would really
-              use, sits in the left half.
+              A fitted trouser in a fabric anyone would actually use sits in
+              the left half of this rail.
             </p>
           </details>
         </div>
@@ -360,26 +365,26 @@
       <div class="cols three reveal">
         <div>
           <p class="rule">01 &mdash; your chart</p>
-          <h3>One file, swappable</h3>
+          <h3>One file you can swap</h3>
           <p>
-            Bodies that land inside every range you state. What you do not
-            state varies freely.
+            We build bodies that land inside every range your chart states.
+            Anything it doesn&rsquo;t state, we let vary.
           </p>
         </div>
         <div>
           <p class="rule">02 &mdash; your garment</p>
-          <h3>Cut once, worn by all of them</h3>
+          <h3>Cut once, worn by all 144</h3>
           <p>
-            From a size and a fabric, or from your tech pack. Opened into the
-            flat pattern a factory would cut.
+            From a size and a fabric, or from your tech pack. Opened out into
+            the flat pattern a factory would cut.
           </p>
         </div>
         <div>
           <p class="rule">03 &mdash; what you get</p>
-          <h3>Where it fails, and by how much</h3>
+          <h3>Where it fails and by how much</h3>
           <p>
-            Which bodies it does not fit, where the fabric runs out, and by how
-            many centimetres.
+            Which bodies it doesn&rsquo;t fit, where the fabric runs out, and by
+            how many centimetres.
           </p>
         </div>
       </div>
@@ -393,19 +398,20 @@
         <details class="note">
           <summary>Are these your customers?</summary>
           <p>
-            No. These are bodies we <b>built</b> to fit this chart's size M, and
-            every count here counts <i>those</i> women and nothing more. Send
-            your own customer figures and we will weight it to them.
+            No. We <b>built</b> these bodies to fit this chart&rsquo;s size M.
+            Every count on this page counts <i>those</i> women and nobody else.
+            Send your own customer figures and we&rsquo;ll weight the results to
+            them.
           </p>
         </details>
         <details class="note">
-          <summary>What we do not claim</summary>
+          <summary>What we don&rsquo;t claim</summary>
           <p>
-            Nobody has worn these, so we will not call this validated. It is a
-            measurement of the garment against the body, checked by a cloth
-            simulation that knew nothing about how the garment was designed and
-            lands on the same answer. The draping makes the picture. It never
-            decides a verdict.
+            Nobody has worn these, so we won&rsquo;t call it validated. We measure
+            the garment against the body, then check it with a cloth simulation
+            that knows nothing about how the garment was designed. It lands on
+            the same answer. The draping is there to make the picture look
+            right. It never decides a verdict.
           </p>
         </details>
       </div>
@@ -433,7 +439,7 @@
           <div>
             <h3>David Bojanić, Ph.D.</h3>
             <p class="role">Product</p>
-            <p>Body modelling and measurement, and what a size chart can and cannot tell you.</p>
+            <p>Body modelling and measurement. What a size chart can and cannot tell you.</p>
           </div>
         </article>
       </div>
@@ -459,9 +465,9 @@
         <div>
           <p class="rule">You get back</p>
           <p>
-            Which bodies can wear it and which cannot, where the fabric runs out
-            and by how many centimetres, and which measurements decide it. On
-            the figure and on the flat pattern.
+            Which bodies can wear it and which can&rsquo;t. Where the fabric
+            runs out, and by how many centimetres. Which measurements decide
+            it. On the figure and on the flat pattern.
           </p>
         </div>
       </div>
@@ -470,12 +476,12 @@
         <a class="btn big" href="mailto:kristijan.bartol@gmail.com?subject=KROY%20%E2%80%94%20our%20size%20chart&amp;body=Garment%3A%0ASize%20we%20manufacture%3A%0AMaterial%3A%0AOur%20size%20chart%20(pasted%2C%20attached%2C%20or%20a%20photograph)%3A%0A%0AAnything%20else%20you%20can%20attach%2C%20all%20optional%3A%0A-%20spec%20sheet%20or%20tech%20pack%0A-%20graded%20measurements%0A-%20fit%20model%20measurements%0A-%20a%20pattern%0A">Send us your size chart</a>
       </p>
       <p class="small">
-        A photograph of the chart will do. A tech pack, graded measurements, a
-        pattern or a CLO file are optional and get us closer to the garment you
-        actually make. No physical sample, no customer data.
+        A photo of the chart will do. A tech pack, graded measurements, a
+        pattern or a CLO file are optional, and they get us closer to the
+        garment you actually make. No physical sample. No customer data.
         Would rather talk it through first?
         <a href="mailto:kristijan.bartol@gmail.com?subject=KROY%20%E2%80%94%20a%20call">Write and say so</a>
-        and we will find a time.
+        and we&rsquo;ll find a time.
       </p>
     </div>
   </section>
@@ -496,6 +502,6 @@
   </div>
 </footer>
 
-<script type="module" src="page.js?v=20261023c"></script>
+<script type="module" src="page.js?v=20261024a"></script>
 </body>
 </html>
